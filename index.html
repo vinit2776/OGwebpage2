@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OneGrid - India's Next-Generation Renewable Energy IPP. Intelligent energy management and clean power solutions for C&I industries.">
+    <meta name="keywords" content="renewable energy, solar power, C&I energy, energy management, green energy, India">
+    <title>OneGrid - Powering Industrial India with Intelligent Green Energy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navigation -->
+    <nav id="mainNav">
+        <div class="nav-container">
+            <a href="#hero" class="logo-container">
+                <div class="logo-mark">
+                    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Main grid square -->
+                        <rect x="2" y="2" width="28" height="28" fill="#536D33" rx="2"/>
+                        <!-- Small accent square -->
+                        <rect x="30" y="30" width="12" height="12" fill="white" stroke="#536D33" stroke-width="2" rx="1"/>
+                        <!-- Grid lines inside main square -->
+                        <line x1="16" y1="2" x2="16" y2="30" stroke="white" stroke-width="1.5" opacity="0.3"/>
+                        <line x1="2" y1="16" x2="30" y2="16" stroke="white" stroke-width="1.5" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="logo-text">ONEGRID</div>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#platform">Platform</a>
+                <a href="#solutions">Solutions</a>
+                <a href="#project">Project</a>
+                <a href="#impact">Impact</a>
+                <a href="#insights">Insights</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-ctas">
+                <a href="#platform" class="btn btn-secondary">Sign Up</a>
+                <a href="#contact" class="btn btn-primary">Enquire PPA</a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <canvas id="particles-canvas"></canvas>
+
+        <!-- Energy Circuit Lines -->
+        <div class="energy-circuit" id="energyCircuit"></div>
+
+        <div class="hero-content">
+            <div class="hero-tag">India's Next-Generation Renewable Energy IPP</div>
+            <h1>POWERING INDUSTRIAL INDIA<br>WITH INTELLIGENT GREEN ENERGY</h1>
+            <div class="hero-stat">40 Billion units of clean energy by 2030</div>
+            <div class="hero-ctas">
+                <a href="#platform" class="btn btn-hero-primary">Sign Up for Platform</a>
+                <a href="#contact" class="btn btn-hero-secondary">Reserve Your Capacity</a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow">↓</div>
+        </div>
+
+        <div class="energy-connector"></div>
+    </section>
+
+    <!-- Challenge Section -->
+    <section class="challenge section" id="challenge">
+        <div class="container">
+            <h2 class="section-title">THE ENERGY CHALLENGE C&I INDUSTRIES FACE</h2>
+
+            <!-- Data streams in background -->
+            <div class="data-stream" style="top: 20%;">10110101 ENERGY_COST_RISING 11010110</div>
+            <div class="data-stream" style="top: 40%; animation-delay: 1s;">01011010 VISIBILITY_LOW 10101101</div>
+            <div class="data-stream" style="top: 60%; animation-delay: 2s;">11001100 ESG_COMPLIANCE 00110011</div>
+
+            <div class="cards-grid">
+                <div class="challenge-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 48L20 36L28 44L40 28L52 36L56 32" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M48 32H56V40" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="20" cy="36" r="3" fill="currentColor"/>
+                            <circle cx="28" cy="44" r="3" fill="currentColor"/>
+                            <circle cx="40" cy="28" r="3" fill="currentColor"/>
+                            <circle cx="52" cy="36" r="3" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">Rising Grid Tariffs</div>
+                    <div class="card-desc">Frequent tariff revisions and peak-hour penalties increase power cost uncertainty</div>
+                    <div class="card-stat">15-30%</div>
+                    <div class="card-label">Energy Cost Wasted</div>
+                </div>
+                <div class="challenge-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32 44C40.8366 44 48 36.8366 48 28C48 19.1634 40.8366 12 32 12C23.1634 12 16 19.1634 16 28C16 36.8366 23.1634 44 32 44Z" stroke="currentColor" stroke-width="3"/>
+                            <circle cx="32" cy="28" r="6" stroke="currentColor" stroke-width="3"/>
+                            <path d="M8 28C8 28 16 12 32 12C48 12 56 28 56 28C56 28 48 44 32 44C16 44 8 28 8 28Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M28 28L36 28M32 24V32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">Limited Visibility</div>
+                    <div class="card-desc">Industries lack 15-minute-level data to manage demand and peak exposure</div>
+                    <div class="card-stat">Zero</div>
+                    <div class="card-label">Real-Time Optimization</div>
+                </div>
+                <div class="challenge-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32 52V28" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M32 28C32 28 24 20 24 14C24 10 26 8 28 8C30 8 32 10 32 14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M32 28C32 28 40 20 40 14C40 10 38 8 36 8C34 8 32 10 32 14" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M32 36C32 36 38 30 38 26C38 24 37 22 35 22C33 22 32 24 32 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <ellipse cx="32" cy="48" rx="10" ry="4" stroke="currentColor" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">ESG Compliance Pressure</div>
+                    <div class="card-desc">RPO targets and sustainability mandates demand cleaner energy sourcing</div>
+                    <div class="card-stat">Growing</div>
+                    <div class="card-label">Compliance Burden</div>
+                </div>
+                <div class="challenge-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="12" width="24" height="32" rx="3" stroke="currentColor" stroke-width="3"/>
+                            <path d="M28 20V28M36 20V28" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <rect x="26" y="44" width="12" height="8" rx="1" stroke="currentColor" stroke-width="3"/>
+                            <path d="M32 44V52" stroke="currentColor" stroke-width="3"/>
+                            <path d="M28 36L24 40L20 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M36 36L40 40L44 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">Fragmented Procurement</div>
+                    <div class="card-desc">Grid, OA wind, OA solar operate without unified cost visibility</div>
+                    <div class="card-stat">Complex</div>
+                    <div class="card-label">Energy Management</div>
+                </div>
+            </div>
+
+            <div class="challenge-summary">
+                Industries are losing 15-30% of energy costs without intelligent management
+            </div>
+        </div>
+
+        <div class="energy-connector"></div>
+    </section>
+
+    <!-- Dual Platform Section -->
+    <section class="dual-platform section" id="platform">
+        <div class="energy-divider"></div>
+
+        <div class="platform-side left">
+            <div class="platform-content">
+                <h2>ONEGRID PLATFORM</h2>
+                <h3>Intelligent Energy Management for C&I</h3>
+                <ul class="feature-list">
+                    <li>Real-time Visibility & Analytics</li>
+                    <li>ToD-Based Cost Optimization</li>
+                    <li>AI-Powered Forecasting</li>
+                    <li>Unified Multi-Source Dashboard</li>
+                    <li>Automated Compliance Management</li>
+                    <li>Managing 1M+ units monthly</li>
+                </ul>
+                <a href="#contact" class="btn btn-platform-left">Sign Up Free</a>
+            </div>
+        </div>
+        <div class="platform-side right">
+            <div class="platform-content">
+                <h2>ONEGRID RENEWABLE</h2>
+                <h3>100 MW Clean Power for Industry</h3>
+                <ul class="feature-list">
+                    <li>Fixed Tariff ex-Busbar Pricing</li>
+                    <li>Q4 2026 Commercial Operation</li>
+                    <li>Group Captive & Third Party Options</li>
+                    <li>Up to 30% Cost Savings</li>
+                    <li>25-Year Power Purchase Agreement</li>
+                    <li>Complete ESG Compliance</li>
+                </ul>
+                <a href="#contact" class="btn btn-platform-right">Enquire PPA</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Features Detail -->
+    <section class="platform-features section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">THE PLATFORM</span>
+                <h2 class="section-title">ONEGRID INTELLIGENT PLATFORM</h2>
+                <p class="section-subtitle">One Dashboard. Complete Energy Intelligence.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="12" y="36" width="8" height="20" rx="2" fill="currentColor"/>
+                            <rect x="24" y="24" width="8" height="32" rx="2" fill="currentColor"/>
+                            <rect x="36" y="16" width="8" height="40" rx="2" fill="currentColor"/>
+                            <rect x="48" y="28" width="8" height="28" rx="2" fill="currentColor"/>
+                            <circle cx="16" cy="34" r="2.5" fill="currentColor"/>
+                            <circle cx="28" cy="22" r="2.5" fill="currentColor"/>
+                            <circle cx="40" cy="14" r="2.5" fill="currentColor"/>
+                            <circle cx="52" cy="26" r="2.5" fill="currentColor"/>
+                            <path d="M16 34L28 22L40 14L52 26" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Real-Time Visibility</h3>
+                    <p>5-minute interval tracking of consumption and generation across all sources</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="3"/>
+                            <path d="M32 32L32 18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M32 32L42 38" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="32" cy="32" r="2" fill="currentColor"/>
+                            <path d="M32 8V12M32 52V56M56 32H52M12 32H8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M46 18L43 21M21 43L18 46M46 46L43 43M21 21L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>ToD-Based Insights</h3>
+                    <p>Time-of-Day analytics to reduce peak-hour costs and optimize consumption patterns</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="16" y="20" width="32" height="32" rx="4" stroke="currentColor" stroke-width="3"/>
+                            <circle cx="26" cy="32" r="3" fill="currentColor"/>
+                            <circle cx="38" cy="32" r="3" fill="currentColor"/>
+                            <path d="M26 42C26 42 29 45 32 45C35 45 38 42 38 42" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M22 12L26 20M42 12L38 20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <rect x="28" y="8" width="8" height="6" rx="1" fill="currentColor"/>
+                            <path d="M32 52V56M24 56H40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>AI Forecasting</h3>
+                    <p>Predict future demand and renewable generation with machine learning algorithms</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 28L16 20C12 16 12 10 16 6C20 2 26 2 30 6L34 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M40 36L48 44C52 48 52 54 48 58C44 62 38 62 34 58L30 54" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M24 40L40 24" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="22" cy="42" r="4" stroke="currentColor" stroke-width="2.5"/>
+                            <circle cx="42" cy="22" r="4" stroke="currentColor" stroke-width="2.5"/>
+                        </svg>
+                    </div>
+                    <h3>Unified Integration</h3>
+                    <p>OA wind, OA solar, captive power, and grid in one comprehensive dashboard</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="3"/>
+                            <path d="M32 18V24M32 40V46" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M26 26C26 26 26 22 32 22C38 22 38 26 38 26C38 30 32 30 32 30C32 30 26 30 26 34C26 34 26 38 32 38C38 38 38 34 38 34" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M28 48L30 52L34 52L36 48" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Landed Cost Engine</h3>
+                    <p>Calculate true cost for every power source daily including all charges</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32 10L56 52H8L32 10Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+                            <path d="M32 26V36" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+                            <circle cx="32" cy="44" r="2.5" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Anomaly Detection</h3>
+                    <p>Flag deviations, spikes, and abnormal patterns before they impact costs</p>
+                </div>
+            </div>
+
+            <div class="cta-row">
+                <a href="#contact" class="btn btn-primary btn-large">Sign Up for Early Access</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Energy Flow Visualization -->
+    <section class="energy-flow-demo section" id="energy-flow">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">HOW IT WORKS</span>
+                <h2 class="section-title">REAL-TIME ENERGY FLOW</h2>
+            </div>
+
+            <div class="flow-container">
+                <div class="flow-node source">
+                    <div class="node-icon">☀️</div>
+                    <div class="node-label">Renewable<br>Sources</div>
+                </div>
+                <div class="flow-node platform">
+                    <div class="node-icon">⚡</div>
+                    <div class="node-label">OneGrid<br>Platform</div>
+                </div>
+                <div class="flow-node destination">
+                    <div class="node-icon">🏭</div>
+                    <div class="node-label">C&I<br>Consumers</div>
+                </div>
+
+                <svg class="energy-path">
+                    <path id="path1" class="path-line" d="M 200 250 Q 350 200, 500 250" />
+                    <path id="path2" class="path-line" d="M 650 250 Q 800 300, 950 250" />
+
+                    <circle class="energy-particle" r="6">
+                        <animateMotion dur="3s" repeatCount="indefinite">
+                            <mpath href="#path1"/>
+                        </animateMotion>
+                    </circle>
+                    <circle class="energy-particle" r="6">
+                        <animateMotion dur="3s" repeatCount="indefinite" begin="0.5s">
+                            <mpath href="#path1"/>
+                        </animateMotion>
+                    </circle>
+                    <circle class="energy-particle" r="6">
+                        <animateMotion dur="3s" repeatCount="indefinite" begin="1s">
+                            <mpath href="#path1"/>
+                        </animateMotion>
+                    </circle>
+
+                    <circle class="energy-particle" r="6">
+                        <animateMotion dur="3s" repeatCount="indefinite">
+                            <mpath href="#path2"/>
+                        </animateMotion>
+                    </circle>
+                    <circle class="energy-particle" r="6">
+                        <animateMotion dur="3s" repeatCount="indefinite" begin="0.5s">
+                            <mpath href="#path2"/>
+                        </animateMotion>
+                    </circle>
+                    <circle class="energy-particle" r="6">
+                        <animateMotion dur="3s" repeatCount="indefinite" begin="1s">
+                            <mpath href="#path2"/>
+                        </animateMotion>
+                    </circle>
+                </svg>
+
+                <div class="energy-orb" style="top: 20%; left: 30%;"></div>
+                <div class="energy-orb" style="top: 70%; left: 25%; animation-delay: 1s;"></div>
+                <div class="energy-orb" style="top: 30%; right: 25%; animation-delay: 2s;"></div>
+                <div class="energy-orb" style="top: 80%; right: 30%; animation-delay: 1.5s;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flagship Project -->
+    <section class="flagship-project section" id="project">
+        <div class="project-overlay"></div>
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FLAGSHIP PROJECT</span>
+                <h2 class="section-title">100 MW RENEWABLE ENERGY PARK</h2>
+                <p class="section-subtitle">Tamil Nadu's Next-Gen Clean Energy Hub</p>
+            </div>
+
+            <div class="project-stats">
+                <div class="stat-box">
+                    <div class="stat-number">100</div>
+                    <div class="stat-label">MW AC Capacity</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">210M</div>
+                    <div class="stat-label">Units/Year</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">230kV</div>
+                    <div class="stat-label">SS Injection</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">Q4 2026</div>
+                    <div class="stat-label">Planned COD</div>
+                </div>
+            </div>
+
+            <div class="project-features">
+                <div class="project-column">
+                    <h3>Technology Advantages</h3>
+                    <ul>
+                        <li>Cutting-Edge Solar Modules</li>
+                        <li>Peak Slot Optimization</li>
+                        <li>AI/ML Plant Monitoring</li>
+                        <li>Automated Maintenance Systems</li>
+                        <li>Generation Forecasting</li>
+                        <li>Advanced Cleaning Technology</li>
+                    </ul>
+                </div>
+                <div class="project-column">
+                    <h3>Power Purchase Options</h3>
+                    <ul>
+                        <li>Group Captive Model</li>
+                        <li>Third Party Open Access</li>
+                        <li>Captive Consumption</li>
+                        <li>Flexible Contract Terms</li>
+                        <li>Full Platform Integration</li>
+                        <li>Transparent Pricing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cta-row">
+                <a href="#contact" class="btn btn-primary btn-large">Enquire Now to Reserve Your Capacity</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Benefits -->
+    <section class="benefits section" id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">VALUE PROPOSITION</span>
+                <h2 class="section-title">WHY ONEGRID POWERS INDIA'S LEADING INDUSTRIES</h2>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32 8L36 16L45 18L38 26L40 36L32 32L24 36L26 26L19 18L28 16L32 8Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="currentColor" fill-opacity="0.2"/>
+                            <circle cx="32" cy="38" r="3" fill="currentColor"/>
+                            <path d="M28 44C28 44 28 48 32 48C36 48 36 44 36 44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M32 38V44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Cost Savings</h3>
+                    <p>Landed cost visibility across grid, OA solar, OA wind enables optimal sourcing</p>
+                    <div class="benefit-stat">30%</div>
+                    <div class="benefit-label">Average Savings</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="16" y="8" width="32" height="48" rx="3" stroke="currentColor" stroke-width="3"/>
+                            <path d="M24 18H40M24 26H40M24 34H40M24 42H32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M38 48L42 52L48 44" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Tariff Certainty</h3>
+                    <p>Long-term ex-busbar pricing with forecasting protects against volatile tariffs</p>
+                    <div class="benefit-stat">25 Years</div>
+                    <div class="benefit-label">Fixed Pricing</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="14" y="32" width="7" height="18" rx="2" fill="currentColor"/>
+                            <rect x="24" y="22" width="7" height="28" rx="2" fill="currentColor"/>
+                            <rect x="34" y="26" width="7" height="24" rx="2" fill="currentColor"/>
+                            <rect x="44" y="16" width="7" height="34" rx="2" fill="currentColor"/>
+                            <path d="M10 52H54" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>ToD Optimization</h3>
+                    <p>15-minute consumption vs generation analytics to reduce peak-hour exposure</p>
+                    <div class="benefit-stat">5 Min</div>
+                    <div class="benefit-label">Interval Data</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="34" r="18" stroke="currentColor" stroke-width="3"/>
+                            <path d="M32 34V22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M32 34L40 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="32" cy="34" r="2" fill="currentColor"/>
+                            <rect x="28" y="8" width="8" height="6" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <path d="M20 14L24 18M44 14L40 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Real-Time Control</h3>
+                    <p>Automated scheduling, accounting and compliance management platform</p>
+                    <div class="benefit-stat">24/7</div>
+                    <div class="benefit-label">Monitoring</div>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32 12C32 12 20 20 20 28C20 34 24 38 28 38L32 34" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M32 12C32 12 44 20 44 28C44 34 40 38 36 38L32 34" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="32" cy="46" r="10" stroke="currentColor" stroke-width="3"/>
+                            <path d="M28 46L30 48L36 42" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>ESG Impact</h3>
+                    <p>Accurate renewable attribution and reporting for sustainability KPIs and RPO compliance</p>
+                    <div class="benefit-stat">100%</div>
+                    <div class="benefit-label">RE Tracking</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Metrics -->
+    <section class="impact-demo section" id="impact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">CLIMATE ACTION</span>
+                <h2 class="section-title">YOUR CLIMATE IMPACT</h2>
+            </div>
+
+            <div class="impact-box">
+                <div class="impact-subtitle">FROM OUR 100 MW RENEWABLE ENERGY PARK</div>
+                <div class="impact-number" id="impactCounter">0</div>
+                <div class="impact-unit">Tonnes CO₂ Offset Annually</div>
+
+                <div class="impact-grid">
+                    <div class="impact-item">
+                        <div class="impact-item-icon">🌳</div>
+                        <div class="impact-item-value">54 Lakh</div>
+                        <div class="impact-item-label">Trees Planted</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-item-icon">🚗</div>
+                        <div class="impact-item-value">26,000</div>
+                        <div class="impact-item-label">Cars Off Road</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-item-icon">🏠</div>
+                        <div class="impact-item-value">18,000</div>
+                        <div class="impact-item-label">Homes Powered</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-item-icon">⛽</div>
+                        <div class="impact-item-value">5 Cr</div>
+                        <div class="impact-item-label">Litres Diesel Saved</div>
+                    </div>
+                </div>
+
+                <div class="impact-footer">
+                    Per MW Procured = 1,200 Tonnes CO₂/Year Offset
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights from Medium -->
+    <section class="insights section" id="insights">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">THOUGHT LEADERSHIP</span>
+                <h2 class="section-title">INSIGHTS & PERSPECTIVES</h2>
+                <p class="section-subtitle">by Vinit Chordia</p>
+            </div>
+
+            <div class="blog-grid" id="blogGrid">
+                <!-- Blog posts will be loaded here via JavaScript -->
+                <div class="blog-skeleton">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-text"></div>
+                        <div class="skeleton-text"></div>
+                    </div>
+                </div>
+                <div class="blog-skeleton">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-text"></div>
+                        <div class="skeleton-text"></div>
+                    </div>
+                </div>
+                <div class="blog-skeleton">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-text"></div>
+                        <div class="skeleton-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-row">
+                <a href="https://medium.com/@onegrid" target="_blank" rel="noopener" class="btn btn-secondary btn-large">View All Insights on Medium →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dual CTA Section -->
+    <section class="dual-cta section" id="cta">
+        <div class="cta-side left">
+            <div class="cta-content">
+                <h2>TRY THE PLATFORM</h2>
+                <p>Experience intelligent energy management for your C&I operations</p>
+                <ul class="cta-features">
+                    <li>Free account setup</li>
+                    <li>Real-time analytics dashboard</li>
+                    <li>No credit card required</li>
+                    <li>Full feature access</li>
+                </ul>
+                <a href="#contact" class="btn btn-cta-left btn-large">Sign Up Free</a>
+            </div>
+        </div>
+        <div class="cta-side right">
+            <div class="cta-content">
+                <h2>SECURE YOUR CAPACITY</h2>
+                <p>Reserve renewable power from our 100 MW energy park</p>
+                <ul class="cta-features">
+                    <li>Fixed ex-busbar pricing</li>
+                    <li>Q4 2026 delivery</li>
+                    <li>Flexible procurement options</li>
+                    <li>Up to 30% cost savings</li>
+                </ul>
+                <a href="#contact" class="btn btn-cta-right btn-large">Get PPA Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">GET STARTED</span>
+                <h2 class="section-title">READY TO TRANSFORM YOUR ENERGY STRATEGY?</h2>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Whether you're interested in our intelligent platform or securing renewable capacity, we're here to help.</p>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <div class="contact-label">Email</div>
+                            <a href="mailto:hello@onegrid.in" class="contact-value">hello@onegrid.in</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">🌐</div>
+                        <div>
+                            <div class="contact-label">Location</div>
+                            <div class="contact-value">Tamil Nadu, India</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-steps">
+                        <h4>Three Simple Steps:</h4>
+                        <ol>
+                            <li>Reserve capacity in our 100 MW portfolio</li>
+                            <li>Deploy OneGrid intelligence across facilities</li>
+                            <li>Accelerate your renewable transition</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interest">Interest *</label>
+                            <select id="interest" name="interest" required>
+                                <option value="">Select your interest</option>
+                                <option value="platform">OneGrid Platform</option>
+                                <option value="ppa">Power Purchase Agreement</option>
+                                <option value="both">Both Platform & PPA</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Platform Metrics Section -->
+    <section class="platform-metrics-section">
+        <div class="container">
+            <div class="platform-ticker" id="platformTicker">
+                <div class="ticker-title">⚡ Live Platform Metrics</div>
+                <div class="ticker-stat">
+                    <span class="ticker-label">Units Managed</span>
+                    <span class="ticker-value" id="unitsManaged">1.00M</span>
+                </div>
+                <div class="ticker-stat">
+                    <span class="ticker-label">Today</span>
+                    <span class="ticker-value" id="unitsToday" style="font-size: 18px;">+32.8K</span>
+                </div>
+                <div class="ticker-trend">
+                    <span>📈 +10% capacity/month</span>
+                </div>
+                <div class="ticker-note">
+                    Real-time updates
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo-container">
+                        <div class="logo-mark">
+                            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Main grid square -->
+                                <rect x="2" y="2" width="28" height="28" fill="#536D33" rx="2"/>
+                                <!-- Small accent square -->
+                                <rect x="30" y="30" width="12" height="12" fill="white" stroke="#536D33" stroke-width="2" rx="1"/>
+                                <!-- Grid lines inside main square -->
+                                <line x1="16" y1="2" x2="16" y2="30" stroke="white" stroke-width="1.5" opacity="0.3"/>
+                                <line x1="2" y1="16" x2="30" y2="16" stroke="white" stroke-width="1.5" opacity="0.3"/>
+                            </svg>
+                        </div>
+                        <div class="logo-text">ONEGRID</div>
+                    </div>
+                    <p class="footer-tagline">India's Next-Generation Renewable Energy IPP<br>Intelligent Energy Solutions for Industry</p>
+                    <div class="footer-contact">
+                        <p>📧 hello@onegrid.in</p>
+                        <p>🌐 Tamil Nadu, India</p>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#benefits">Benefits</a></li>
+                        <li><a href="#contact">Pricing</a></li>
+                        <li><a href="#contact">Documentation</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#project">100 MW Project</a></li>
+                        <li><a href="#project">Group Captive</a></li>
+                        <li><a href="#project">Third Party</a></li>
+                        <li><a href="#project">Captive</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#hero">About Us</a></li>
+                        <li><a href="#insights">Insights</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="https://medium.com/@onegrid" target="_blank" rel="noopener">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/company/onegrid" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+                    <a href="https://twitter.com/onegrid" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
+                    <a href="https://medium.com/@onegrid" target="_blank" rel="noopener" aria-label="Medium">Medium</a>
+                </div>
+                <div class="copyright">
+                    © 2026 OneGrid. All rights reserved.
+                </div>
+                <div class="legal-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
