@@ -20,14 +20,10 @@
         <div class="nav-container">
             <a href="#hero" class="logo-container">
                 <div class="logo-mark">
-                    <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Main grid square -->
-                        <rect x="2" y="2" width="28" height="28" fill="#536D33" rx="2"/>
-                        <!-- Small accent square -->
-                        <rect x="30" y="30" width="12" height="12" fill="white" stroke="#536D33" stroke-width="2" rx="1"/>
-                        <!-- Grid lines inside main square -->
-                        <line x1="16" y1="2" x2="16" y2="30" stroke="white" stroke-width="1.5" opacity="0.3"/>
-                        <line x1="2" y1="16" x2="30" y2="16" stroke="white" stroke-width="1.5" opacity="0.3"/>
+                    <svg viewBox="0 0 110 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16,0 H84 V64 H16 Z M50,14 C62,14 72,24 72,36 L72,36 H84 V14 Z" fill="currentColor" fill-rule="evenodd"/>
+                        <path d="M0,44 H54 V98 H0 Z M16,66 H32 V82 H16 Z" fill="currentColor" fill-rule="evenodd"/>
+                        <rect x="16" y="66" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
                     </svg>
                 </div>
                 <div class="logo-text">ONEGRID</div>
@@ -663,7 +659,10 @@
                 </div>
 
                 <div class="contact-form">
-                    <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="1e917a6a-d464-4c57-b358-b07a5f168f2f">
+                        <input type="hidden" name="subject" value="New Contact Form Submission - OneGrid">
+                        <input type="hidden" name="from_name" value="OneGrid Website">
                         <div class="form-group">
                             <label for="name">Name *</label>
                             <input type="text" id="name" name="name" required>
@@ -732,14 +731,10 @@
                 <div class="footer-brand">
                     <div class="logo-container">
                         <div class="logo-mark">
-                            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Main grid square -->
-                                <rect x="2" y="2" width="28" height="28" fill="#536D33" rx="2"/>
-                                <!-- Small accent square -->
-                                <rect x="30" y="30" width="12" height="12" fill="white" stroke="#536D33" stroke-width="2" rx="1"/>
-                                <!-- Grid lines inside main square -->
-                                <line x1="16" y1="2" x2="16" y2="30" stroke="white" stroke-width="1.5" opacity="0.3"/>
-                                <line x1="2" y1="16" x2="30" y2="16" stroke="white" stroke-width="1.5" opacity="0.3"/>
+                            <svg viewBox="0 0 110 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16,0 H84 V64 H16 Z M50,14 C62,14 72,24 72,36 L72,36 H84 V14 Z" fill="currentColor" fill-rule="evenodd"/>
+                                <path d="M0,44 H54 V98 H0 Z M16,66 H32 V82 H16 Z" fill="currentColor" fill-rule="evenodd"/>
+                                <rect x="16" y="66" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"/>
                             </svg>
                         </div>
                         <div class="logo-text">ONEGRID</div>

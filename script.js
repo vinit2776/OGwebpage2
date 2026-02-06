@@ -460,12 +460,14 @@ function setupContactForm() {
 
         try {
             const formData = new FormData(form);
-            const response = await fetch(form.action, {
+            const object = Object.fromEntries(formData);
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                body: formData,
                 headers: {
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
-                }
+                },
+                body: JSON.stringify(object)
             });
 
             if (response.ok) {
