@@ -195,121 +195,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   PLATFORM TICKER
-   ============================================ */
-
-.platform-metrics-section {
-    background: var(--gray-100);
-    padding: 60px 0;
-}
-
-.platform-ticker {
-    position: relative;
-    background: rgba(25, 65, 47, 0.95);
-    padding: 30px 40px;
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    box-shadow: var(--shadow-lg), var(--shadow-energy);
-    max-width: 600px;
-    margin: 0 auto;
-    border: 2px solid rgba(83, 109, 51, 0.3);
-    overflow: hidden;
-    text-align: center;
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(120%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.platform-ticker::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        transparent,
-        rgba(39, 174, 96, 0.5),
-        transparent 30%
-    );
-    animation: rotateBorder 4s linear infinite;
-    z-index: -2;
-}
-
-@keyframes rotateBorder {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.platform-ticker::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    background: rgba(25, 65, 47, 0.95);
-    border-radius: 10px;
-    z-index: -1;
-}
-
-.ticker-title {
-    font-size: 12px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    z-index: 1;
-}
-
-.ticker-stat {
-    display: inline-block;
-    margin: 0 30px 12px;
-    position: relative;
-    z-index: 1;
-    text-align: center;
-}
-
-.ticker-label {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.8);
-    display: block;
-    margin-bottom: 5px;
-}
-
-.ticker-value {
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--accent-green);
-    font-family: 'Courier New', monospace;
-    text-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
-    display: block;
-}
-
-.ticker-trend {
-    font-size: 11px;
-    color: var(--accent-green);
-    margin-top: 8px;
-    position: relative;
-    z-index: 1;
-}
-
-.ticker-note {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.5);
-    margin-top: 10px;
-    position: relative;
-    z-index: 1;
-}
-
-/* ============================================
    NAVIGATION
    ============================================ */
 
@@ -1890,15 +1775,6 @@ svg.energy-path {
 
     .mobile-menu-toggle {
         display: flex;
-    }
-
-    .platform-ticker {
-        padding: 20px 25px;
-    }
-
-    .ticker-stat {
-        display: block;
-        margin: 0 0 15px 0;
     }
 
     .hero {

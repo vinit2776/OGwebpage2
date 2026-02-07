@@ -291,49 +291,6 @@ function animateCounter() {
 // LIVE PLATFORM TICKER
 // ============================================
 
-class PlatformTicker {
-    constructor() {
-        this.unitsManaged = 1000000; // 1M units
-        this.dailyUnits = 0;
-        this.dailyTarget = 32800; // ~1M / 30 days
-        this.updateInterval = 2000; // 2 seconds
-
-        this.unitsElement = document.getElementById('unitsManaged');
-        this.todayElement = document.getElementById('unitsToday');
-
-        if (this.unitsElement && this.todayElement) {
-            this.start();
-        }
-    }
-
-    start() {
-        setInterval(() => this.update(), this.updateInterval);
-    }
-
-    update() {
-        // Simulate real-time growth
-        const increment = this.dailyTarget / (24 * 60 * 60 / (this.updateInterval / 1000));
-
-        this.dailyUnits += increment;
-        this.unitsManaged += increment;
-
-        // 10% monthly growth simulation
-        const monthlyGrowth = 0.10;
-        const monthlyIncrease = (this.unitsManaged * monthlyGrowth) /
-                                (30 * 24 * 60 * 60 / (this.updateInterval / 1000));
-        this.unitsManaged += monthlyIncrease;
-
-        // Update display
-        this.unitsElement.textContent = (this.unitsManaged / 1000000).toFixed(2) + 'M';
-        this.todayElement.textContent = '+' + (this.dailyUnits / 1000).toFixed(1) + 'K';
-
-        // Reset daily at "midnight" (every 30 seconds for demo)
-        if (this.dailyUnits >= this.dailyTarget) {
-            this.dailyUnits = 0;
-        }
-    }
-}
-
 // ============================================
 // MEDIUM BLOG INTEGRATION
 // ============================================
@@ -504,9 +461,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Setup intersection observer for animations
     setupIntersectionObserver();
-
-    // Initialize platform ticker
-    new PlatformTicker();
 
     // Load Medium blog posts
     loadMediumPosts();
