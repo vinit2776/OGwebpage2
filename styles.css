@@ -521,6 +521,10 @@ nav {
     transform: translateY(50px);
     position: relative;
     overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .challenge-card::before {
@@ -1058,138 +1062,6 @@ nav {
     margin-left: auto;
     margin-right: auto;
     box-shadow: var(--shadow-sm);
-}
-
-/* ============================================
-   PRICING SECTION
-   ============================================ */
-
-.pricing {
-    background: var(--white);
-}
-
-.pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.pricing-card {
-    background: var(--gray-50);
-    padding: 40px 30px;
-    border-radius: 16px;
-    text-align: center;
-    border: 2px solid var(--gray-200);
-    transition: var(--transition-smooth);
-    position: relative;
-}
-
-.pricing-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-}
-
-.pricing-featured {
-    border-color: var(--accent-green);
-    background: var(--white);
-    box-shadow: var(--shadow-md);
-}
-
-.pricing-save {
-    position: absolute;
-    top: -14px;
-    right: 20px;
-    background: var(--accent-green);
-    color: var(--white);
-    padding: 4px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.pricing-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--primary-green);
-    margin-bottom: 8px;
-}
-
-.pricing-card h3 {
-    font-size: 22px;
-    color: var(--secondary-dark-green);
-    margin-bottom: 20px;
-}
-
-.pricing-amount {
-    margin-bottom: 20px;
-}
-
-.currency {
-    font-size: 16px;
-    color: var(--gray-600);
-    vertical-align: super;
-}
-
-.price {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--secondary-dark-green);
-}
-
-.price-old {
-    display: block;
-    font-size: 14px;
-    color: var(--gray-600);
-    text-decoration: line-through;
-    margin-bottom: 4px;
-}
-
-.period {
-    display: block;
-    font-size: 13px;
-    color: var(--gray-600);
-    margin-top: 4px;
-}
-
-.pricing-note {
-    font-size: 13px;
-    color: var(--gray-600);
-}
-
-.pricing-features {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-}
-
-.pricing-features li {
-    padding: 8px 0;
-    font-size: 14px;
-    color: var(--gray-600);
-    border-bottom: 1px solid var(--gray-100);
-}
-
-.pricing-features li:last-child {
-    border-bottom: none;
-}
-
-.pricing-features li::before {
-    content: '✓ ';
-    color: var(--accent-green);
-    font-weight: 700;
-}
-
-.pricing-footer {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--primary-green);
-    font-style: italic;
 }
 
 /* 3-column challenge grid */
@@ -1944,8 +1816,7 @@ nav {
 
     .features-grid,
     .benefits-grid,
-    .agent-suite-grid,
-    .pricing-grid {
+    .agent-suite-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -2048,8 +1919,7 @@ nav {
     .benefits-grid,
     .blog-grid,
     .impact-grid,
-    .agent-suite-grid,
-    .pricing-grid {
+    .agent-suite-grid {
         grid-template-columns: 1fr;
     }
 
