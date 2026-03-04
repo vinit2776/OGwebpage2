@@ -207,7 +207,7 @@ function setupIntersectionObserver() {
     });
 
     // Observe cards
-    document.querySelectorAll('.challenge-card, .feature-card, .benefit-card, .blog-card').forEach(card => {
+    document.querySelectorAll('.challenge-card, .feature-card, .benefit-card, .blog-card, .agent-card').forEach(card => {
         observer.observe(card);
     });
 }
@@ -223,13 +223,13 @@ function handleSectionAnimation(section) {
         });
     }
 
-    // Feature cards stagger
+    // Agent / Feature cards stagger
     if (section.classList.contains('platform-features')) {
-        const cards = section.querySelectorAll('.feature-card');
+        const cards = section.querySelectorAll('.agent-card, .feature-card');
         cards.forEach((card, index) => {
             setTimeout(() => {
                 card.classList.add('visible');
-            }, index * 100);
+            }, index * 150);
         });
     }
 
