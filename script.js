@@ -210,6 +210,11 @@ function setupIntersectionObserver() {
     document.querySelectorAll('.challenge-card, .feature-card, .benefit-card, .blog-card, .agent-card').forEach(card => {
         observer.observe(card);
     });
+
+    // Observe action table and transform sides
+    document.querySelectorAll('.action-table, .transform-side').forEach(el => {
+        observer.observe(el);
+    });
 }
 
 function handleSectionAnimation(section) {
@@ -255,6 +260,28 @@ function handleSectionAnimation(section) {
             setTimeout(() => {
                 card.classList.add('visible');
             }, index * 150);
+        });
+    }
+
+    // Agents in Action - stagger table rows
+    if (section.classList.contains('agents-action')) {
+        const table = section.querySelector('.action-table');
+        if (table) table.classList.add('visible');
+        const rows = section.querySelectorAll('.action-row');
+        rows.forEach((row, index) => {
+            setTimeout(() => {
+                row.classList.add('animate');
+            }, index * 120);
+        });
+    }
+
+    // Transformation - slide in before/after cards
+    if (section.classList.contains('transformation')) {
+        const sides = section.querySelectorAll('.transform-side');
+        sides.forEach((side, index) => {
+            setTimeout(() => {
+                side.classList.add('visible');
+            }, index * 300);
         });
     }
 }
