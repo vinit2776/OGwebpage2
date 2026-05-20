@@ -25,5 +25,8 @@ jobs:
           rsync -avz --delete \
             --exclude='.git*' \
             --exclude='.github' \
+            --exclude='.well-known' \
+            --exclude='old-website' \
+            --ignore-errors \
             ./ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}
