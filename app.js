@@ -340,7 +340,7 @@
         if (json.success) {
           formStatus.style.display = 'block';
           formStatus.style.color = 'var(--signal-deep)';
-          formStatus.textContent = '✓ Message sent. We'll be in touch within one business day.';
+          formStatus.textContent = "✓ Message sent. We'll be in touch within one business day.";
           contactForm.reset();
           contactSubmit.textContent = 'Sent';
         } else {
