@@ -1,763 +1,942 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="OneGrid - India's Next-Generation Renewable Energy IPP. Intelligent energy management and clean power solutions for C&I industries.">
-    <meta name="keywords" content="renewable energy, solar power, C&I energy, energy management, green energy, India">
-    <title>OneGrid - Powering Industrial India with Intelligent Green Energy</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OneGrid — You're Already Losing Money on Energy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=JetBrains+Mono:wght@400;500;600&family=Archivo:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Navigation -->
-    <nav id="mainNav">
-        <div class="nav-container">
-            <a href="#hero" class="logo-container">
-                <div class="logo-mark">
-                   <svg
-  width="44"
-  height="44"
-  viewBox="120 200 200 200"
-  xmlns="http://www.w3.org/2000/svg"
-  preserveAspectRatio="xMidYMid meet"
->
-  <path
-    fill="#536D33"
-    d="M262.78,376.72l-.3-112.97h-76.06v38.9h32.89v46.04h-4v-42.04h-32.89v-46.9h80.05l-.14-53.36H120.02v142.31h95.29v28.02h47.47ZM219.31,348.7h39.47v24.02h-39.47v-24.02Z"
-  />
-</svg>
-                </div>
-                <div class="logo-text">ONEGRID</div>
-            </a>
-            <div class="nav-links" id="navLinks">
-                <a href="#platform">Platform</a>
-                <a href="#solutions">Solutions</a>
-                <a href="#project">Project</a>
-                <a href="#impact">Impact</a>
-                <a href="#insights">Insights</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="nav-ctas">
-                <a href="#features" class="btn btn-secondary">Sign Up</a>
-                <a href="#contact" class="btn btn-primary">Enquire PPA</a>
-            </div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+<!-- Scroll progress -->
+<div class="scroll-progress"><div class="scroll-progress__bar" id="scroll-bar"></div></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAV
+     ═══════════════════════════════════════════════════════ -->
+<header class="nav">
+  <div class="nav__inner">
+    <a href="#" class="brand" aria-label="OneGrid">
+      <span class="brand__mark" aria-hidden="true">
+        <svg width="32" height="38" viewBox="0 0 142.76 170.33" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentColor" fill-rule="evenodd" d="M 142.76 170.33 L 142.46 57.37 L 66.40 57.37 L 66.40 96.26 L 99.29 96.26 L 99.29 142.31 L 95.29 142.31 L 95.29 100.26 L 62.40 100.26 L 62.40 53.37 L 142.45 53.37 L 142.31 0 L 0 0 L 0 142.31 L 95.29 142.31 L 95.29 170.33 Z M 99.29 142.31 L 138.76 142.31 L 138.76 166.33 L 99.29 166.33 Z"/>
+        </svg>
+      </span>
+      <span>ONEGRID</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#platform">Platform</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#flagship">Project</a>
+      <a href="#impact">Impact</a>
+      <a href="#insights">Insights</a>
+      <a href="#contact">Contact</a>
     </nav>
+    <div class="nav__cta">
+      <a href="#quiz" class="btn btn--ghost">Take the Quiz</a>
+      <a href="#contact" class="btn btn--primary">Enquire PPA <span class="arrow">→</span></a>
+    </div>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <canvas id="particles-canvas"></canvas>
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════ -->
+<section class="section hero" id="top">
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="hero__watermark" aria-hidden="true">₹?</div>
+  <div class="container hero__inner">
+    <div class="hero__meta">
+      <span class="mono">India's Next-Generation Renewable Energy IPP</span>
+      <span class="hero__date">Edition 01 · Tamil Nadu · 2026</span>
+    </div>
+    <h1 class="hero-headline">
+      You're <em>Already</em><br>
+      Losing Money<br>
+      on <em class="signal">Energy.</em>
+    </h1>
+    <div class="hero__bottom">
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <div class="figure">8–15%</div>
+          <span class="label">of your energy bill leaks undetected every month</span>
+        </div>
+        <div class="hero__stat">
+          <div class="figure">₹40–80L</div>
+          <span class="label">average annual hidden cost per C&amp;I facility</span>
+        </div>
+      </div>
+      <div class="hero__cta">
+        <a href="#calculator" class="btn btn--primary">Calculate Your Loss <span class="arrow">→</span></a>
+        <a href="#quiz" class="btn btn--ghost">Take the 2-Minute Quiz</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Energy Circuit Lines -->
-        <div class="energy-circuit" id="energyCircuit"></div>
+<!-- ═══════════════════════════════════════════════════════
+     CHALLENGE
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="challenge" data-screen-label="Challenge">
+  <div class="container">
+    <div class="challenge__head">
+      <span class="eyebrow">The Problem</span>
+      <h2 class="section-title">
+        Three ways your facility<br>
+        <em>bleeds money</em> every month.
+      </h2>
+    </div>
 
-        <div class="hero-content">
-            <div class="hero-tag">India's Next-Generation Renewable Energy IPP</div>
-            <h1>POWERING INDUSTRIAL INDIA<br>WITH INTELLIGENT GREEN ENERGY</h1>
-            <div class="hero-stat">40 Billion units of clean energy by 2030</div>
-            <div class="hero-ctas">
-                <a href="#features" class="btn btn-hero-primary">Sign Up for Platform</a>
-                <a href="#contact" class="btn btn-hero-secondary">Reserve Your Capacity</a>
-            </div>
+    <div class="challenge__rows">
+      <div class="bleed-row">
+        <div class="bleed-row__num">01 / Visibility</div>
+        <div class="bleed-row__title">You can't <em>see</em> the leak.</div>
+        <div class="bleed-row__body">
+          Data scattered across meters, bills, PPAs, and spreadsheets. By the time you notice something's wrong, you've already lost it.
+          <strong>Average undetected loss: ₹8–12L per month.</strong>
+        </div>
+        <span class="tag">Status: Bleeding</span>
+      </div>
+      <div class="bleed-row">
+        <div class="bleed-row__num">02 / Accountability</div>
+        <div class="bleed-row__title">You can't <em>prove</em> the dispute.</div>
+        <div class="bleed-row__body">
+          When invoices are wrong, you can't dispute what you can't document. Manual logs are inconsistent, timestamps are missing.
+          <strong>Disputed bills take 3–6 months to resolve — if ever.</strong>
+        </div>
+        <span class="tag">Status: Bleeding</span>
+      </div>
+      <div class="bleed-row">
+        <div class="bleed-row__num">03 / Predictability</div>
+        <div class="bleed-row__title">You're always <em>one step behind.</em></div>
+        <div class="bleed-row__body">
+          Exchange rates spike. Generation shortfalls happen. Demand peaks arrive. You react hours too late.
+          <strong>Missed exchange windows cost ₹20–50L annually.</strong>
+        </div>
+        <span class="tag">Status: Bleeding</span>
+      </div>
+    </div>
+
+    <div class="challenge__bridge">
+      <p class="bridge-quote">
+        Every day without visibility is a day your competitors aren't paying for.
+      </p>
+      <a href="#assessment" class="btn btn--ghost">Find Your Blind Spots <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     QUIZ — interactive
+     ═══════════════════════════════════════════════════════ -->
+<section class="section section--dark" id="quiz" data-screen-label="Quiz">
+  <div class="container">
+    <div class="quiz__head">
+      <div>
+        <span class="eyebrow">2-Minute Assessment</span>
+        <div class="quiz__progress" id="quiz-progress" aria-hidden="true">
+          <span class="done"></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title">Do you know your<br><em>true energy cost?</em></h2>
+        <p class="lede" style="margin-top:20px;">5 questions. Instant score. No email required.</p>
+      </div>
+    </div>
+
+    <div class="quiz__card" id="quiz-card">
+      <div class="quiz__qmeta">
+        <div>
+          <div class="quiz__qnum"><span id="q-num">01</span> / 05</div>
+          <h3 class="quiz__qtitle" id="q-title">How do you currently track energy costs across your facility?</h3>
+        </div>
+        <div class="quiz__qfoot">Choose one</div>
+      </div>
+      <div class="quiz__options" id="q-options"><!-- filled by JS --></div>
+    </div>
+
+    <div class="quiz__result" id="quiz-result">
+      <div class="quiz__grade" id="quiz-grade">A</div>
+      <div class="quiz__verdict">
+        <span class="label">Your grade · <span id="quiz-score">15</span>/15</span>
+        <h3 id="quiz-verdict-title">Optimised</h3>
+        <p id="quiz-verdict-body">You're ahead of most facilities. A full audit would still find gaps.</p>
+        <div class="quiz__resultcta">
+          <a href="#calculator" class="btn btn--primary">Calculate Your Hidden Loss <span class="arrow">→</span></a>
+          <button class="btn btn--ghost" id="quiz-retake">Retake Quiz</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     INCIDENT STORIES
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="incidents" data-screen-label="Incidents">
+  <div class="container">
+    <div class="incidents__head">
+      <div>
+        <span class="eyebrow">Real Consequences</span>
+        <h2 class="section-title" style="margin-top:20px;">What happens without<br><em>visibility.</em></h2>
+      </div>
+      <p class="lede">These aren't hypotheticals. They're the calls we get from energy managers every week.</p>
+    </div>
+
+    <div class="incidents__grid">
+      <article class="incident">
+        <div class="incident__head">
+          <span class="incident__code">Incident-001 / Power Factor</span>
+          <span class="tag">Bleeding</span>
+        </div>
+        <div class="incident__loss">
+          <span class="label">Loss</span>
+          <span class="figure">₹4.8 Lakh</span>
+          <span class="sub">Single-month penalty</span>
+        </div>
+        <h3 class="incident__title">The PF penalty you didn't see coming.</h3>
+        <p class="incident__story">Power factor dropped gradually over six weeks. Loads shifted, capacitor banks degraded — nothing alarming on any individual day. The bill arrived with a ₹4.8L penalty. There was no audit trail to dispute it. The root cause took another two months to find.</p>
+        <div class="incident__resolution">With OneGrid <em>Explorer</em>: alert raised on Day 4</div>
+      </article>
+
+      <article class="incident">
+        <div class="incident__head">
+          <span class="incident__code">Incident-002 / Exchange</span>
+          <span class="tag">Bleeding</span>
+        </div>
+        <div class="incident__loss">
+          <span class="label">Loss</span>
+          <span class="figure">₹31 Lakh</span>
+          <span class="sub">Annual missed opportunity</span>
+        </div>
+        <h3 class="incident__title">The exchange window that closed while you slept.</h3>
+        <p class="incident__story">RE generation shortfall forecast at 6:00am. Exchange rates were at ₹2.80/unit — a clear buy signal. By the time the team noticed and escalated, it was 10:30am. Rates had reached ₹6.40. The gap is booked as "market volatility." It wasn't.</p>
+        <div class="incident__resolution">With OneGrid <em>Oracle</em>: automated suggestion at 5:55am</div>
+      </article>
+
+      <article class="incident">
+        <div class="incident__head">
+          <span class="incident__code">Incident-003 / Billing Dispute</span>
+          <span class="tag">Bleeding</span>
+        </div>
+        <div class="incident__loss">
+          <span class="label">Loss</span>
+          <span class="figure">₹12 Lakh</span>
+          <span class="sub">Disputed invoice — unresolved at 4 months</span>
+        </div>
+        <h3 class="incident__title">The bill nobody could prove was wrong.</h3>
+        <p class="incident__story">Three invoices. Two sources. Four spreadsheets. A ₹12L discrepancy that everyone suspected but nobody could document. The energy team spent 11 weeks reconstructing consumption data from PDFs and meter photographs. The vendor settled at 60 paise on the rupee. The rest was written off.</p>
+        <div class="incident__resolution">With OneGrid <em>Auditor</em>: digital audit log from Day 1</div>
+      </article>
+
+      <article class="incident">
+        <div class="incident__head">
+          <span class="incident__code">Incident-004 / DG Bleed</span>
+          <span class="tag">Bleeding</span>
+        </div>
+        <div class="incident__loss">
+          <span class="label">Loss</span>
+          <span class="figure">₹2.1 Lakh</span>
+          <span class="sub">Single weekend</span>
+        </div>
+        <h3 class="incident__title">The DG run nobody authorised.</h3>
+        <p class="incident__story">Night shift ran the DG set for 14 hours over a weekend. At ₹18/unit. While the solar plant was generating at ₹2.20 and the grid was available at ₹7.80. No one raised it — not because they didn't care, but because there was no system to show the comparison in real time.</p>
+        <div class="incident__resolution">With OneGrid <em>Explorer</em>: source cost alert triggers instantly</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     PLATFORM
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="platform" data-screen-label="Platform">
+  <div class="container">
+    <div class="platform__head">
+      <span class="eyebrow">The Product</span>
+      <h2 class="section-title">Two halves of the<br>same <em>safety net.</em></h2>
+    </div>
+    <div class="platform__split">
+      <div class="panel">
+        <span class="panel__num">Panel 01 — Platform</span>
+        <h3 class="panel__name">OneGrid <em>Platform.</em></h3>
+        <p class="panel__tagline">Your 24/7 watchdog for energy costs.</p>
+        <div class="panel__features">
+          <div class="panel__feat"><span class="marker">01</span><span class="name"><em>Explorer Agent</em> — Catches leaks before they compound</span></div>
+          <div class="panel__feat"><span class="marker">02</span><span class="name"><em>Auditor Agent</em> — Every rupee tracked, every dispute winnable</span></div>
+          <div class="panel__feat"><span class="marker">03</span><span class="name"><em>Oracle Agent</em> — Predicts gaps before they cost you</span></div>
+          <div class="panel__feat"><span class="marker">04</span><span class="name">Multi-source real-time dashboard</span></div>
+          <div class="panel__feat"><span class="marker">05</span><span class="name">Automated compliance &amp; audit logs</span></div>
+          <div class="panel__feat"><span class="marker">06</span><span class="name">Exchange filler suggestions</span></div>
+        </div>
+        <a href="#contact" class="btn btn--primary panel__cta">Request a Demo <span class="arrow">→</span></a>
+      </div>
+      <div class="panel panel--ink">
+        <span class="panel__num">Panel 02 — Renewable</span>
+        <h3 class="panel__name">OneGrid <em>Renewable.</em></h3>
+        <p class="panel__tagline">Lock in your tariff. Stop the volatility.</p>
+        <div class="panel__features">
+          <div class="panel__feat"><span class="marker">01</span><span class="name"><em>Fixed Tariff</em> ex-busbar — No more rate surprises</span></div>
+          <div class="panel__feat"><span class="marker">02</span><span class="name">Q4 2026 Commercial Operation</span></div>
+          <div class="panel__feat"><span class="marker">03</span><span class="name">Group Captive &amp; Third Party options</span></div>
+          <div class="panel__feat"><span class="marker">04</span><span class="name">Up to <em>30% cost savings</em> vs. grid</span></div>
+          <div class="panel__feat"><span class="marker">05</span><span class="name">25-Year Power Purchase Agreement</span></div>
+          <div class="panel__feat"><span class="marker">06</span><span class="name">Complete ESG &amp; RPO compliance</span></div>
+        </div>
+        <a href="#contact" class="btn btn--primary panel__cta">Enquire PPA <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     AGENT SUITE
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="agents" data-screen-label="Agent Suite">
+  <div class="container">
+    <div class="suite__head">
+      <span class="eyebrow">The Intelligent Layer</span>
+      <h2 class="section-title">Three agents.<br>One <em class="signal">safety net.</em></h2>
+    </div>
+    <p class="lede" style="margin-bottom:48px; max-width:64ch;">Not software features — dedicated intelligence working around the clock so you stop discovering problems after the damage is done.</p>
+
+    <div class="suite__row">
+      <div class="suite__num">01</div>
+      <div>
+        <div class="suite__name"><em>Explorer</em> Agent</div>
+        <div class="suite__pillar">Pillar / Visibility</div>
+      </div>
+      <p class="suite__tagline">Finds the leak before you get the bill.</p>
+      <ul class="suite__feat">
+        <li>Real-time monitoring across all power sources</li>
+        <li>Pattern anomalies flagged within minutes</li>
+        <li>ToD consumption vs. generation comparison</li>
+        <li>Multi-source data unified in one view</li>
+      </ul>
+    </div>
+
+    <div class="suite__row">
+      <div class="suite__num">02</div>
+      <div>
+        <div class="suite__name"><em>Auditor</em> Agent</div>
+        <div class="suite__pillar">Pillar / Accountability</div>
+      </div>
+      <p class="suite__tagline">Every dispute, winnable. Every cost, traceable.</p>
+      <ul class="suite__feat">
+        <li>Unified landed cost across every source</li>
+        <li>Immutable digital audit trail from Day 1</li>
+        <li>Automated anomaly flagging before month-end</li>
+        <li>Cost attribution that holds up in any dispute</li>
+      </ul>
+    </div>
+
+    <div class="suite__row">
+      <div class="suite__num">03</div>
+      <div>
+        <div class="suite__name"><em>Oracle</em> Agent</div>
+        <div class="suite__pillar">Pillar / Predictability</div>
+      </div>
+      <p class="suite__tagline">Stops you from being the last to know.</p>
+      <ul class="suite__feat">
+        <li>Demand spikes forecasted, not discovered</li>
+        <li>Exchange windows identified automatically</li>
+        <li>Generation shortfalls predicted in advance</li>
+        <li>Continuous savings optimisation</li>
+      </ul>
+    </div>
+
+    <div class="suite__bottom">
+      <p class="suite__insurance">Think of it as insurance — <em>except it pays you back every month.</em></p>
+      <a href="#contact" class="btn btn--primary">Request a Demo <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     AGENTS IN ACTION — terminal table
+     ═══════════════════════════════════════════════════════ -->
+<section class="section section--ink" id="action" data-screen-label="Agents in Action">
+  <div class="container">
+    <div class="terminal__head">
+      <span class="eyebrow">Agents in Action</span>
+      <h2 class="section-title">What the agents<br><em>catch</em> for you.</h2>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal__bar">
+        <span><span class="dot"></span>OneGrid Live · Last 24 hours · Demo facility</span>
+        <span>9 events caught · 4 shown</span>
+      </div>
+      <div class="terminal__head-row">
+        <span>Agent</span>
+        <span>What it caught</span>
+        <span>Before OneGrid, this meant…</span>
+        <span style="text-align:right;">Caught at</span>
+      </div>
+
+      <div class="terminal__row">
+        <span class="terminal__agent">Explorer</span>
+        <span class="terminal__catch">Consumption pattern anomaly — <span class="hi">18%</span> above baseline</span>
+        <span class="terminal__before">Month-end surprise. No recourse.</span>
+        <span class="terminal__time">T+04:12</span>
+      </div>
+      <div class="terminal__row">
+        <span class="terminal__agent">Auditor</span>
+        <span class="terminal__catch">Cost variance <span class="hi">₹3.2L</span> across OA and grid invoices</span>
+        <span class="terminal__before">Weeks of spreadsheet archaeology.</span>
+        <span class="terminal__time">T+09:48</span>
+      </div>
+      <div class="terminal__row">
+        <span class="terminal__agent">Auditor</span>
+        <span class="terminal__catch">PF declining <span class="hi">0.4%</span> week-on-week for 6 weeks</span>
+        <span class="terminal__before">₹4.8L penalty with no audit trail.</span>
+        <span class="terminal__time">T+11:30</span>
+      </div>
+      <div class="terminal__row">
+        <span class="terminal__agent">Oracle</span>
+        <span class="terminal__catch">RE shortfall predicted — exchange window <span class="hi">open</span></span>
+        <span class="terminal__before">Missed buy at ₹2.80. Paid ₹6.40.</span>
+        <span class="terminal__time">T+18:05</span>
+      </div>
+      <div class="terminal__row">
+        <span class="terminal__agent">Oracle</span>
+        <span class="terminal__catch">Demand spike forecast — <span class="hi">3 days</span> ahead</span>
+        <span class="terminal__before">Reactive procurement at peak rates.</span>
+        <span class="terminal__time">T+21:22</span>
+      </div>
+
+      <div class="terminal__foot">Every row above is money you stop losing. Every single month.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     COST CALCULATOR
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="calculator" data-screen-label="Calculator">
+  <div class="container">
+    <div class="calc__head">
+      <span class="eyebrow">The Hidden Cost Calculator</span>
+      <h2 class="section-title">How much is your<br>energy bill <em>hiding?</em></h2>
+    </div>
+    <p class="lede" style="margin-bottom:48px;">Enter your details below. We'll estimate what you're likely losing — and what you could recover.</p>
+
+    <div class="calc__split">
+      <div class="calc__inputs">
+        <div class="calc-field">
+          <div class="calc-field__head">
+            <span class="label">01 / Monthly Electricity Spend</span>
+            <span class="value" id="spend-value">₹80L</span>
+          </div>
+          <input type="range" id="spend" min="10" max="500" step="5" value="80">
+          <div class="mono" style="display:flex; justify-content:space-between; color:var(--ink-muted); font-size:11px;">
+            <span>₹10L</span><span>₹500L</span>
+          </div>
         </div>
 
-        <div class="scroll-indicator">
-            <span>Scroll to explore</span>
-            <div class="scroll-arrow">↓</div>
+        <div class="calc-field">
+          <div class="calc-field__head">
+            <span class="label">02 / Number of Facilities</span>
+            <span class="value" id="facilities-value">3</span>
+          </div>
+          <input type="range" id="facilities" min="1" max="20" step="1" value="3">
+          <div class="mono" style="display:flex; justify-content:space-between; color:var(--ink-muted); font-size:11px;">
+            <span>1</span><span>20</span>
+          </div>
         </div>
 
-        <div class="energy-connector"></div>
-    </section>
+        <div class="calc-field">
+          <div class="calc-field__head">
+            <span class="label">03 / Power Sources</span>
+            <span class="value mono" id="sources-count" style="font-style:normal; font-size:13px; letter-spacing:0.08em;">2 active</span>
+          </div>
+          <div class="calc-field__sources" id="sources">
+            <label class="src-chip on"><input type="checkbox" value="Grid" checked><span class="src-chip__dot"></span><span>Grid</span></label>
+            <label class="src-chip on"><input type="checkbox" value="OA Solar" checked><span class="src-chip__dot"></span><span>OA Solar</span></label>
+            <label class="src-chip"><input type="checkbox" value="OA Wind"><span class="src-chip__dot"></span><span>OA Wind</span></label>
+            <label class="src-chip"><input type="checkbox" value="DG Set"><span class="src-chip__dot"></span><span>DG Set</span></label>
+          </div>
+        </div>
+      </div>
 
-    <!-- Challenge Section - 3 Blind Spots -->
-    <section class="challenge section" id="challenge">
-        <div class="container">
-            <h2 class="section-title">3 BLIND SPOTS IN ENERGY MANAGEMENT</h2>
+      <div class="calc__output">
+        <span class="calc__output-eyebrow">Live estimate · updates as you adjust</span>
 
-            <!-- Data streams in background -->
-            <div class="data-stream" style="top: 20%;">10110101 NO_VISIBILITY 11010110</div>
-            <div class="data-stream" style="top: 40%; animation-delay: 1s;">01011010 NO_ACCOUNTABILITY 10101101</div>
-            <div class="data-stream" style="top: 60%; animation-delay: 2s;">11001100 NO_PREDICTABILITY 00110011</div>
-
-            <div class="cards-grid cards-grid-3">
-                <div class="challenge-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 28C8 28 16 12 32 12C48 12 56 28 56 28C56 28 48 44 32 44C16 44 8 28 8 28Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="32" cy="28" r="6" stroke="currentColor" stroke-width="3"/>
-                            <path d="M10 10L54 54" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="card-stat">&#x2717;</div>
-                    <div class="card-title">No Visibility</div>
-                    <div class="card-desc">Data scattered across meters, bills, PPAs, and spreadsheets. No real-time view of what's happening.</div>
-                </div>
-                <div class="challenge-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="3"/>
-                            <path d="M32 18V24M32 40V46" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                            <path d="M26 26C26 26 26 22 32 22C38 22 38 26 38 26C38 30 32 30 32 30C32 30 26 30 26 34C26 34 26 38 32 38C38 38 38 34 38 34" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                            <path d="M12 12L52 52" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="card-stat">&#x2717;</div>
-                    <div class="card-title">No Accountability</div>
-                    <div class="card-desc">Cannot pinpoint true costs or where money is leaking. Manual logs are inconsistent or missing.</div>
-                </div>
-                <div class="challenge-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="16" y="20" width="32" height="32" rx="4" stroke="currentColor" stroke-width="3"/>
-                            <circle cx="26" cy="32" r="3" fill="currentColor"/>
-                            <circle cx="38" cy="32" r="3" fill="currentColor"/>
-                            <path d="M26 42C26 42 29 45 32 45C35 45 38 42 38 42" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M22 12L26 20M42 12L38 20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                            <path d="M12 12L52 52" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="card-stat">&#x2717;</div>
-                    <div class="card-title">No Predictability</div>
-                    <div class="card-desc">Reactive decisions. Missed opportunities to optimise. No foresight on demand-supply gaps.</div>
-                </div>
-            </div>
-
-            <div class="challenge-summary">
-                What if your energy portfolio had dedicated intelligent agents for each challenge?<br>
-                <span style="opacity: 0.7; font-size: 0.9em;">Always exploring. Always auditing. Always optimising.</span>
-            </div>
+        <div class="calc__out-row">
+          <span class="label">Monthly hidden loss (est.)</span>
+          <span class="figure" id="out-monthly">₹12L</span>
         </div>
 
-        <div class="energy-connector"></div>
-    </section>
-
-    <!-- Dual Platform Section -->
-    <section class="dual-platform section" id="platform">
-        <div class="energy-divider"></div>
-
-        <div class="platform-side left">
-            <div class="platform-content">
-                <h2>ONEGRID PLATFORM</h2>
-                <h3>Three Intelligent Agents for C&I</h3>
-                <ul class="feature-list">
-                    <li>Explorer Agent — Real-time Visibility</li>
-                    <li>Auditor Agent — Unified Cost Tracking</li>
-                    <li>Oracle Agent — Predictive Optimisation</li>
-                    <li>Multi-Source Dashboard</li>
-                    <li>Automated Compliance & Audit Logs</li>
-                    <li>Exchange Filler Suggestions</li>
-                </ul>
-                <a href="#contact" class="btn btn-platform-left">Request a Demo</a>
-            </div>
+        <div class="calc__out-row primary">
+          <span class="label">Annual amount at risk</span>
+          <span class="figure" id="out-annual">₹1.44Cr</span>
         </div>
-        <div class="platform-side right">
-            <div class="platform-content">
-                <h2>ONEGRID RENEWABLE</h2>
-                <h3>100 MW Clean Power for Industry</h3>
-                <ul class="feature-list">
-                    <li>Fixed Tariff ex-Busbar Pricing</li>
-                    <li>Q4 2026 Commercial Operation</li>
-                    <li>Group Captive & Third Party Options</li>
-                    <li>Up to 30% Cost Savings</li>
-                    <li>25-Year Power Purchase Agreement</li>
-                    <li>Complete ESG Compliance</li>
-                </ul>
-                <a href="#contact" class="btn btn-platform-right">Enquire PPA</a>
-            </div>
+
+        <div class="calc__out-row savings">
+          <span class="label">Potential annual savings with OneGrid</span>
+          <span class="figure" id="out-savings">₹1.01Cr</span>
         </div>
-    </section>
 
-    <!-- Agent Suite Section -->
-    <section class="platform-features section" id="features">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">THE INTELLIGENT LAYER</span>
-                <h2 class="section-title">ONEGRID AGENT SUITE</h2>
-                <p class="section-subtitle">Three specialised agents. One unified intelligence.</p>
-            </div>
+        <p class="calc__disclaimer">Estimates based on industry benchmarks for C&amp;I facilities in India. Actual savings vary. Contact us for a precise audit.</p>
 
-            <div class="agent-suite-grid">
-                <div class="agent-card agent-explorer">
-                    <div class="agent-pillar">VISIBILITY</div>
-                    <div class="agent-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="28" cy="28" r="16" stroke="currentColor" stroke-width="3"/>
-                            <path d="M40 40L56 56" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                            <circle cx="28" cy="28" r="6" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h3>Explorer Agent</h3>
-                    <p class="agent-tagline">Discovers patterns across your energy sources</p>
-                    <ul class="agent-features">
-                        <li>Real-time monitoring</li>
-                        <li>Multi-source data view</li>
-                        <li>Pattern discovery</li>
-                        <li>ToD insights</li>
-                    </ul>
-                </div>
-                <div class="agent-card agent-auditor">
-                    <div class="agent-pillar">ACCOUNTABILITY</div>
-                    <div class="agent-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="16" y="8" width="32" height="48" rx="3" stroke="currentColor" stroke-width="3"/>
-                            <path d="M24 18H40M24 26H40M24 34H40M24 42H32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M38 48L42 52L48 44" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3>Auditor Agent</h3>
-                    <p class="agent-tagline">Unifies costs and tracks every rupee</p>
-                    <ul class="agent-features">
-                        <li>Unified landed cost</li>
-                        <li>Anomaly detection</li>
-                        <li>Digital audit logs</li>
-                        <li>Cost attribution</li>
-                    </ul>
-                </div>
-                <div class="agent-card agent-oracle">
-                    <div class="agent-pillar">PREDICTABILITY</div>
-                    <div class="agent-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="3"/>
-                            <path d="M32 16V32L42 42" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M20 8L18 4M44 8L46 4M56 20L60 18M56 44L60 46" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3>Oracle Agent</h3>
-                    <p class="agent-tagline">Predicts, optimises, and maximises savings</p>
-                    <ul class="agent-features">
-                        <li>Demand forecasting</li>
-                        <li>Gap detection</li>
-                        <li>Exchange optimisation</li>
-                        <li>Continuous savings</li>
-                    </ul>
-                </div>
-            </div>
+        <a href="#contact" class="btn btn--primary">Get an Exact Estimate <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <p class="agent-suite-footer">Powered by <strong>OneGrid Agent Suite</strong> — Working together to give you complete energy confidence.</p>
+<!-- ═══════════════════════════════════════════════════════
+     TRANSFORMATION
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="transformation" data-screen-label="Transformation">
+  <div class="container">
+    <div class="tx__head">
+      <span class="eyebrow">The Transformation</span>
+      <h2 class="section-title" style="margin-top:20px;">From reactive to<br><em>always in control.</em></h2>
+    </div>
 
-            <div class="cta-row">
-                <a href="#contact" class="btn btn-primary btn-large">Request a Demo</a>
-            </div>
+    <div class="tx__split">
+      <div class="tx__col">
+        <div class="tx__col-head">
+          <div class="tx__col-name">Without OneGrid</div>
+          <span class="tag">Bleeding</span>
         </div>
-    </section>
-
-    <!-- Agents in Action -->
-    <section class="agents-action section" id="agents-action">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">AGENTS IN ACTION</span>
-                <h2 class="section-title">HOW THE AGENT SUITE WORKS FOR YOU</h2>
-            </div>
-
-            <div class="action-table">
-                <div class="action-row action-header">
-                    <div class="action-col agent-col">Agent</div>
-                    <div class="action-col catches-col">What It Catches</div>
-                    <div class="action-col does-col">What It Does</div>
-                </div>
-                <div class="action-row">
-                    <div class="action-col agent-col"><span class="agent-badge explorer-badge">Explorer</span></div>
-                    <div class="action-col catches-col">Consumption pattern anomaly detected</div>
-                    <div class="action-col does-col">Identifies hidden energy waste early</div>
-                </div>
-                <div class="action-row">
-                    <div class="action-col agent-col"><span class="agent-badge auditor-badge">Auditor</span></div>
-                    <div class="action-col catches-col">Cost variance across power sources</div>
-                    <div class="action-col does-col">Unified landed cost reveals true spend</div>
-                </div>
-                <div class="action-row">
-                    <div class="action-col agent-col"><span class="agent-badge auditor-badge">Auditor</span></div>
-                    <div class="action-col catches-col">PF dropping gradually over weeks</div>
-                    <div class="action-col does-col">Flags penalty charges + equipment stress</div>
-                </div>
-                <div class="action-row">
-                    <div class="action-col agent-col"><span class="agent-badge oracle-badge">Oracle</span></div>
-                    <div class="action-col catches-col">RE generation shortfall predicted</div>
-                    <div class="action-col does-col">Suggests cheaper exchange power to fill gap</div>
-                </div>
-                <div class="action-row">
-                    <div class="action-col agent-col"><span class="agent-badge oracle-badge">Oracle</span></div>
-                    <div class="action-col catches-col">Demand spike forecasted for next week</div>
-                    <div class="action-col does-col">Pre-arranges optimal power mix</div>
-                </div>
-            </div>
-
-            <p class="action-footer">Multi-layer intelligence working continuously to maximise your benefit.</p>
+        <div class="tx__list">
+          <div class="tx__item before"><span class="x">✕</span><span class="name">Fragmented data — no single source of truth</span></div>
+          <div class="tx__item before"><span class="x">✕</span><span class="name">True cost per unit: unknown</span></div>
+          <div class="tx__item before"><span class="x">✕</span><span class="name">Power purchasing: reactive, expensive</span></div>
+          <div class="tx__item before"><span class="x">✕</span><span class="name">Exchange windows: consistently missed</span></div>
+          <div class="tx__item before"><span class="x">✕</span><span class="name">PF penalties arrive as surprises</span></div>
+          <div class="tx__item before"><span class="x">✕</span><span class="name">Disputes take months, settle at a loss</span></div>
         </div>
-    </section>
+      </div>
 
-    <!-- Before vs After Transformation -->
-    <section class="transformation section" id="transformation">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">THE TRANSFORMATION</span>
-                <h2 class="section-title">FROM ENERGY CHAOS TO ENERGY CONFIDENCE</h2>
-            </div>
-
-            <div class="transform-grid">
-                <div class="transform-side before">
-                    <h3>BEFORE</h3>
-                    <ul>
-                        <li><span class="x-mark">&#x2717;</span> Fragmented data across systems</li>
-                        <li><span class="x-mark">&#x2717;</span> Unclear true cost per source</li>
-                        <li><span class="x-mark">&#x2717;</span> Reactive power purchasing</li>
-                        <li><span class="x-mark">&#x2717;</span> Missed exchange opportunities</li>
-                        <li><span class="x-mark">&#x2717;</span> Hidden inefficiencies</li>
-                        <li><span class="x-mark">&#x2717;</span> Unexpected breakdowns</li>
-                    </ul>
-                </div>
-                <div class="transform-side after">
-                    <h3>WITH ONEGRID AGENTS</h3>
-                    <ul>
-                        <li><span class="check-mark">&#x2713;</span> Explorer monitors everything</li>
-                        <li><span class="check-mark">&#x2713;</span> Auditor unifies true cost</li>
-                        <li><span class="check-mark">&#x2713;</span> Oracle optimises power mix</li>
-                        <li><span class="check-mark">&#x2713;</span> Exchange fillers suggested</li>
-                        <li><span class="check-mark">&#x2713;</span> Continuous cost optimisation</li>
-                        <li><span class="check-mark">&#x2713;</span> Maximum savings achieved</li>
-                    </ul>
-                </div>
-            </div>
-
-            <p class="transform-equation">Explorer + Auditor + Oracle = Maximum Energy Savings</p>
+      <div class="tx__col">
+        <div class="tx__col-head">
+          <div class="tx__col-name">With OneGrid Agents</div>
+          <span class="tag tag--ok">In Control</span>
         </div>
-    </section>
-
-    <!-- Flagship Project -->
-    <section class="flagship-project section" id="project">
-        <div class="project-overlay"></div>
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">FLAGSHIP PROJECT</span>
-                <h2 class="section-title">100 MW RENEWABLE ENERGY PARK</h2>
-                <p class="section-subtitle">Tamil Nadu's Next-Gen Clean Energy Hub</p>
-            </div>
-
-            <div class="project-stats">
-                <div class="stat-box">
-                    <div class="stat-number">100</div>
-                    <div class="stat-label">MW AC Capacity</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">210M</div>
-                    <div class="stat-label">Units/Year</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">230kV</div>
-                    <div class="stat-label">SS Injection</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-number">Q4 2026</div>
-                    <div class="stat-label">Planned COD</div>
-                </div>
-            </div>
-
-            <div class="project-features">
-                <div class="project-column">
-                    <h3>Technology Advantages</h3>
-                    <ul>
-                        <li>Cutting-Edge Solar Modules</li>
-                        <li>Peak Slot Optimization</li>
-                        <li>AI/ML Plant Monitoring</li>
-                        <li>Automated Maintenance Systems</li>
-                        <li>Generation Forecasting</li>
-                        <li>Advanced Cleaning Technology</li>
-                    </ul>
-                </div>
-                <div class="project-column">
-                    <h3>Power Purchase Options</h3>
-                    <ul>
-                        <li>Group Captive Model</li>
-                        <li>Third Party Open Access</li>
-                        <li>Captive Consumption</li>
-                        <li>Flexible Contract Terms</li>
-                        <li>Full Platform Integration</li>
-                        <li>Transparent Pricing</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="cta-row">
-                <a href="#contact" class="btn btn-primary btn-large">Enquire Now to Reserve Your Capacity</a>
-            </div>
+        <div class="tx__list">
+          <div class="tx__item after"><span class="v">+</span><span class="name"><em>Explorer</em> sees everything in real time</span></div>
+          <div class="tx__item after"><span class="v">+</span><span class="name"><em>Auditor</em> unifies true landed cost daily</span></div>
+          <div class="tx__item after"><span class="v">+</span><span class="name"><em>Oracle</em> optimises your power mix proactively</span></div>
+          <div class="tx__item after"><span class="v">+</span><span class="name">Exchange fillers suggested automatically</span></div>
+          <div class="tx__item after"><span class="v">+</span><span class="name">PF alerts raised before penalties form</span></div>
+          <div class="tx__item after"><span class="v">+</span><span class="name">Every dispute backed by immutable audit logs</span></div>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Customer Benefits -->
-    <section class="benefits section" id="benefits">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">VALUE PROPOSITION</span>
-                <h2 class="section-title">WHY ONEGRID POWERS INDIA'S LEADING INDUSTRIES</h2>
-            </div>
+    <div class="tx__equation">
+      <div class="line">
+        <em>Explorer</em><span class="plus">+</span><em>Auditor</em><span class="plus">+</span><em>Oracle</em>
+      </div>
+      <div class="line" style="margin-top:16px; color: var(--ink-muted); font-style: normal;">=</div>
+      <div class="line" style="margin-top:16px;"><span class="signal">Stop Losing. Start Saving.</span></div>
+    </div>
+  </div>
+</section>
 
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32 8L36 16L45 18L38 26L40 36L32 32L24 36L26 26L19 18L28 16L32 8Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="currentColor" fill-opacity="0.2"/>
-                            <circle cx="32" cy="38" r="3" fill="currentColor"/>
-                            <path d="M28 44C28 44 28 48 32 48C36 48 36 44 36 44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M32 38V44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3>Cost Savings</h3>
-                    <p>Landed cost visibility across grid, OA solar, OA wind enables optimal sourcing</p>
-                    <div class="benefit-stat">30%</div>
-                    <div class="benefit-label">Average Savings</div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="16" y="8" width="32" height="48" rx="3" stroke="currentColor" stroke-width="3"/>
-                            <path d="M24 18H40M24 26H40M24 34H40M24 42H32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M38 48L42 52L48 44" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3>Tariff Certainty</h3>
-                    <p>Long-term ex-busbar pricing with forecasting protects against volatile tariffs</p>
-                    <div class="benefit-stat">25 Years</div>
-                    <div class="benefit-label">Fixed Pricing</div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="14" y="32" width="7" height="18" rx="2" fill="currentColor"/>
-                            <rect x="24" y="22" width="7" height="28" rx="2" fill="currentColor"/>
-                            <rect x="34" y="26" width="7" height="24" rx="2" fill="currentColor"/>
-                            <rect x="44" y="16" width="7" height="34" rx="2" fill="currentColor"/>
-                            <path d="M10 52H54" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3>ToD Optimization</h3>
-                    <p>15-minute consumption vs generation analytics to reduce peak-hour exposure</p>
-                    <div class="benefit-stat">5 Min</div>
-                    <div class="benefit-label">Interval Data</div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="32" cy="34" r="18" stroke="currentColor" stroke-width="3"/>
-                            <path d="M32 34V22" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                            <path d="M32 34L40 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                            <circle cx="32" cy="34" r="2" fill="currentColor"/>
-                            <rect x="28" y="8" width="8" height="6" rx="1" stroke="currentColor" stroke-width="2"/>
-                            <path d="M20 14L24 18M44 14L40 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3>Real-Time Control</h3>
-                    <p>Automated scheduling, accounting and compliance management platform</p>
-                    <div class="benefit-stat">24/7</div>
-                    <div class="benefit-label">Monitoring</div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32 12C32 12 20 20 20 28C20 34 24 38 28 38L32 34" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M32 12C32 12 44 20 44 28C44 34 40 38 36 38L32 34" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="32" cy="46" r="10" stroke="currentColor" stroke-width="3"/>
-                            <path d="M28 46L30 48L36 42" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3>ESG Impact</h3>
-                    <p>Accurate renewable attribution and reporting for sustainability KPIs and RPO compliance</p>
-                    <div class="benefit-stat">100%</div>
-                    <div class="benefit-label">RE Tracking</div>
-                </div>
-            </div>
+<!-- ═══════════════════════════════════════════════════════
+     BLIND SPOT ASSESSMENT
+     ═══════════════════════════════════════════════════════ -->
+<section class="section section--dark" id="assessment" data-screen-label="Blind Spot">
+  <div class="container">
+    <div class="bs__head">
+      <span class="eyebrow">60-Second Assessment</span>
+      <div>
+        <h2 class="section-title">Energy blind spot<br><em>assessment.</em></h2>
+        <p class="lede" style="margin-top:20px;">Answer 3 questions. Get an instant risk rating. No form required.</p>
+      </div>
+    </div>
+
+    <div class="bs__card" id="bs-card">
+      <div class="bs__qmeta">
+        <div>
+          <span class="bs__counter">Question <span class="now" id="bs-num">01</span> / 03</span>
+          <h3 class="bs__q" id="bs-q">Can you see your real-time energy consumption right now — across all sources?</h3>
         </div>
-    </section>
+        <div class="quiz__qfoot">Answer honestly</div>
+      </div>
+      <div class="bs__actions">
+        <button class="bs__btn" data-ans="yes"><span class="key">[Y]</span><span>Yes — full visibility</span><span class="arr">→</span></button>
+        <button class="bs__btn" data-ans="no"><span class="key">[N]</span><span>No — or only partially</span><span class="arr">→</span></button>
+      </div>
+    </div>
 
-    <!-- Impact Metrics -->
-    <section class="impact-demo section" id="impact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">CLIMATE ACTION</span>
-                <h2 class="section-title">YOUR CLIMATE IMPACT</h2>
-            </div>
-
-            <div class="impact-box">
-                <div class="impact-subtitle">FROM OUR 100 MW RENEWABLE ENERGY PARK</div>
-                <div class="impact-number" id="impactCounter">0</div>
-                <div class="impact-unit">Tonnes CO₂ Offset Annually</div>
-
-                <div class="impact-grid">
-                    <div class="impact-item">
-                        <div class="impact-item-icon">🌳</div>
-                        <div class="impact-item-value">54 Lakh</div>
-                        <div class="impact-item-label">Trees Planted</div>
-                    </div>
-                    <div class="impact-item">
-                        <div class="impact-item-icon">🚗</div>
-                        <div class="impact-item-value">26,000</div>
-                        <div class="impact-item-label">Cars Off Road</div>
-                    </div>
-                    <div class="impact-item">
-                        <div class="impact-item-icon">🏠</div>
-                        <div class="impact-item-value">18,000</div>
-                        <div class="impact-item-label">Homes Powered</div>
-                    </div>
-                    <div class="impact-item">
-                        <div class="impact-item-icon">⛽</div>
-                        <div class="impact-item-value">5 Cr</div>
-                        <div class="impact-item-label">Litres Diesel Saved</div>
-                    </div>
-                </div>
-
-                <div class="impact-footer">
-                    Per MW Procured = 1,200 Tonnes CO₂/Year Offset
-                </div>
-            </div>
+    <div class="bs__result" id="bs-result">
+      <div class="bs__tier-num"><span id="bs-tier">1</span><span class="glyph" id="bs-dot">●</span></div>
+      <div class="bs__verdict">
+        <span class="label">Tier <span id="bs-tier-num">1</span> · <span id="bs-yes-count">3</span>/3 Yes</span>
+        <h3 id="bs-title">In Control</h3>
+        <p id="bs-body">Genuinely rare. A OneGrid audit will still surface savings.</p>
+        <div class="bs__resultcta">
+          <a href="#contact" class="btn btn--primary">Get a Full Audit <span class="arrow">→</span></a>
+          <button class="btn btn--ghost" id="bs-retake">Retake</button>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Insights from Medium -->
-    <section class="insights section" id="insights">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">THOUGHT LEADERSHIP</span>
-                <h2 class="section-title">INSIGHTS & PERSPECTIVES</h2>
-                <p class="section-subtitle">by Vinit Chordia</p>
-            </div>
+<!-- ═══════════════════════════════════════════════════════
+     FLAGSHIP PROJECT
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="flagship" data-screen-label="Flagship">
+  <div class="container">
+    <div class="flag__head">
+      <span class="eyebrow">Flagship Project</span>
+      <h2 class="section-title">100 MW <em>Renewable</em><br>Energy Park.</h2>
+    </div>
+    <p class="lede" style="margin-bottom:48px;">Tamil Nadu's next-gen clean energy hub — lock in your tariff before capacity fills.</p>
 
-            <div class="blog-grid" id="blogGrid">
-                <!-- Blog posts will be loaded here via JavaScript -->
-                <div class="blog-skeleton">
-                    <div class="skeleton-image"></div>
-                    <div class="skeleton-content">
-                        <div class="skeleton-title"></div>
-                        <div class="skeleton-text"></div>
-                        <div class="skeleton-text"></div>
-                    </div>
-                </div>
-                <div class="blog-skeleton">
-                    <div class="skeleton-image"></div>
-                    <div class="skeleton-content">
-                        <div class="skeleton-title"></div>
-                        <div class="skeleton-text"></div>
-                        <div class="skeleton-text"></div>
-                    </div>
-                </div>
-                <div class="blog-skeleton">
-                    <div class="skeleton-image"></div>
-                    <div class="skeleton-content">
-                        <div class="skeleton-title"></div>
-                        <div class="skeleton-text"></div>
-                        <div class="skeleton-text"></div>
-                    </div>
-                </div>
-            </div>
+    <div class="flag__visual">
+      <div class="flag__visual-grid"></div>
+      <div class="flag__visual-caption">
+        <span>Site · Tirunelveli District · Lat 8.7°N</span>
+        <span class="loc">Tamil Nadu</span>
+        <span>Status: Pre-COD · Reserving capacity</span>
+      </div>
+    </div>
 
-            <div class="cta-row">
-                <a href="https://medium.com/@onegrid" target="_blank" rel="noopener" class="btn btn-secondary btn-large">View All Insights on Medium →</a>
-            </div>
+    <div class="flag__stats">
+      <div class="flag__stat">
+        <div class="figure">100<span class="unit">MW AC</span></div>
+        <span class="label">Installed Capacity</span>
+      </div>
+      <div class="flag__stat">
+        <div class="figure">210M<span class="unit">units / yr</span></div>
+        <span class="label">Annual Generation</span>
+      </div>
+      <div class="flag__stat">
+        <div class="figure">230<span class="unit">kV SS</span></div>
+        <span class="label">Injection Voltage</span>
+      </div>
+      <div class="flag__stat">
+        <div class="figure">Q4 '26<span class="unit"></span></div>
+        <span class="label">Planned COD</span>
+      </div>
+    </div>
+
+    <div class="flag__feats">
+      <div class="flag__col">
+        <h4>// Technology Advantages</h4>
+        <ul>
+          <li>Cutting-edge solar modules</li>
+          <li>Peak slot optimization</li>
+          <li>AI/ML plant monitoring</li>
+          <li>Automated maintenance systems</li>
+          <li>Generation forecasting</li>
+          <li>Advanced cleaning technology</li>
+        </ul>
+      </div>
+      <div class="flag__col">
+        <h4>// Power Purchase Options</h4>
+        <ul>
+          <li>Group Captive Model</li>
+          <li>Third Party Open Access</li>
+          <li>Captive Consumption</li>
+          <li>Flexible contract terms</li>
+          <li>Full platform integration</li>
+          <li>Transparent pricing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flag__cta">
+      <p class="note">Capacity allocates first-come, first-served. Group Captive shares are limited.</p>
+      <a href="#contact" class="btn btn--primary">Reserve Your Capacity Before It's Gone <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     BENEFITS
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="benefits" data-screen-label="Benefits">
+  <div class="container">
+    <div class="benefits__head">
+      <span class="eyebrow">The ROI</span>
+      <h2 class="section-title">What you get back<br><em>from Day One.</em></h2>
+    </div>
+
+    <div class="benefits__row">
+      <div class="benefit">
+        <span class="benefit__num">01</span>
+        <div class="benefit__figure"><em>30%</em></div>
+        <span class="benefit__label">Average Savings</span>
+        <span class="benefit__heading">// Cost Reduction</span>
+        <p class="benefit__body">Landed cost visibility across grid, OA solar, OA wind — stop overpaying the moment you can see what you're paying.</p>
+      </div>
+      <div class="benefit">
+        <span class="benefit__num">02</span>
+        <div class="benefit__figure">25<span class="unit">yr</span></div>
+        <span class="benefit__label">Fixed Tariff</span>
+        <span class="benefit__heading">// Rate Certainty</span>
+        <p class="benefit__body">Lock in ex-busbar pricing. Your CFO can model 25 years of energy costs. The volatility stops here.</p>
+      </div>
+      <div class="benefit">
+        <span class="benefit__num">03</span>
+        <div class="benefit__figure">15<span class="unit">min</span></div>
+        <span class="benefit__label">Interval Data</span>
+        <span class="benefit__heading">// ToD Mastery</span>
+        <p class="benefit__body">15-minute consumption vs. generation analytics. Know exactly when and where peak costs hit — before they hit.</p>
+      </div>
+      <div class="benefit">
+        <span class="benefit__num">04</span>
+        <div class="benefit__figure">24/7</div>
+        <span class="benefit__label">Always On</span>
+        <span class="benefit__heading">// No Blind Shifts</span>
+        <p class="benefit__body">Night shifts, weekends, public holidays — the agents never clock out. Problems get caught whether you're watching or not.</p>
+      </div>
+      <div class="benefit">
+        <span class="benefit__num">05</span>
+        <div class="benefit__figure">100<span class="unit">%</span></div>
+        <span class="benefit__label">Attributed</span>
+        <span class="benefit__heading">// ESG Compliance</span>
+        <p class="benefit__body">Accurate renewable attribution and RPO reporting. Every unit traced, verified, and audit-ready for any stakeholder.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     IMPACT (dark) — animated counter
+     ═══════════════════════════════════════════════════════ -->
+<section class="section section--dark impact" id="impact" data-screen-label="Impact">
+  <div class="container">
+    <span class="eyebrow impact__eyebrow">Climate Action</span>
+
+    <div class="impact__counter-wrap">
+      <div class="impact__counter-label">CO₂ Offset · Annually</div>
+      <div class="impact__counter" id="co2-counter" data-target="120000">0</div>
+      <div class="impact__counter-unit">tonnes — from our 100 MW Renewable Energy Park.</div>
+    </div>
+
+    <div class="impact__secondary">
+      <div class="impact__stat">
+        <div class="fig">54 <span style="font-family:var(--mono); font-size:0.5em; color:var(--stone); letter-spacing:0.04em;">Lakh</span></div>
+        <span class="lab">Trees planted equivalent</span>
+      </div>
+      <div class="impact__stat">
+        <div class="fig">26,000</div>
+        <span class="lab">Cars off road</span>
+      </div>
+      <div class="impact__stat">
+        <div class="fig">18,000</div>
+        <span class="lab">Homes powered</span>
+      </div>
+      <div class="impact__stat">
+        <div class="fig">5 <span style="font-family:var(--mono); font-size:0.5em; color:var(--stone); letter-spacing:0.04em;">Cr L</span></div>
+        <span class="lab">Diesel saved</span>
+      </div>
+    </div>
+
+    <p class="impact__note">Per MW procured = 1,200 tonnes CO₂ / year offset.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     INSIGHTS
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="insights" data-screen-label="Insights">
+  <div class="container">
+    <div class="insights__head">
+      <span class="eyebrow">Thought Leadership</span>
+      <h2 class="section-title">Insights &amp;<br><em>perspectives.</em></h2>
+    </div>
+
+    <div class="insights__grid" id="insights-grid">
+      <article class="insight">
+        <div class="insight__cover"><span class="mono">cover · 16:10</span></div>
+        <span class="insight__tag">Energy Markets · 8 min read</span>
+        <h3 class="insight__title">Why exchange windows close while CFOs sleep — and what to do about it.</h3>
+        <p class="insight__excerpt">A six-month study of 14 C&amp;I facilities shows the average team learns about a missed buying window 4.5 hours after it opens. The math behind the loss, and how to invert it.</p>
+        <a href="#" class="insight__cta">Read</a>
+      </article>
+      <article class="insight">
+        <div class="insight__cover"><span class="mono">cover · 16:10</span></div>
+        <span class="insight__tag">Operations · 6 min read</span>
+        <h3 class="insight__title">The PF penalty is never about power factor.</h3>
+        <p class="insight__excerpt">Capacitor degradation is gradual. Penalties are sudden. The disconnect between operational drift and financial consequence — and why monthly bill reviews can't bridge it.</p>
+        <a href="#" class="insight__cta">Read</a>
+      </article>
+      <article class="insight">
+        <div class="insight__cover"><span class="mono">cover · 16:10</span></div>
+        <span class="insight__tag">Procurement · 5 min read</span>
+        <h3 class="insight__title">Open Access in 2026: a buyer's playbook for India.</h3>
+        <p class="insight__excerpt">Group Captive, Third Party, Captive — the structures CFOs need to understand before signing a 25-year PPA. With worked examples and tariff comparison.</p>
+        <a href="#" class="insight__cta">Read</a>
+      </article>
+    </div>
+
+    <div style="margin-top:48px;">
+      <a href="https://medium.com/@onegrid" class="btn btn--ghost">View All on Medium <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     DUAL CTA
+     ═══════════════════════════════════════════════════════ -->
+<section class="section section--tight" id="dual" data-screen-label="Dual CTA">
+  <div class="container">
+    <div class="dual__split">
+      <div class="dual__panel">
+        <span class="dual__tag">// Platform</span>
+        <h3 class="dual__h">Stop the bleed.<br><em>Try the platform.</em></h3>
+        <p class="dual__sub">Full visibility from Day 1. No credit card. No commitment.</p>
+        <div class="dual__feats">
+          <div class="dual__feat"><span class="marker">+</span><span>Free account setup</span></div>
+          <div class="dual__feat"><span class="marker">+</span><span>Real-time analytics dashboard</span></div>
+          <div class="dual__feat"><span class="marker">+</span><span>All three agents active from Day 1</span></div>
+          <div class="dual__feat"><span class="marker">+</span><span>No credit card required</span></div>
         </div>
-    </section>
+        <a href="#contact" class="btn btn--primary dual__cta">Sign Up Free <span class="arrow">→</span></a>
+      </div>
 
-    <!-- Dual CTA Section -->
-    <section class="dual-cta section" id="cta">
-        <div class="cta-side left">
-            <div class="cta-content">
-                <h2>TRY THE PLATFORM</h2>
-                <p>Experience intelligent energy management for your C&I operations</p>
-                <ul class="cta-features">
-                    <li>Free account setup</li>
-                    <li>Real-time analytics dashboard</li>
-                    <li>No credit card required</li>
-                    <li>Full feature access</li>
-                </ul>
-                <a href="#contact" class="btn btn-cta-left btn-large">Sign Up Free</a>
-            </div>
+      <div class="dual__panel dual__panel--ink">
+        <span class="dual__tag">// Renewable</span>
+        <h3 class="dual__h">Lock in your tariff.<br><em>Secure capacity.</em></h3>
+        <p class="dual__sub">Reserve power from our 100 MW park before it fills.</p>
+        <div class="dual__feats">
+          <div class="dual__feat"><span class="marker">+</span><span>Fixed ex-busbar pricing — no surprises</span></div>
+          <div class="dual__feat"><span class="marker">+</span><span>Q4 2026 delivery</span></div>
+          <div class="dual__feat"><span class="marker">+</span><span>Group Captive or Third Party options</span></div>
+          <div class="dual__feat"><span class="marker">+</span><span>Up to 30% cost savings vs. grid</span></div>
         </div>
-        <div class="cta-side right">
-            <div class="cta-content">
-                <h2>SECURE YOUR CAPACITY</h2>
-                <p>Reserve renewable power from our 100 MW energy park</p>
-                <ul class="cta-features">
-                    <li>Fixed ex-busbar pricing</li>
-                    <li>Q4 2026 delivery</li>
-                    <li>Flexible procurement options</li>
-                    <li>Up to 30% cost savings</li>
-                </ul>
-                <a href="#contact" class="btn btn-cta-right btn-large">Get PPA Quote</a>
-            </div>
+        <a href="#contact" class="btn btn--primary dual__cta">Get PPA Quote <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CONTACT
+     ═══════════════════════════════════════════════════════ -->
+<section class="section" id="contact" data-screen-label="Contact">
+  <div class="container">
+    <div class="contact__head">
+      <span class="eyebrow">Get Started</span>
+      <h2 class="section-title" style="margin-top:20px;">Ready to stop<br><em>losing money</em><br>on energy?</h2>
+      <p class="lede contact__lede">For C&amp;I Energy Managers, CFOs, Directors and Stakeholders.</p>
+    </div>
+
+    <div class="contact__split">
+      <div class="contact__info">
+        <div class="contact__info-block">
+          <h4>// Direct</h4>
+          <p>info@onegrid.in</p>
+          <p>Tamil Nadu, India</p>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact section" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">GET STARTED</span>
-                <h2 class="section-title">READY TO TRANSFORM YOUR ENERGY STRATEGY?</h2>
-                <p class="section-subtitle">For C&I Energy Managers, CFOs, Directors and Stakeholders</p>
-            </div>
-
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Get in Touch</h3>
-                    <p>Whether you're interested in our intelligent platform or securing renewable capacity, we're here to help.</p>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div>
-                            <div class="contact-label">Email</div>
-                            <a href="mailto:info@onegrid.in" class="contact-value">info@onegrid.in</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">🌐</div>
-                        <div>
-                            <div class="contact-label">Location</div>
-                            <div class="contact-value">Tamil Nadu, India</div>
-                        </div>
-                    </div>
-
-                    <div class="contact-steps">
-                        <h4>Three Simple Steps:</h4>
-                        <ol>
-                            <li>Reserve capacity in our 100 MW portfolio</li>
-                            <li>Deploy OneGrid intelligence across facilities</li>
-                            <li>Accelerate your renewable transition</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="contact-form">
-                    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" value="1e917a6a-d464-4c57-b358-b07a5f168f2f">
-                        <input type="hidden" name="subject" value="New Contact Form Submission - OneGrid">
-                        <input type="hidden" name="from_name" value="OneGrid Website">
-                        <div class="form-group">
-                            <label for="name">Name *</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" id="company" name="company">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="interest">Interest *</label>
-                            <select id="interest" name="interest" required>
-                                <option value="">Select your interest</option>
-                                <option value="platform">OneGrid Platform</option>
-                                <option value="ppa">Power Purchase Agreement</option>
-                                <option value="both">Both Platform & PPA</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="4"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-large">Send Message</button>
-                    </form>
-                </div>
-            </div>
+        <div class="contact__info-block">
+          <h4>// What Happens Next</h4>
+          <div class="contact__steps">
+            <div class="contact__step">We review your current energy setup and identify your biggest cost exposures.</div>
+            <div class="contact__step">You see a live demo of the platform on your own data (or sample data).</div>
+            <div class="contact__step">We build a custom savings estimate before you commit to anything.</div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="logo-container">
-                        <div class="logo-mark">
-                            <svg
-  width="44"
-  height="44"
-  viewBox="120 200 200 200"
-  xmlns="http://www.w3.org/2000/svg"
-  preserveAspectRatio="xMidYMid meet"
->
-  <path
-    fill="var(--accent-green)"
-    d="M262.78,376.72l-.3-112.97h-76.06v38.9h32.89v46.04h-4v-42.04h-32.89v-46.9h80.05l-.14-53.36H120.02v142.31h95.29v28.02h47.47ZM219.31,348.7h39.47v24.02h-39.47v-24.02Z"
-  />
-</svg>
-                        </div>
-                        <div class="logo-text">ONEGRID</div>
-                    </div>
-                    <p class="footer-tagline">India's Next-Generation Renewable Energy IPP<br>Intelligent Energy Solutions for Industry</p>
-                    <div class="footer-contact">
-                        <p>📧 info@onegrid.in</p>
-                        <p>🌐 Tamil Nadu, India</p>
-                    </div>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Platform</h4>
-                    <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#benefits">Benefits</a></li>
-                        <li><a href="#contact">Get Started</a></li>
-                        <li><a href="#contact">Documentation</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Solutions</h4>
-                    <ul>
-                        <li><a href="#project">100 MW Project</a></li>
-                        <li><a href="#project">Group Captive</a></li>
-                        <li><a href="#project">Third Party</a></li>
-                        <li><a href="#project">Captive</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#hero">About Us</a></li>
-                        <li><a href="#insights">Insights</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="https://medium.com/@onegrid" target="_blank" rel="noopener">Blog</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/company/onegrid" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
-                    <a href="https://twitter.com/onegrid" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
-                    <a href="https://medium.com/@onegrid" target="_blank" rel="noopener" aria-label="Medium">Medium</a>
-                </div>
-                <div class="copyright">
-                    © 2026 OneGrid. All rights reserved.
-                </div>
-                <div class="legal-links">
-                    <a href="#privacy">Privacy Policy</a>
-                    <a href="#terms">Terms of Service</a>
-                </div>
-            </div>
+      <form class="contact__form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="1e917a6a-d464-4c57-b358-b07a5f168f2f">
+        <input type="hidden" name="subject" value="New Enquiry — OneGrid">
+        <input type="hidden" name="from_name" value="OneGrid Website">
+        <input type="hidden" name="redirect" value="false">
+        <div class="form-row">
+          <label for="cf-name">Name *</label>
+          <input id="cf-name" name="name" type="text" required placeholder="Full name">
         </div>
-    </footer>
+        <div class="form-row">
+          <label for="cf-email">Email *</label>
+          <input id="cf-email" name="email" type="email" required placeholder="name@company.com">
+        </div>
+        <div class="form-row">
+          <label for="cf-company">Company</label>
+          <input id="cf-company" name="company" type="text" placeholder="Company name">
+        </div>
+        <div class="form-row">
+          <label for="cf-interest">I'm interested in *</label>
+          <select id="cf-interest" name="interest" required>
+            <option value="">Select your interest</option>
+            <option value="audit">Free Energy Cost Audit</option>
+            <option value="platform">OneGrid Platform Demo</option>
+            <option value="ppa">Power Purchase Agreement</option>
+            <option value="both">Both Platform &amp; PPA</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="cf-msg">Message</label>
+          <textarea id="cf-msg" name="message" placeholder="Tell us about your facility — monthly spend, sources, biggest pain point."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary contact__submit" id="contact-submit">Send Message <span class="arrow">→</span></button>
+        <p class="form-status" id="form-status" style="display:none;margin-top:16px;font-family:var(--mono);font-size:12px;letter-spacing:0.08em;"></p>
+      </form>
+    </div>
+  </div>
+</section>
 
-    <script src="script.js?v=3"></script>
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════ -->
+<footer class="footer" data-screen-label="Footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="#top" class="brand">
+          <span class="brand__mark" aria-hidden="true">
+            <svg width="32" height="38" viewBox="0 0 142.76 170.33" xmlns="http://www.w3.org/2000/svg">
+              <path fill="currentColor" fill-rule="evenodd" d="M 142.76 170.33 L 142.46 57.37 L 66.40 57.37 L 66.40 96.26 L 99.29 96.26 L 99.29 142.31 L 95.29 142.31 L 95.29 100.26 L 62.40 100.26 L 62.40 53.37 L 142.45 53.37 L 142.31 0 L 0 0 L 0 142.31 L 95.29 142.31 L 95.29 170.33 Z M 99.29 142.31 L 138.76 142.31 L 138.76 166.33 L 99.29 166.33 Z"/>
+            </svg>
+          </span>
+          <span>ONEGRID</span>
+        </a>
+        <p class="footer__tag">India's Next-Generation Renewable Energy IPP. Intelligent energy solutions for industry.</p>
+        <div class="footer__contact">info@onegrid.in · Tamil Nadu, India</div>
+      </div>
+      <div class="footer__col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#agents">Agent Suite</a></li>
+          <li><a href="#calculator">Cost Calculator</a></li>
+          <li><a href="#quiz">Take the Quiz</a></li>
+          <li><a href="#contact">Get Started</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="#flagship">100 MW Project</a></li>
+          <li><a href="#flagship">Group Captive</a></li>
+          <li><a href="#flagship">Third Party</a></li>
+          <li><a href="#flagship">Captive</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#insights">Insights</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bigtype">ONEGRID</div>
+    <div class="footer__bottom">
+      <span>© 2026 OneGrid Energy · Tamil Nadu</span>
+      <span>v1.0 · Edition 01 · Built for Indian C&amp;I</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── Interactive JS ─── -->
+<script src="app.js"></script>
+
+
 </body>
 </html>
-
-
-
