@@ -14,6 +14,19 @@
     return '₹' + (amountLakhs >= 10 ? Math.round(amountLakhs) : amountLakhs.toFixed(1)) + 'L';
   }
 
+  // ─── Rotating hero headline ────────────────────────────────
+  const HEADLINES = [
+    `You're <em>Already</em><br>Losing Money<br>on <em class="signal">Energy.</em>`,
+    `Your Energy Bill<br>Has a <em>Hidden</em><br><em class="signal">Tax.</em>`,
+    `Your Competitor<br>Just Cut Their<br><em class="signal">Energy Cost.</em>`,
+    `You Don't Know<br>What Your Energy<br><em class="signal">Actually Costs.</em>`
+  ];
+  const heroHeadline = document.querySelector('.hero-headline');
+  if (heroHeadline) {
+    const idx = Math.floor(Math.random() * HEADLINES.length);
+    heroHeadline.innerHTML = HEADLINES[idx];
+  }
+
   // ─── Scroll progress ───────────────────────────────────────
   const bar = document.getElementById('scroll-bar');
   if (bar) {
