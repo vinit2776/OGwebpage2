@@ -561,6 +561,7 @@ h1, h2, h3, h4 {
 }
 .quiz__inner.anim-in {
   animation: quizSlideIn 0.32s cubic-bezier(0.2, 0, 0, 1) forwards;
+  pointer-events: none;
 }
 .quiz__qmeta {
   display: flex;
