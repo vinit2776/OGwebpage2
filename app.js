@@ -158,16 +158,35 @@
   }
 
   function answerQuiz(score, btn) {
+    // Lock every button immediately — prevents mis-clicks landing on the next question
+    qOptions.querySelectorAll('.quiz__opt').forEach(b => { b.disabled = true; });
     btn.classList.add('selected');
     qTotal += score;
+
+    const inner = document.getElementById('quiz-inner');
+
+    // Hold the selected state for 380ms so the user can register what they picked
     setTimeout(() => {
-      qIdx++;
-      if (qIdx >= QUIZ.length) {
-        showQuizResult();
-      } else {
-        renderQuiz();
-      }
-    }, 240);
+      inner.classList.add('anim-out');
+
+      // After slide-out finishes, swap content then slide the new question in
+      setTimeout(() => {
+        inner.classList.remove('anim-out');
+        qIdx++;
+        if (qIdx >= QUIZ.length) {
+          showQuizResult();
+        } else {
+          renderQuiz();
+          // Double rAF ensures the new DOM is painted before the slide-in starts
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              inner.classList.add('anim-in');
+              setTimeout(() => inner.classList.remove('anim-in'), 280);
+            });
+          });
+        }
+      }, 240); // matches quizSlideOut animation duration
+    }, 380); // pause to show the selected answer
   }
 
   function showQuizResult() {
