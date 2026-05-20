@@ -1382,6 +1382,74 @@ h1, h2, h3, h4 {
   .bs__qmeta { border-right: 0; padding-right: 0; }
 }
 
+/* ─── CASES ──────────────────────────────────── */
+
+.cases__head {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+.cases__lede { max-width: 48ch; }
+.cases__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.case-card {
+  padding: 44px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-right: 1px solid var(--rule);
+  transition: background 0.2s ease;
+}
+.case-card:last-child { border-right: 0; }
+.case-card:hover { background: rgba(122, 230, 92, 0.03); }
+.case-card__tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+.case-card__loss {
+  font-family: var(--serif);
+  font-size: clamp(44px, 5.5vw, 72px);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  color: var(--signal);
+  font-style: italic;
+}
+.case-card__loss-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+.case-card__hook {
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.case-card__body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-muted);
+  flex: 1;
+}
+@media (max-width: 980px) {
+  .cases__head { grid-template-columns: 1fr; gap: 24px; }
+  .cases__grid { grid-template-columns: 1fr; }
+  .case-card { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .case-card:last-child { border-bottom: 0; }
+}
+
 /* ─── FLAGSHIP ────────────────────────────────── */
 
 .flag__head {

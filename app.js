@@ -388,6 +388,61 @@
     });
   }
 
+  // ─── Case stories ──────────────────────────────────────────
+  const CASES = [
+    {
+      loss: '₹2.5Cr',
+      lossLabel: 'left before anyone noticed',
+      tag: 'Pharma · Pune',
+      hook: 'The Penalty They Never Caught',
+      body: 'A pharma plant was paying ₹18L/month in power factor penalties — logged as "grid charges" for 14 months. No one questioned it. A OneGrid audit found it in 6 hours.'
+    },
+    {
+      loss: '₹60L',
+      lossLabel: 'saved by a competitor in the same zone',
+      tag: 'Auto Components · Chennai',
+      hook: 'The Exchange Window They Never Acted On',
+      body: 'An OA solar user watched exchange prices drop to ₹2.8/unit every afternoon — and never acted. A competitor 40km away automated it. Same tariff zone. ₹60L difference.'
+    },
+    {
+      loss: '₹8.4L',
+      lossLabel: 'spent on diesel the grid didn\'t require',
+      tag: 'Textiles · Coimbatore',
+      hook: 'The Diesel They Didn\'t Need to Run',
+      body: 'A textile mill ran DG sets for 11 hours last monsoon. The grid was stable for 7 of them. No real-time signal meant the DG ran anyway. ₹8.4L. Entirely avoidable.'
+    },
+    {
+      loss: '₹1.1Cr',
+      lossLabel: 'found in the first audit',
+      tag: 'Cold Chain · Tamil Nadu',
+      hook: 'Four Facilities. Four Different Costs. Nobody Knew.',
+      body: 'Landed cost varied from ₹6.20 to ₹9.40/unit across 4 facilities — same state, same month. One had unmonitored solar. One had no PF correction. No visibility, no action.'
+    },
+    {
+      loss: '₹28.8L',
+      lossLabel: 'cost of an 8-month delay',
+      tag: 'Steel Processing · Tamil Nadu',
+      hook: 'The Tariff Migration Nobody Tracked',
+      body: 'They qualified for HT industrial tariffs 8 months before they switched. At ₹1.20/unit across 3 lakh units/month, the delay cost ₹28.8L. "We didn\'t have the data front of mind."'
+    }
+  ];
+
+  const casesGrid = document.getElementById('cases-grid');
+  if (casesGrid) {
+    const shuffled = [...CASES].sort(() => Math.random() - 0.5).slice(0, 3);
+    casesGrid.innerHTML = shuffled.map(c => `
+      <div class="case-card">
+        <span class="case-card__tag">${c.tag}</span>
+        <div>
+          <div class="case-card__loss">${c.loss}</div>
+          <div class="case-card__loss-label">${c.lossLabel}</div>
+        </div>
+        <h3 class="case-card__hook">${c.hook}</h3>
+        <p class="case-card__body">${c.body}</p>
+      </div>
+    `).join('');
+  }
+
   // ─── Insights — Medium RSS via rss2json ────────────────────
   const insightsGrid = document.getElementById('insights-grid');
 
