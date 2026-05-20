@@ -448,7 +448,7 @@
 
   if (insightsGrid) {
     const RSS_URL = 'https://medium.com/feed/@onegrid';
-    const API_URL = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&count=3';
+    const API_URL = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL);
 
     function stripHtml(html) {
       const tmp = document.createElement('div');
@@ -466,8 +466,16 @@
       return Math.max(1, Math.round(words / 200)) + ' min read';
     }
 
+    function extractImage(html) {
+      // Medium puts the cover image inside the description HTML — pull the first <img src>
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      const img = tmp.querySelector('img');
+      return img ? img.src : '';
+    }
+
     function renderInsightCard(item) {
-      const thumb = item.thumbnail || item.enclosure?.link || '';
+      const thumb = item.thumbnail || extractImage(item.description || '') || item.enclosure?.link || '';
       const tag = (item.categories && item.categories[0]) ? item.categories[0] : 'Insights';
       const excerpt = truncate(stripHtml(item.description), 160);
       const rt = readTime(item.content || item.description || '');
