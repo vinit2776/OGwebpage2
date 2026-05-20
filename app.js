@@ -165,11 +165,11 @@
 
     const inner = document.getElementById('quiz-inner');
 
-    // Hold the selected state for 380ms so the user can register what they picked
+    // Brief pause so the green selection registers, then slide out
     setTimeout(() => {
       inner.classList.add('anim-out');
 
-      // After slide-out finishes, swap content then slide the new question in
+      // After slide-out (220ms), swap content and slide the new question in from right
       setTimeout(() => {
         inner.classList.remove('anim-out');
         qIdx++;
@@ -181,12 +181,12 @@
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
               inner.classList.add('anim-in');
-              setTimeout(() => inner.classList.remove('anim-in'), 280);
+              setTimeout(() => inner.classList.remove('anim-in'), 320);
             });
           });
         }
-      }, 240); // matches quizSlideOut animation duration
-    }, 380); // pause to show the selected answer
+      }, 220); // matches quizSlideOut duration
+    }, 260); // just enough to see the selected answer before it exits
   }
 
   function showQuizResult() {

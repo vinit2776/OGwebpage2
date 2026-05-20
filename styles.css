@@ -548,19 +548,19 @@ h1, h2, h3, h4 {
   min-height: calc(480px - 112px);
 }
 @keyframes quizSlideOut {
-  from { transform: translateX(0);    opacity: 1; }
-  to   { transform: translateX(-52px); opacity: 0; }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-110%); }
 }
 @keyframes quizSlideIn {
-  from { transform: translateX(52px);  opacity: 0; }
-  to   { transform: translateX(0);    opacity: 1; }
+  from { transform: translateX(110%); }
+  to   { transform: translateX(0); }
 }
 .quiz__inner.anim-out {
-  animation: quizSlideOut 0.24s cubic-bezier(0.4, 0, 1, 1) forwards;
+  animation: quizSlideOut 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
   pointer-events: none;
 }
 .quiz__inner.anim-in {
-  animation: quizSlideIn 0.28s cubic-bezier(0, 0, 0.2, 1) forwards;
+  animation: quizSlideIn 0.32s cubic-bezier(0.2, 0, 0, 1) forwards;
 }
 .quiz__qmeta {
   display: flex;
