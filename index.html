@@ -1858,6 +1858,73 @@ body {
   color: rgba(245,240,232,0.18);
   text-align: center;
 }
+.contact-form__captcha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 11px 14px;
+}
+.contact-form__captcha-question {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: rgba(245,240,232,0.5);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.contact-form__captcha-question strong {
+  color: var(--parchment);
+  font-weight: 600;
+}
+.contact-form__captcha-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 3px;
+  padding: 6px 10px;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--parchment);
+  outline: none;
+  width: 64px;
+  text-align: center;
+  transition: border-color 0.15s;
+}
+.contact-form__captcha-input:focus {
+  border-color: var(--signal);
+}
+.contact-form__captcha-input.captcha--error {
+  border-color: var(--ember, #e25a2b);
+  animation: captcha-shake 0.35s ease;
+}
+.contact-form__captcha-hint {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ember, #e25a2b);
+  margin-left: auto;
+  display: none;
+}
+.contact-form__captcha-hint.visible { display: block; }
+/* honeypot — must stay invisible */
+.contact-form__honeypot {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 0;
+  z-index: -1;
+  pointer-events: none;
+  tab-index: -1;
+}
+@keyframes captcha-shake {
+  0%,100% { transform: translateX(0); }
+  20%      { transform: translateX(-5px); }
+  40%      { transform: translateX(5px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
 .contact-form__success {
   display: flex;
   flex-direction: column;
@@ -2971,6 +3038,20 @@ a.footer__contact-val:hover { color: var(--signal); }
               <option>Above ₹2Cr / month</option>
             </select>
           </div>
+          <!-- Honeypot — bots fill this, humans never see it -->
+          <div class="contact-form__honeypot" aria-hidden="true">
+            <label>Leave this empty</label>
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+          </div>
+          <!-- Math CAPTCHA -->
+          <div class="contact-form__field">
+            <label class="contact-form__label">Quick check</label>
+            <div class="contact-form__captcha">
+              <span class="contact-form__captcha-question" id="captcha-question">What is <strong id="captcha-a">?</strong> + <strong id="captcha-b">?</strong> ?</span>
+              <input class="contact-form__captcha-input" type="number" id="captcha-answer" placeholder="—" min="0" max="99" autocomplete="off" required>
+              <span class="contact-form__captcha-hint" id="captcha-hint">Try again</span>
+            </div>
+          </div>
           <button type="submit" class="contact-form__submit">Request my free audit →</button>
           <div class="contact-form__note">We call within 24h · First audit in 14 days · No commitment</div>
         </form>
@@ -3282,8 +3363,39 @@ buildBigChart();
 /* ─── FORM SUBMISSION ─── */
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpqnlzkp';
 
+/* ─── CAPTCHA INIT ─── */
+var _captchaA = 0, _captchaB = 0;
+(function initCaptcha() {
+  _captchaA = Math.floor(Math.random() * 9) + 1;
+  _captchaB = Math.floor(Math.random() * 9) + 1;
+  var elA = document.getElementById('captcha-a');
+  var elB = document.getElementById('captcha-b');
+  if (elA) elA.textContent = _captchaA;
+  if (elB) elB.textContent = _captchaB;
+})();
+
 async function handleFormSubmit(e) {
   e.preventDefault();
+
+  /* ─── Validate CAPTCHA ─── */
+  var captchaInput = document.getElementById('captcha-answer');
+  var captchaHint  = document.getElementById('captcha-hint');
+  var userAnswer   = parseInt(captchaInput.value, 10);
+  if (isNaN(userAnswer) || userAnswer !== _captchaA + _captchaB) {
+    captchaInput.classList.add('captcha--error');
+    captchaHint.classList.add('visible');
+    captchaInput.value = '';
+    captchaInput.focus();
+    setTimeout(function() { captchaInput.classList.remove('captcha--error'); }, 400);
+    /* Refresh numbers after a wrong attempt */
+    _captchaA = Math.floor(Math.random() * 9) + 1;
+    _captchaB = Math.floor(Math.random() * 9) + 1;
+    document.getElementById('captcha-a').textContent = _captchaA;
+    document.getElementById('captcha-b').textContent = _captchaB;
+    return;
+  }
+  captchaHint.classList.remove('visible');
+
   const form    = document.getElementById('contact-form');
   const btn     = form.querySelector('.contact-form__submit');
   const origTxt = btn.textContent;
