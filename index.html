@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OneGrid — Energy Intelligence Platform for C&I India</title>
+<!-- Google Analytics GA4 — G-32NS9EMXF7 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-32NS9EMXF7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-32NS9EMXF7', {
+    page_title: document.title,
+    page_location: window.location.href,
+    send_page_view: true
+  });
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400;1,8..60,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -3398,6 +3411,132 @@ setInterval(tickKPIs, 3200);
       document.body.style.overflow = '';
     }
   });
+})();
+
+/* ─── GOOGLE ANALYTICS — CUSTOM EVENT TRACKING ─── */
+(function() {
+  // Safe gtag wrapper — no-ops if GA hasn't loaded
+  function track(eventName, params) {
+    if (typeof gtag === 'function') gtag('event', eventName, params || {});
+  }
+
+  // ── 1. CTA button clicks ──────────────────────────────────────
+  document.querySelectorAll('a[href="#contact"], a[href="#contact"] *').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var label = el.closest('a') ? (el.closest('a').textContent || '').trim().slice(0, 60) : 'unknown';
+      track('cta_click', { event_category: 'engagement', event_label: label });
+    });
+  });
+
+  // ── 2. "Get started" nav button ──────────────────────────────
+  var navCta = document.querySelector('.nav__cta .btn-primary');
+  if (navCta) {
+    navCta.addEventListener('click', function() {
+      track('nav_get_started', { event_category: 'navigation' });
+    });
+  }
+
+  // ── 3. "See the platform" hero secondary CTA ─────────────────
+  var seePlatform = document.querySelector('.hero__actions .btn-outline-dark');
+  if (seePlatform) {
+    seePlatform.addEventListener('click', function() {
+      track('hero_see_platform', { event_category: 'engagement' });
+    });
+  }
+
+  // ── 4. Contact form submission ────────────────────────────────
+  var contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function() {
+      var bill = (contactForm.querySelector('[name="Monthly Bill"]') || {}).value || 'unknown';
+      track('form_submit', {
+        event_category: 'lead',
+        event_label: 'audit_request',
+        monthly_bill_range: bill
+      });
+    });
+  }
+
+  // ── 5. Pricing slider interaction ────────────────────────────
+  var pricingSlider = document.getElementById('pc-spend');
+  if (pricingSlider) {
+    var sliderMoved = false;
+    pricingSlider.addEventListener('change', function() {
+      if (!sliderMoved) {
+        track('pricing_calculator_used', {
+          event_category: 'engagement',
+          spend_lakhs: pricingSlider.value
+        });
+        sliderMoved = true;
+      }
+    });
+  }
+
+  // ── 6. Insight article clicks ─────────────────────────────────
+  document.addEventListener('click', function(e) {
+    var readLink = e.target.closest('.insight-card__read');
+    if (readLink) {
+      var title = (readLink.closest('.insight-card__body') || {}).querySelector
+        ? readLink.closest('.insight-card__body').querySelector('.insight-card__title')
+        : null;
+      track('insight_click', {
+        event_category: 'content',
+        event_label: title ? title.textContent.trim().slice(0, 80) : 'unknown'
+      });
+    }
+  });
+
+  // ── 7. Section visibility — scroll depth ──────────────────────
+  var sections = [
+    { id: 'platform',  name: 'platform_section' },
+    { id: 'pricing',   name: 'pricing_section'   },
+    { id: 'insights',  name: 'insights_section'  },
+    { id: 'about',     name: 'about_section'      },
+    { id: 'contact',   name: 'contact_section'    },
+  ];
+  var seen = {};
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !seen[entry.target.id]) {
+        seen[entry.target.id] = true;
+        var match = sections.find(function(s) { return s.id === entry.target.id; });
+        if (match) track('section_viewed', { event_category: 'scroll', section: match.name });
+      }
+    });
+  }, { threshold: 0.25 });
+
+  sections.forEach(function(s) {
+    var el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
+
+  // ── 8. Pricing tier CTA clicks ────────────────────────────────
+  document.querySelectorAll('.pricing__cta').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var tier = (el.closest('.pricing__card') || {}).querySelector
+        ? el.closest('.pricing__card').querySelector('.pricing__tier')
+        : null;
+      track('pricing_cta_click', {
+        event_category: 'engagement',
+        tier: tier ? tier.textContent.trim() : 'unknown'
+      });
+    });
+  });
+
+  // ── 9. Outbound link — Medium ─────────────────────────────────
+  document.querySelectorAll('a[href*="medium.com"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      track('outbound_click', { event_category: 'outbound', destination: 'medium' });
+    });
+  });
+
+  // ── 10. Email link clicks ─────────────────────────────────────
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      track('email_click', { event_category: 'engagement', event_label: 'hello@onegrid.in' });
+    });
+  });
+
 })();
 </script>
 </body>
