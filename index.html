@@ -1,960 +1,3404 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OneGrid — You're Already Losing Money on Energy</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OneGrid — Energy Intelligence Platform for C&I India</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=JetBrains+Mono:wght@400;500;600&family=Archivo:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400;1,8..60,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root {
+  --parchment: #F5F0E8;
+  --parchment-mid: #EBE4D6;
+  --forest: #09100A;
+  --forest-mid: #162118;
+  --forest-pale: rgba(9,16,10,0.06);
+  --signal: #34B84A;
+  --signal-dim: rgba(52,184,74,0.15);
+  --signal-glow: rgba(52,184,74,0.35);
+  --amber: #E8A020;
+  --ember: #C8462E;
+  --slate: #8B9BB4;
+  --rule: rgba(9,16,10,0.1);
+  --rule-strong: rgba(9,16,10,0.2);
+
+  --serif: 'Source Serif 4', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background: var(--parchment);
+  color: var(--forest);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── TICKER STRIP ─── */
+.ticker {
+  background: var(--forest);
+  color: var(--parchment);
+  height: 36px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ticker__track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 0;
+  white-space: nowrap;
+  animation: tickerScroll 38s linear infinite;
+}
+.ticker__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  padding: 0 32px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  color: rgba(245,240,232,0.7);
+}
+.ticker__label { color: rgba(245,240,232,0.4); text-transform: uppercase; font-size: 10px; letter-spacing: 0.1em; }
+.ticker__val { color: var(--parchment); }
+.ticker__val.up { color: var(--signal); }
+.ticker__val.down { color: var(--ember); }
+.ticker__dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 6px var(--signal-glow);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav__logo {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav__logo-mark {
+  width: 28px; height: 28px;
+  background: var(--forest);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav__logo-mark svg { width: 16px; height: 16px; }
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav__links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(9,16,10,0.55);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.18s;
+}
+.nav__links a:hover { color: var(--forest); }
+.nav__links a.active { color: var(--forest); }
+.nav__cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-ghost {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(9,16,10,0.7);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+}
+.btn-ghost:hover { background: var(--forest-pale); color: var(--forest); }
+.btn-primary {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--forest);
+  background: var(--signal);
+  border: none;
+  cursor: pointer;
+  padding: 9px 20px;
+  border-radius: 4px;
+  letter-spacing: 0.01em;
+  transition: background 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: #3ECF58;
+  box-shadow: 0 0 20px var(--signal-glow);
+}
+.btn-large {
+  font-size: 16px;
+  padding: 14px 28px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  padding: 80px 0 64px;
+  overflow: hidden;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 40%, rgba(52,184,74,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 85% 80%, rgba(232,160,32,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+/* Subtle grid texture */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(9,16,10,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(9,16,10,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 80px;
+  align-items: center;
+}
+.hero__left {}
+.hero__eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero__eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--signal);
+}
+.hero__headline {
+  font-family: var(--serif);
+  font-size: clamp(52px, 5.5vw, 80px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--forest);
+  margin-bottom: 28px;
+}
+.hero__headline em {
+  font-style: italic;
+  font-weight: 400;
+}
+.hero__headline .signal {
+  color: var(--signal);
+  font-style: italic;
+  position: relative;
+}
+.hero__sub {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(9,16,10,0.62);
+  max-width: 420px;
+  margin-bottom: 40px;
+}
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 52px;
+}
+.hero__proof {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.hero__proof-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero__proof-val {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+}
+.hero__proof-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(9,16,10,0.4);
+}
+.hero__proof-sep {
+  width: 1px;
+  height: 36px;
+  background: var(--rule-strong);
+}
+
+/* ─── PRODUCT WIDGET ─── */
+.hero__right {
+  position: relative;
+}
+.product-widget {
+  background: var(--forest-mid);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 32px 80px rgba(9,16,10,0.28),
+    0 0 0 1px rgba(52,184,74,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+}
+/* Reflection glare */
+.product-widget::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+}
+.widget__chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.widget__dots {
+  display: flex;
+  gap: 6px;
+}
+.widget__dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+}
+.widget__dot:first-child { background: var(--ember); }
+.widget__dot:nth-child(2) { background: var(--amber); }
+.widget__dot:nth-child(3) { background: var(--signal); }
+.widget__title {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(245,240,232,0.35);
+  letter-spacing: 0.06em;
+}
+.widget__status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--signal);
+  letter-spacing: 0.05em;
+}
+.widget__status::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--signal);
+  animation: pulse 2s ease-in-out infinite;
+}
+.widget__body {
+  padding: 20px;
+}
+/* Facility selector tabs */
+.widget__tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 6px;
+  padding: 3px;
+}
+.widget__tab {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.35);
+  padding: 6px 8px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.widget__tab.active {
+  background: rgba(52,184,74,0.12);
+  color: var(--signal);
+  border: 1px solid rgba(52,184,74,0.2);
+}
+/* KPI row */
+.widget__kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.widget__kpi {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 12px;
+}
+.widget__kpi-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+  margin-bottom: 6px;
+}
+.widget__kpi-val {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--parchment);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.widget__kpi-val.red { color: var(--ember); }
+.widget__kpi-val.amber { color: var(--amber); }
+.widget__kpi-val.green { color: var(--signal); }
+.widget__kpi-delta {
+  font-family: var(--mono);
+  font-size: 9px;
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+}
+.widget__kpi-delta.pos { color: var(--signal); }
+.widget__kpi-delta.neg { color: var(--ember); }
+/* Mini chart area */
+.widget__chart-wrap {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+.widget__chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.widget__chart-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+}
+.widget__chart-val {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--parchment);
+  letter-spacing: -0.01em;
+}
+.widget__chart-val span {
+  font-size: 10px;
+  color: rgba(245,240,232,0.35);
+  font-weight: 400;
+}
+/* SVG chart */
+.chart-svg { width: 100%; height: 56px; display: block; }
+
+/* Alert row */
+.widget__alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.widget__alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(245,240,232,0.55);
+  padding: 7px 10px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.2);
+  border-left: 2px solid transparent;
+  letter-spacing: 0.02em;
+}
+.widget__alert.warn { border-color: var(--amber); color: rgba(232,160,32,0.8); }
+.widget__alert.crit { border-color: var(--ember); color: rgba(200,70,46,0.8); }
+.widget__alert.ok { border-color: var(--signal); color: rgba(52,184,74,0.7); }
+.widget__alert-ico { font-size: 11px; }
+
+/* Floating savings badge */
+.widget__badge {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background: var(--signal);
+  color: var(--forest);
+  border-radius: 50%;
+  width: 88px;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px var(--signal-glow), 0 0 0 6px rgba(52,184,74,0.12);
+  z-index: 2;
+  animation: badgeBob 3s ease-in-out infinite;
+}
+.widget__badge-num {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.widget__badge-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: 2px;
+  text-align: center;
+  line-height: 1.3;
+}
+@keyframes badgeBob {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-5px) rotate(-4deg); }
+}
+
+/* ─── SECTION DIVIDERS ─── */
+.section-rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+/* ─── PLATFORM PREVIEW SECTION ─── */
+.platform-section {
+  padding: 120px 0;
+  background: var(--forest);
+  position: relative;
+  overflow: hidden;
+}
+.platform-section::before {
+  content: 'ONEGRID';
+  position: absolute;
+  font-family: var(--serif);
+  font-size: clamp(120px, 15vw, 220px);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.04em;
+  color: rgba(245,240,232,0.03);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.platform-section .container { position: relative; z-index: 1; }
+.platform__header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 64px;
+}
+.platform__eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.platform__eyebrow::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--signal);
+}
+.platform__headline {
+  font-family: var(--serif);
+  font-size: clamp(36px, 3.5vw, 54px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--parchment);
+}
+.platform__headline em {
+  font-style: italic;
+  font-weight: 400;
+}
+.platform__desc {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(245,240,232,0.5);
+  max-width: 420px;
+  margin-bottom: 32px;
+  align-self: end;
+}
+.platform__features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.platform__feat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: rgba(245,240,232,0.6);
+  font-weight: 300;
+}
+.platform__feat::before {
+  content: '';
+  width: 16px; height: 1px;
+  background: var(--signal);
+  flex-shrink: 0;
+}
+/* Full-width dashboard mockup */
+.platform__dash {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.dash__topbar {
+  background: rgba(0,0,0,0.4);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dash__topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.dash__wordmark {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--parchment);
+  letter-spacing: -0.02em;
+}
+.dash__nav-items {
+  display: flex;
+  gap: 20px;
+}
+.dash__nav-item {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(245,240,232,0.3);
+  text-transform: uppercase;
+}
+.dash__nav-item.active {
+  color: var(--signal);
+}
+.dash__topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.dash__org {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(245,240,232,0.3);
+  letter-spacing: 0.04em;
+}
+.dash__avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--signal);
+  color: var(--forest);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dash__body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  height: 440px;
+}
+.dash__sidebar {
+  background: rgba(0,0,0,0.2);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.dash__sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(245,240,232,0.28);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.dash__sidebar-item.active {
+  background: rgba(52,184,74,0.08);
+  color: var(--signal);
+  border-left: 2px solid var(--signal);
+}
+.dash__sidebar-icon {
+  font-size: 12px;
+  opacity: 0.6;
+}
+.dash__sidebar-item.active .dash__sidebar-icon { opacity: 1; }
+.dash__sidebar-section {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.15);
+  padding: 16px 20px 6px;
+}
+.dash__main {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+}
+.dash__main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dash__main-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--parchment);
+  letter-spacing: -0.015em;
+}
+.dash__main-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(245,240,232,0.3);
+  margin-top: 2px;
+}
+.dash__date-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(245,240,232,0.45);
+}
+.dash__kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.dash__kpi-card {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+.dash__kpi-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.28);
+  margin-bottom: 8px;
+}
+.dash__kpi-value {
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--parchment);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.dash__kpi-value.green { color: var(--signal); }
+.dash__kpi-value.red { color: var(--ember); }
+.dash__kpi-value.amber { color: var(--amber); }
+.dash__kpi-change {
+  font-family: var(--mono);
+  font-size: 9px;
+  margin-top: 6px;
+  color: rgba(245,240,232,0.3);
+  letter-spacing: 0.04em;
+}
+.dash__kpi-change.pos { color: var(--signal); }
+.dash__kpi-change.neg { color: var(--ember); }
+.dash__chart-row {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+.dash__chart-card {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 6px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+.dash__chart-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+  margin-bottom: 12px;
+}
+.dash__chart-area {
+  flex: 1;
+  min-height: 120px;
+  position: relative;
+}
+.big-chart { width: 100%; height: 100%; }
+.dash__anomaly-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.dash__anomaly {
+  padding: 9px 12px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 4px;
+  border-left: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.dash__anomaly.critical { border-color: var(--ember); }
+.dash__anomaly.warning { border-color: var(--amber); }
+.dash__anomaly.info { border-color: var(--slate); }
+.dash__anomaly-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+.dash__anomaly.critical .dash__anomaly-title { color: var(--ember); }
+.dash__anomaly.warning .dash__anomaly-title { color: var(--amber); }
+.dash__anomaly.info .dash__anomaly-title { color: var(--slate); }
+.dash__anomaly-body {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(245,240,232,0.35);
+  letter-spacing: 0.02em;
+}
+.dash__anomaly-meta {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: rgba(245,240,232,0.2);
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+
+/* ─── HOW IT WORKS ─── */
+.how-section {
+  padding: 120px 0;
+  background: var(--parchment);
+}
+.how__header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(9,16,10,0.38);
+  margin-bottom: 16px;
+  display: block;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 3.8vw, 54px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+}
+.section-title em { font-style: italic; font-weight: 400; }
+.how__steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.how__step {
+  padding: 48px 40px;
+  border-right: 1px solid var(--rule);
+  position: relative;
+  transition: background 0.2s;
+}
+.how__step:last-child { border-right: none; }
+.how__step:hover { background: var(--forest-pale); }
+.how__num {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--signal);
+  font-style: italic;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+.how__step-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--forest);
+  margin-bottom: 12px;
+}
+.how__step-title em { font-style: italic; }
+.how__step-body {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(9,16,10,0.5);
+}
+.how__step-detail {
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: rgba(9,16,10,0.28);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.how__step-detail::before { content: '→'; color: var(--signal); }
+
+/* ─── PROOF / CASES ─── */
+.cases-section {
+  padding: 120px 0;
+  background: var(--parchment-mid);
+  border-top: 1px solid var(--rule);
+}
+.cases__header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+.cases__lede {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(9,16,10,0.5);
+  max-width: 400px;
+  align-self: end;
+}
+.cases__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--rule);
+}
+.case-card {
+  padding: 44px 36px;
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: background 0.2s;
+}
+.case-card:last-child { border-right: none; }
+.case-card:hover { background: var(--forest-pale); }
+.case__tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(9,16,10,0.3);
+}
+.case__loss {
+  font-family: var(--serif);
+  font-size: clamp(40px, 4.5vw, 64px);
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--signal);
+}
+.case__loss-label {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(9,16,10,0.4);
+  margin-top: -8px;
+}
+.case__hook {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+}
+.case__hook em { font-style: italic; }
+.case__body {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(9,16,10,0.45);
+}
+
+/* ─── PRICING PAYBACK CALC ─── */
+.pricing-calc {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 32px 40px;
+  margin-bottom: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.pricing-calc__label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.35);
+  margin-bottom: 12px;
+}
+.pricing-calc__slider-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.pricing-calc__val {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--parchment);
+  letter-spacing: -0.02em;
+  min-width: 72px;
+}
+.pricing-calc__slider {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+.pricing-calc__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--signal);
+  border: 2px solid var(--forest-mid);
+  cursor: pointer;
+  box-shadow: 0 0 0 3px rgba(52,184,74,0.2);
+  transition: box-shadow 0.15s;
+}
+.pricing-calc__slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 6px rgba(52,184,74,0.25);
+}
+.pricing-calc__hint {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: rgba(245,240,232,0.2);
+  margin-top: 8px;
+}
+.pricing-calc__output {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pricing-calc__output-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.pricing-calc__output-row:last-child { border-bottom: none; padding-bottom: 0; }
+.pricing-calc__output-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+}
+.pricing-calc__output-val {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--parchment);
+  letter-spacing: -0.01em;
+}
+.pricing-calc__output-val.signal { color: var(--signal); }
+
+/* ─── PRICING CARDS — PAYBACK STYLE ─── */
+.pricing__payback-headline {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--parchment);
+  margin-bottom: 4px;
+}
+.pricing__payback-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+  margin-bottom: 20px;
+}
+.pricing__reveal {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(245,240,232,0.2);
+  margin-top: 10px;
+  text-align: center;
+}
+.pricing__reveal strong {
+  color: rgba(245,240,232,0.45);
+  font-weight: 400;
+}
+.pricing__tier-badge {
+  font-family: var(--serif);
+  font-size: 11px;
+  font-style: italic;
+  color: var(--signal);
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+.pricing__explainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 28px 36px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  margin-bottom: 32px;
+  background: rgba(255,255,255,0.02);
+}
+.pricing__explainer-text {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(245,240,232,0.45);
+}
+.pricing__explainer-text em {
+  font-style: italic;
+  color: rgba(245,240,232,0.7);
+}
+.pricing__explainer-estimate {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(245,240,232,0.3);
+  line-height: 1.6;
+  padding-left: 32px;
+  border-left: 1px solid rgba(52,184,74,0.2);
+}
+.pricing__explainer-estimate strong {
+  color: var(--signal);
+  font-weight: 400;
+}
+
+/* ─── PRICING ─── */
+.pricing-section {
+  padding: 120px 0;
+  background: var(--forest);
+  position: relative;
+  overflow: hidden;
+}
+.pricing-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 60% at 50% 0%, rgba(52,184,74,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.pricing-section .container { position: relative; z-index: 1; }
+.pricing__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.pricing__eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 16px;
+  display: block;
+}
+.pricing__headline {
+  font-family: var(--serif);
+  font-size: clamp(36px, 3.5vw, 52px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--parchment);
+}
+.pricing__headline em { font-style: italic; font-weight: 400; }
+.pricing__sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.45);
+  margin-top: 12px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.65;
+}
+.pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.pricing__card {
+  padding: 48px 40px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: rgba(255,255,255,0.02);
+  transition: background 0.2s;
+}
+.pricing__card:hover { background: rgba(255,255,255,0.04); }
+.pricing__card:last-child { border-right: none; }
+.pricing__card.featured {
+  background: rgba(52,184,74,0.06);
+  border-right: 1px solid rgba(52,184,74,0.15);
+  position: relative;
+}
+.pricing__card.featured::before {
+  content: 'MOST POPULAR';
+  position: absolute;
+  top: 20px; right: 20px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--signal);
+  background: rgba(52,184,74,0.1);
+  border: 1px solid rgba(52,184,74,0.2);
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+.pricing__tier {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+  margin-bottom: 20px;
+}
+.pricing__card.featured .pricing__tier { color: var(--signal); }
+.pricing__price {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--parchment);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 4px;
+}
+.pricing__price-unit {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(245,240,232,0.3);
+  margin-bottom: 24px;
+}
+.pricing__desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.5);
+  line-height: 1.6;
+  margin-bottom: 32px;
+  min-height: 64px;
+}
+.pricing__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 36px;
+  flex: 1;
+}
+.pricing__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.55);
+  line-height: 1.4;
+}
+.pricing__feature::before {
+  content: '—';
+  color: var(--signal);
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  margin-top: 1px;
+}
+.pricing__card.featured .pricing__feature { color: rgba(245,240,232,0.7); }
+.pricing__cta {
+  display: block;
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(245,240,232,0.7);
+}
+.pricing__cta:hover { background: rgba(255,255,255,0.1); color: var(--parchment); }
+.pricing__card.featured .pricing__cta {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--forest);
+}
+.pricing__card.featured .pricing__cta:hover {
+  background: #3ECF58;
+  box-shadow: 0 0 24px var(--signal-glow);
+}
+.pricing__footnote {
+  text-align: center;
+  margin-top: 32px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(245,240,232,0.2);
+}
+
+/* ─── INSIGHTS ─── */
+.insights-section {
+  padding: 120px 0;
+  background: var(--parchment);
+  border-top: 1px solid var(--rule);
+}
+.insights__header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 80px;
+  margin-bottom: 56px;
+}
+.insights__lede {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(9,16,10,0.45);
+  line-height: 1.65;
+  max-width: 400px;
+  align-self: end;
+}
+.insights__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.insight-card {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--rule);
+  transition: background 0.2s;
+  overflow: hidden;
+}
+.insight-card:last-child { border-right: none; }
+.insight-card:hover { background: var(--forest-pale); }
+.insight-card__img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  background: var(--parchment-mid);
+  display: block;
+  border-bottom: 1px solid var(--rule);
+}
+.insight-card__img-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, var(--parchment-mid) 0%, rgba(9,16,10,0.08) 100%);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.insight-card__placeholder-ico {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(9,16,10,0.2);
+}
+.insight-card__body { padding: 32px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.insight-card__tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(9,16,10,0.3);
+}
+.insight-card__title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+}
+.insight-card__excerpt {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(9,16,10,0.45);
+  flex: 1;
+}
+.insight-card__read {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(9,16,10,0.35);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+  margin-top: 4px;
+}
+.insight-card__read:hover { color: var(--forest); }
+.insight-card__read::after { content: '→'; }
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+.skeleton-line {
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--rule) 25%, rgba(9,16,10,0.06) 50%, var(--rule) 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  display: block;
+}
+/* Real image card */
+.insight-card__img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--rule);
+}
+.insights__all {
+  margin-top: 36px;
+  text-align: center;
+}
+.btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--forest);
+  background: none;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  padding: 11px 24px;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.btn-outline-dark:hover { background: var(--forest-pale); border-color: var(--forest); }
+
+/* ─── ABOUT ─── */
+.about-section {
+  padding: 120px 0;
+  background: var(--parchment-mid);
+  border-top: 1px solid var(--rule);
+}
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 100px;
+  align-items: start;
+}
+.about__left {}
+.about__eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(9,16,10,0.35);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.about__eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--rule-strong); }
+.about__headline {
+  font-family: var(--serif);
+  font-size: clamp(36px, 3.5vw, 50px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+  margin-bottom: 28px;
+}
+.about__headline em { font-style: italic; }
+.about__body {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(9,16,10,0.55);
+  margin-bottom: 20px;
+}
+.about__right {}
+.about__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--rule);
+  margin-bottom: 40px;
+}
+.about__stat {
+  padding: 32px 28px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.about__stat:nth-child(2n) { border-right: none; }
+.about__stat:nth-child(3), .about__stat:nth-child(4) { border-bottom: none; }
+.about__stat-val {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+  margin-bottom: 6px;
+}
+.about__stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(9,16,10,0.35);
+}
+.about__team-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(9,16,10,0.3);
+  margin-bottom: 16px;
+}
+.about__values {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.about__value {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.about__value-num {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--signal);
+  flex-shrink: 0;
+  margin-top: 2px;
+  min-width: 24px;
+}
+.about__value-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+  margin-bottom: 4px;
+}
+.about__value-body {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(9,16,10,0.45);
+  line-height: 1.55;
+}
+
+/* ─── CTA STRIP ─── */
+.cta-strip {
+  background: var(--forest);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.cta-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 100% at 20% 50%, rgba(52,184,74,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-strip .container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 80px;
+}
+.cta-strip__headline {
+  font-family: var(--serif);
+  font-size: clamp(36px, 3.5vw, 52px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--parchment);
+}
+.cta-strip__headline em { font-style: italic; font-weight: 400; }
+.cta-strip__sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.4);
+  margin-top: 12px;
+  max-width: 480px;
+  line-height: 1.6;
+}
+.cta-strip__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.cta-strip__note {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.2);
+  text-align: center;
+}
+
+/* ─── CTA STRIP UPDATED ─── */
+.cta-strip__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.cta-strip__left {}
+.cta-strip__proofs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+}
+.cta-strip__proof-item {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(245,240,232,0.3);
+}
+.cta-strip__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+.cta-strip__step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.cta-strip__step-num {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--signal);
+  flex-shrink: 0;
+  min-width: 24px;
+  margin-top: 2px;
+}
+.cta-strip__step-title {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(245,240,232,0.8);
+  margin-bottom: 3px;
+}
+.cta-strip__step-body {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.35);
+  line-height: 1.55;
+}
+.cta-strip__email-alt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(245,240,232,0.25);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 20px;
+}
+.cta-strip__email-link {
+  color: rgba(245,240,232,0.5);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245,240,232,0.15);
+  transition: color 0.15s, border-color 0.15s;
+}
+.cta-strip__email-link:hover {
+  color: var(--signal);
+  border-color: var(--signal);
+}
+
+/* ─── CONTACT FORM ─── */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.contact-form__label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.35);
+}
+.contact-form__input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 11px 14px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--parchment);
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+  width: 100%;
+}
+.contact-form__input::placeholder { color: rgba(245,240,232,0.2); }
+.contact-form__input:focus {
+  border-color: var(--signal);
+  background: rgba(52,184,74,0.04);
+}
+.contact-form__select {
+  appearance: none;
+  cursor: pointer;
+}
+.contact-form__select option { background: var(--forest-mid); }
+.contact-form__submit {
+  background: var(--signal);
+  color: var(--forest);
+  border: none;
+  border-radius: 4px;
+  padding: 14px 24px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  text-align: center;
+  margin-top: 4px;
+}
+.contact-form__submit:hover {
+  background: #3ECF58;
+  box-shadow: 0 0 24px var(--signal-glow);
+}
+.contact-form__note {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.18);
+  text-align: center;
+}
+.contact-form__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 48px 32px;
+  background: rgba(52,184,74,0.06);
+  border: 1px solid rgba(52,184,74,0.15);
+  border-radius: 8px;
+}
+.contact-form__success-ico {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--signal);
+  color: var(--forest);
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-form__success-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--parchment);
+  letter-spacing: -0.015em;
+}
+.contact-form__success-body {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.5);
+  line-height: 1.65;
+  max-width: 340px;
+}
+
+/* ─── FOOTER ─── */
+.site-footer {
+  background: #060C07;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 64px 0 40px;
+}
+.footer__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.footer__top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.footer__brand {}
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  text-decoration: none;
+}
+.footer__logo-mark {
+  width: 26px; height: 26px;
+  background: var(--forest);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.footer__logo-mark svg { width: 14px; height: 14px; }
+.footer__logo-name {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--parchment);
+  letter-spacing: -0.02em;
+}
+.footer__tagline {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.35);
+  line-height: 1.6;
+  max-width: 260px;
+  margin-bottom: 24px;
+}
+.footer__contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+.footer__contact-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.25);
+}
+.footer__contact-val {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(245,240,232,0.5);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+a.footer__contact-val:hover { color: var(--signal); }
+.footer__col-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+  margin-bottom: 20px;
+}
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+}
+.footer__links a {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(245,240,232,0.45);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer__links a:hover { color: var(--parchment); }
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer__legal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.footer__copyright {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.25);
+}
+.footer__cin {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: rgba(245,240,232,0.15);
+}
+.footer__legal-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.footer__legal-links a {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(245,240,232,0.25);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer__legal-links a:hover { color: rgba(245,240,232,0.5); }
+.footer__social {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.footer__social-link {
+  width: 34px; height: 34px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.footer__social-link:hover {
+  border-color: rgba(52,184,74,0.4);
+  background: rgba(52,184,74,0.06);
+}
+.footer__social-link svg { width: 16px; height: 16px; fill: rgba(245,240,232,0.4); }
+.footer__social-link:hover svg { fill: var(--signal); }
+.footer__ipp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  padding: 6px 10px;
+  border: 1px solid rgba(52,184,74,0.2);
+  border-radius: 4px;
+  background: rgba(52,184,74,0.04);
+}
+.footer__ipp-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--signal);
+  flex-shrink: 0;
+}
+.footer__ipp-text {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(52,184,74,0.6);
+}
+
+@media (max-width: 900px) {
+  .footer__top { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .footer__brand { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .footer__top { grid-template-columns: 1fr; gap: 32px; }
+  .footer__bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer__inner { padding: 0 24px; }
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--parchment); }
+::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(9,16,10,0.3); }
+
+/* ─── MOBILE NAV TOGGLE ─── */
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.nav__hamburger:hover { background: var(--forest-pale); }
+.nav__hamburger span {
+  display: block;
+  height: 1.5px;
+  background: var(--forest);
+  border-radius: 1px;
+  transition: transform 0.2s, opacity 0.2s;
+  transform-origin: center;
+}
+.nav__hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav__hamburger.open span:nth-child(2) { opacity: 0; }
+.nav__hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile nav drawer */
+.nav__mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(245,240,232,0.98);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule-strong);
+  padding: 16px 24px 24px;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 99;
+}
+.nav__mobile-menu.open { display: flex; }
+.nav__mobile-menu a {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(9,16,10,0.65);
+  text-decoration: none;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.15s;
+}
+.nav__mobile-menu a:last-of-type { border-bottom: none; }
+.nav__mobile-menu a:hover { color: var(--forest); }
+.nav__mobile-menu .btn-primary {
+  margin-top: 12px;
+  text-align: center;
+  display: block;
+  padding: 13px 20px;
+  font-size: 15px;
+}
+
+/* ─── TABLET (≤900px) ─── */
+@media (max-width: 900px) {
+  .container { padding: 0 28px; }
+  .nav__inner { padding: 0 28px; }
+
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .hero { padding: 56px 0 48px; min-height: auto; }
+  .hero__sub { max-width: 100%; }
+
+  /* Platform header: collapse to 1-col */
+  .platform__header { grid-template-columns: 1fr; gap: 32px; }
+  /* Dashboard: hide sidebar, stack */
+  .dash__body { grid-template-columns: 1fr; }
+  .dash__sidebar { display: none; }
+  .dash__kpi-row { grid-template-columns: repeat(2, 1fr); }
+
+  /* How it works: 2-col on tablet */
+  .how__steps { grid-template-columns: repeat(2, 1fr); }
+
+  /* Cases: single column */
+  .cases__grid { grid-template-columns: 1fr; }
+
+  /* Pricing: single column */
+  .pricing__grid { grid-template-columns: 1fr; }
+
+  /* Insights: 2-col on tablet */
+  .insights__grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* About */
+  .about__grid { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Contact */
+  .cta-strip__grid { grid-template-columns: 1fr; gap: 48px; }
+  .contact-form__row { grid-template-columns: 1fr; }
+}
+
+/* ─── MOBILE (≤640px) ─── */
+@media (max-width: 640px) {
+  /* Ticker */
+  .ticker { height: 32px; }
+  .ticker__track { animation-duration: 50s; }
+  .ticker__item { padding: 0 20px; font-size: 10px; }
+
+  /* Nav */
+  .nav__inner { padding: 0 20px; height: 56px; }
+  .nav__links { display: none; }
+  .nav__cta { display: none; }
+  .nav__hamburger { display: flex; }
+  .nav { position: sticky; top: 0; }
+
+  /* Container */
+  .container { padding: 0 20px; }
+
+  /* Section padding */
+  section { padding: 64px 0 !important; }
+
+  /* Hero */
+  .hero {
+    padding: 40px 0 48px;
+    min-height: auto;
+  }
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hero__headline {
+    font-size: clamp(38px, 10vw, 56px);
+  }
+  .hero__sub { font-size: 16px; max-width: 100%; }
+  .hero__actions {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hero__actions .btn-large {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    padding: 13px 20px;
+  }
+  .hero__proof {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .hero__proof-sep { display: none; }
+
+  /* Product widget */
+  .product-widget { border-radius: 8px; }
+  .widget__body { padding: 16px; }
+  .widget__kpis { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .widget__kpi-val { font-size: 16px; }
+  .widget__tabs { display: none; }
+
+  /* Platform / Dashboard */
+  .platform__header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
+  .platform__desc { max-width: 100%; }
+  .platform__dash { overflow-x: auto; }
+  .dash__body { grid-template-columns: 1fr; height: auto; min-height: auto; }
+  .dash__sidebar { display: none; }
+  .dash__topbar-right { display: none; }
+  .dash__nav-items { display: none; }
+  .dash__kpi-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .dash__main { padding: 16px; overflow: hidden; }
+  .dash__chart-row { display: none; }
+
+  /* How it works: single column on mobile */
+  .how__steps { grid-template-columns: 1fr; }
+  .how__step { border-right: none; border-bottom: 1px solid var(--rule); padding: 28px 24px; }
+  .how__step:last-child { border-bottom: none; }
+
+  /* Cases */
+  .cases__grid { grid-template-columns: 1fr; }
+  .case-card { border-right: none; border-bottom: 1px solid var(--rule); padding: 28px 20px; }
+  .case-card:last-child { border-bottom: none; }
+
+  /* Pricing */
+  .pricing-calc { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+  .pricing-calc__slider-row { flex-direction: row; gap: 12px; }
+  .pricing__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-radius: 8px;
+  }
+  .pricing__card {
+    padding: 28px 24px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .pricing__card:last-child { border-bottom: none; }
+  .pricing__explainer { flex-direction: column; gap: 8px; }
+
+  /* Insights */
+  .insights__grid { grid-template-columns: 1fr; }
+  .insight-card { border-right: none; border-bottom: 1px solid var(--rule); }
+  .insight-card:last-child { border-bottom: none; }
+  .insight-card__img-placeholder { height: 180px; }
+
+  /* About */
+  .about__grid { grid-template-columns: 1fr; gap: 40px; }
+  .about__stats { grid-template-columns: repeat(2, 1fr); }
+
+  /* Contact */
+  .cta-strip__grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-form__row { grid-template-columns: 1fr; }
+
+  /* Headings */
+  .section__eyebrow { font-size: 10px; }
+}
+
+/* ─── SMALL MOBILE (≤380px) ─── */
+@media (max-width: 380px) {
+  .hero__headline { font-size: 34px; }
+  .hero__proof { display: none; }
+  .widget__kpis { grid-template-columns: 1fr; }
+  .dash__kpi-row { grid-template-columns: 1fr; }
+  .about__stats { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-<!-- Scroll progress -->
-<div class="scroll-progress"><div class="scroll-progress__bar" id="scroll-bar"></div></div>
 
-<!-- ═══════════════════════════════════════════════════════
-     NAV
-     ═══════════════════════════════════════════════════════ -->
-<header class="nav">
+<!-- ─── TICKER STRIP ─── -->
+<div class="ticker">
+  <div class="ticker__track" id="ticker-track">
+    <!-- Filled by JS twice for infinite loop -->
+  </div>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav class="nav">
   <div class="nav__inner">
-    <a href="#" class="brand" aria-label="OneGrid">
-      <span class="brand__mark" aria-hidden="true">
-        <svg width="32" height="38" viewBox="0 0 142.76 170.33" xmlns="http://www.w3.org/2000/svg">
-          <path fill="currentColor" fill-rule="evenodd" d="M 142.76 170.33 L 142.46 57.37 L 66.40 57.37 L 66.40 96.26 L 99.29 96.26 L 99.29 142.31 L 95.29 142.31 L 95.29 100.26 L 62.40 100.26 L 62.40 53.37 L 142.45 53.37 L 142.31 0 L 0 0 L 0 142.31 L 95.29 142.31 L 95.29 170.33 Z M 99.29 142.31 L 138.76 142.31 L 138.76 166.33 L 99.29 166.33 Z"/>
+    <div class="nav__logo">
+      <div class="nav__logo-mark">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 2L14 6V10L8 14L2 10V6L8 2Z" stroke="#34B84A" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="8" cy="8" r="2" fill="#34B84A"/>
         </svg>
-      </span>
-      <span>ONEGRID</span>
-    </a>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="#platform">Platform</a>
-      <a href="#calculator">Calculator</a>
-      <a href="#flagship">Project</a>
-      <a href="#impact">Impact</a>
-      <a href="#insights">Insights</a>
-      <a href="#contact">Contact</a>
-    </nav>
+      </div>
+      OneGrid
+    </div>
+    <ul class="nav__links">
+      <li><a href="#platform" class="active">Platform</a></li>
+      <li><a href="#how">For C&I</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#insights">Insights</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
     <div class="nav__cta">
-      <a href="#quiz" class="btn btn--ghost">Take the Quiz</a>
-      <a href="#contact" class="btn btn--primary">Enquire PPA <span class="arrow">→</span></a>
+      <a href="#" class="btn-ghost">Sign in</a>
+      <a href="#contact" class="btn-primary">Get started →</a>
     </div>
+    <!-- Hamburger for mobile -->
+    <button class="nav__hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
-</header>
-
-<!-- ═══════════════════════════════════════════════════════
-     HERO
-     ═══════════════════════════════════════════════════════ -->
-<section class="section hero" id="top">
-  <div class="hero__grid" aria-hidden="true"></div>
-  <div class="hero__watermark" aria-hidden="true">₹?</div>
-  <div class="container hero__inner">
-    <div class="hero__meta">
-      <span class="mono">India's Next-Generation Renewable Energy IPP</span>
-      <span class="hero__date">Edition 01 · Tamil Nadu · 2026</span>
-    </div>
-    <h1 class="hero-headline">
-      You're <em>Already</em><br>
-      Losing Money<br>
-      on <em class="signal">Energy.</em>
-    </h1>
-    <div class="hero__bottom">
-      <div class="hero__stats">
-        <div class="hero__stat">
-          <div class="figure">8–15%</div>
-          <span class="label">of your energy bill leaks undetected every month</span>
-        </div>
-        <div class="hero__stat">
-          <div class="figure">₹40–80L</div>
-          <span class="label">average annual hidden cost per C&amp;I facility</span>
-        </div>
-      </div>
-      <div class="hero__cta">
-        <a href="#calculator" class="btn btn--primary">Calculate Your Loss <span class="arrow">→</span></a>
-        <a href="#quiz" class="btn btn--ghost">Take the 2-Minute Quiz</a>
-      </div>
-    </div>
+  <!-- Mobile drawer -->
+  <div class="nav__mobile-menu" id="navMobileMenu">
+    <a href="#platform">Platform</a>
+    <a href="#how">For C&amp;I</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#insights">Insights</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="btn-primary">Get started →</a>
   </div>
-</section>
+</nav>
 
-<!-- ═══════════════════════════════════════════════════════
-     CHALLENGE
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="challenge" data-screen-label="Challenge">
+<!-- ─── HERO ─── -->
+<section class="hero">
   <div class="container">
-    <div class="challenge__head">
-      <span class="eyebrow">The Problem</span>
-      <h2 class="section-title">
-        Three ways your facility<br>
-        <em>bleeds money</em> every month.
-      </h2>
-    </div>
-
-    <div class="challenge__rows">
-      <div class="bleed-row">
-        <div class="bleed-row__num">01 / Visibility</div>
-        <div class="bleed-row__title">You can't <em>see</em> the leak.</div>
-        <div class="bleed-row__body">
-          Data scattered across meters, bills, PPAs, and spreadsheets. By the time you notice something's wrong, you've already lost it.
-          <strong>Average undetected loss: ₹8–12L per month.</strong>
+    <div class="hero__grid">
+      <!-- LEFT: HEADLINE + CTA -->
+      <div class="hero__left">
+        <div class="hero__eyebrow">Energy Intelligence Platform</div>
+        <h1 class="hero__headline" id="hero-headline">
+          You're <em>Already</em><br>Losing Money<br>on <span class="signal">Energy.</span>
+        </h1>
+        <p class="hero__sub">
+          OneGrid connects to your facility's energy data, finds what's costing you, and tells you exactly what to do. No consultants. No spreadsheets. Live intelligence.
+        </p>
+        <div class="hero__actions">
+          <a href="#contact" class="btn-primary btn-large">Start your free audit →</a>
+          <a href="#platform" class="btn-outline-dark btn-large">See the platform</a>
         </div>
-        <span class="tag">Status: Bleeding</span>
-      </div>
-      <div class="bleed-row">
-        <div class="bleed-row__num">02 / Accountability</div>
-        <div class="bleed-row__title">You can't <em>prove</em> the dispute.</div>
-        <div class="bleed-row__body">
-          When invoices are wrong, you can't dispute what you can't document. Manual logs are inconsistent, timestamps are missing.
-          <strong>Disputed bills take 3–6 months to resolve — if ever.</strong>
-        </div>
-        <span class="tag">Status: Bleeding</span>
-      </div>
-      <div class="bleed-row">
-        <div class="bleed-row__num">03 / Predictability</div>
-        <div class="bleed-row__title">You're always <em>one step behind.</em></div>
-        <div class="bleed-row__body">
-          Exchange rates spike. Generation shortfalls happen. Demand peaks arrive. You react hours too late.
-          <strong>Missed exchange windows cost ₹20–50L annually.</strong>
-        </div>
-        <span class="tag">Status: Bleeding</span>
-      </div>
-    </div>
-
-    <div class="challenge__bridge">
-      <p class="bridge-quote">
-        Every day without visibility is a day your competitors aren't paying for.
-      </p>
-      <a href="#assessment" class="btn btn--ghost">Find Your Blind Spots <span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     QUIZ — interactive
-     ═══════════════════════════════════════════════════════ -->
-<section class="section section--dark" id="quiz" data-screen-label="Quiz">
-  <div class="container">
-    <div class="quiz__head">
-      <div>
-        <span class="eyebrow">2-Minute Assessment</span>
-        <div class="quiz__progress" id="quiz-progress" aria-hidden="true">
-          <span class="done"></span><span></span><span></span><span></span><span></span>
-        </div>
-      </div>
-      <div>
-        <h2 class="section-title">Do you know your<br><em>true energy cost?</em></h2>
-        <p class="lede" style="margin-top:20px;">5 questions. Instant score. No email required.</p>
-      </div>
-    </div>
-
-    <div class="quiz__card" id="quiz-card">
-      <div class="quiz__inner" id="quiz-inner">
-        <div class="quiz__qmeta">
-          <div>
-            <div class="quiz__qnum"><span id="q-num">01</span> / 05</div>
-            <h3 class="quiz__qtitle" id="q-title">How do you currently track energy costs across your facility?</h3>
+        <div class="hero__proof">
+          <div class="hero__proof-item">
+            <div class="hero__proof-val">₹4.2Cr</div>
+            <div class="hero__proof-label">Recovered · FY24</div>
           </div>
-          <div class="quiz__qfoot">Choose one</div>
-        </div>
-        <div class="quiz__options" id="q-options"><!-- filled by JS --></div>
-      </div>
-    </div>
-
-    <div class="quiz__result" id="quiz-result">
-      <div class="quiz__grade" id="quiz-grade">A</div>
-      <div class="quiz__verdict">
-        <span class="label">Your grade · <span id="quiz-score">15</span>/15</span>
-        <h3 id="quiz-verdict-title">Optimised</h3>
-        <p id="quiz-verdict-body">You're ahead of most facilities. A full audit would still find gaps.</p>
-        <div class="quiz__resultcta">
-          <a href="#calculator" class="btn btn--primary">Calculate Your Hidden Loss <span class="arrow">→</span></a>
-          <button class="btn btn--ghost" id="quiz-retake">Retake Quiz</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     INCIDENT STORIES
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="incidents" data-screen-label="Incidents">
-  <div class="container">
-    <div class="incidents__head">
-      <div>
-        <span class="eyebrow">Real Consequences</span>
-        <h2 class="section-title" style="margin-top:20px;">What happens without<br><em>visibility.</em></h2>
-      </div>
-      <p class="lede">These aren't hypotheticals. They're the calls we get from energy managers every week.</p>
-    </div>
-
-    <div class="incidents__grid">
-      <article class="incident">
-        <div class="incident__head">
-          <span class="incident__code">Incident-001 / Power Factor</span>
-          <span class="tag">Bleeding</span>
-        </div>
-        <div class="incident__loss">
-          <span class="label">Loss</span>
-          <span class="figure">₹4.8 Lakh</span>
-          <span class="sub">Single-month penalty</span>
-        </div>
-        <h3 class="incident__title">The PF penalty you didn't see coming.</h3>
-        <p class="incident__story">Power factor dropped gradually over six weeks. Loads shifted, capacitor banks degraded — nothing alarming on any individual day. The bill arrived with a ₹4.8L penalty. There was no audit trail to dispute it. The root cause took another two months to find.</p>
-        <div class="incident__resolution">With OneGrid <em>Explorer</em>: alert raised on Day 4</div>
-      </article>
-
-      <article class="incident">
-        <div class="incident__head">
-          <span class="incident__code">Incident-002 / Exchange</span>
-          <span class="tag">Bleeding</span>
-        </div>
-        <div class="incident__loss">
-          <span class="label">Loss</span>
-          <span class="figure">₹31 Lakh</span>
-          <span class="sub">Annual missed opportunity</span>
-        </div>
-        <h3 class="incident__title">The exchange window that closed while you slept.</h3>
-        <p class="incident__story">RE generation shortfall forecast at 6:00am. Exchange rates were at ₹2.80/unit — a clear buy signal. By the time the team noticed and escalated, it was 10:30am. Rates had reached ₹6.40. The gap is booked as "market volatility." It wasn't.</p>
-        <div class="incident__resolution">With OneGrid <em>Oracle</em>: automated suggestion at 5:55am</div>
-      </article>
-
-      <article class="incident">
-        <div class="incident__head">
-          <span class="incident__code">Incident-003 / Billing Dispute</span>
-          <span class="tag">Bleeding</span>
-        </div>
-        <div class="incident__loss">
-          <span class="label">Loss</span>
-          <span class="figure">₹12 Lakh</span>
-          <span class="sub">Disputed invoice — unresolved at 4 months</span>
-        </div>
-        <h3 class="incident__title">The bill nobody could prove was wrong.</h3>
-        <p class="incident__story">Three invoices. Two sources. Four spreadsheets. A ₹12L discrepancy that everyone suspected but nobody could document. The energy team spent 11 weeks reconstructing consumption data from PDFs and meter photographs. The vendor settled at 60 paise on the rupee. The rest was written off.</p>
-        <div class="incident__resolution">With OneGrid <em>Auditor</em>: digital audit log from Day 1</div>
-      </article>
-
-      <article class="incident">
-        <div class="incident__head">
-          <span class="incident__code">Incident-004 / DG Bleed</span>
-          <span class="tag">Bleeding</span>
-        </div>
-        <div class="incident__loss">
-          <span class="label">Loss</span>
-          <span class="figure">₹2.1 Lakh</span>
-          <span class="sub">Single weekend</span>
-        </div>
-        <h3 class="incident__title">The DG run nobody authorised.</h3>
-        <p class="incident__story">Night shift ran the DG set for 14 hours over a weekend. At ₹18/unit. While the solar plant was generating at ₹2.20 and the grid was available at ₹7.80. No one raised it — not because they didn't care, but because there was no system to show the comparison in real time.</p>
-        <div class="incident__resolution">With OneGrid <em>Explorer</em>: source cost alert triggers instantly</div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     PLATFORM
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="platform" data-screen-label="Platform">
-  <div class="container">
-    <div class="platform__head">
-      <span class="eyebrow">The Product</span>
-      <h2 class="section-title">Two halves of the<br>same <em>safety net.</em></h2>
-    </div>
-    <div class="platform__split">
-      <div class="panel">
-        <span class="panel__num">Panel 01 — Platform</span>
-        <h3 class="panel__name">OneGrid <em>Platform.</em></h3>
-        <p class="panel__tagline">Your 24/7 watchdog for energy costs.</p>
-        <div class="panel__features">
-          <div class="panel__feat"><span class="marker">01</span><span class="name"><em>Explorer Agent</em> — Catches leaks before they compound</span></div>
-          <div class="panel__feat"><span class="marker">02</span><span class="name"><em>Auditor Agent</em> — Every rupee tracked, every dispute winnable</span></div>
-          <div class="panel__feat"><span class="marker">03</span><span class="name"><em>Oracle Agent</em> — Predicts gaps before they cost you</span></div>
-          <div class="panel__feat"><span class="marker">04</span><span class="name">Multi-source real-time dashboard</span></div>
-          <div class="panel__feat"><span class="marker">05</span><span class="name">Automated compliance &amp; audit logs</span></div>
-          <div class="panel__feat"><span class="marker">06</span><span class="name">Exchange filler suggestions</span></div>
-        </div>
-        <a href="#contact" class="btn btn--primary panel__cta">Request a Demo <span class="arrow">→</span></a>
-      </div>
-      <div class="panel panel--ink">
-        <span class="panel__num">Panel 02 — Renewable</span>
-        <h3 class="panel__name">OneGrid <em>Renewable.</em></h3>
-        <p class="panel__tagline">Lock in your tariff. Stop the volatility.</p>
-        <div class="panel__features">
-          <div class="panel__feat"><span class="marker">01</span><span class="name"><em>Fixed Tariff</em> ex-busbar — No more rate surprises</span></div>
-          <div class="panel__feat"><span class="marker">02</span><span class="name">Q4 2026 Commercial Operation</span></div>
-          <div class="panel__feat"><span class="marker">03</span><span class="name">Group Captive &amp; Third Party options</span></div>
-          <div class="panel__feat"><span class="marker">04</span><span class="name">Up to <em>30% cost savings</em> vs. grid</span></div>
-          <div class="panel__feat"><span class="marker">05</span><span class="name">25-Year Power Purchase Agreement</span></div>
-          <div class="panel__feat"><span class="marker">06</span><span class="name">Complete ESG &amp; RPO compliance</span></div>
-        </div>
-        <a href="#contact" class="btn btn--primary panel__cta">Enquire PPA <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     AGENT SUITE
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="agents" data-screen-label="Agent Suite">
-  <div class="container">
-    <div class="suite__head">
-      <span class="eyebrow">The Intelligent Layer</span>
-      <h2 class="section-title">Three agents.<br>One <em class="signal">safety net.</em></h2>
-    </div>
-    <p class="lede" style="margin-bottom:48px; max-width:64ch;">Not software features — dedicated intelligence working around the clock so you stop discovering problems after the damage is done.</p>
-
-    <div class="suite__row">
-      <div class="suite__num">01</div>
-      <div>
-        <div class="suite__name"><em>Explorer</em> Agent</div>
-        <div class="suite__pillar">Pillar / Visibility</div>
-      </div>
-      <p class="suite__tagline">Finds the leak before you get the bill.</p>
-      <ul class="suite__feat">
-        <li>Real-time monitoring across all power sources</li>
-        <li>Pattern anomalies flagged within minutes</li>
-        <li>ToD consumption vs. generation comparison</li>
-        <li>Multi-source data unified in one view</li>
-      </ul>
-    </div>
-
-    <div class="suite__row">
-      <div class="suite__num">02</div>
-      <div>
-        <div class="suite__name"><em>Auditor</em> Agent</div>
-        <div class="suite__pillar">Pillar / Accountability</div>
-      </div>
-      <p class="suite__tagline">Every dispute, winnable. Every cost, traceable.</p>
-      <ul class="suite__feat">
-        <li>Unified landed cost across every source</li>
-        <li>Immutable digital audit trail from Day 1</li>
-        <li>Automated anomaly flagging before month-end</li>
-        <li>Cost attribution that holds up in any dispute</li>
-      </ul>
-    </div>
-
-    <div class="suite__row">
-      <div class="suite__num">03</div>
-      <div>
-        <div class="suite__name"><em>Oracle</em> Agent</div>
-        <div class="suite__pillar">Pillar / Predictability</div>
-      </div>
-      <p class="suite__tagline">Stops you from being the last to know.</p>
-      <ul class="suite__feat">
-        <li>Demand spikes forecasted, not discovered</li>
-        <li>Exchange windows identified automatically</li>
-        <li>Generation shortfalls predicted in advance</li>
-        <li>Continuous savings optimisation</li>
-      </ul>
-    </div>
-
-    <div class="suite__bottom">
-      <p class="suite__insurance">Think of it as insurance — <em>except it pays you back every month.</em></p>
-      <a href="#contact" class="btn btn--primary">Request a Demo <span class="arrow">→</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     AGENTS IN ACTION — terminal table
-     ═══════════════════════════════════════════════════════ -->
-<section class="section section--ink" id="action" data-screen-label="Agents in Action">
-  <div class="container">
-    <div class="terminal__head">
-      <span class="eyebrow">Agents in Action</span>
-      <h2 class="section-title">What the agents<br><em>catch</em> for you.</h2>
-    </div>
-
-    <div class="terminal">
-      <div class="terminal__bar">
-        <span><span class="dot"></span>OneGrid Live · Last 24 hours · Demo facility</span>
-        <span>9 events caught · 4 shown</span>
-      </div>
-      <div class="terminal__head-row">
-        <span>Agent</span>
-        <span>What it caught</span>
-        <span>Before OneGrid, this meant…</span>
-        <span style="text-align:right;">Caught at</span>
-      </div>
-
-      <div class="terminal__row">
-        <span class="terminal__agent">Explorer</span>
-        <span class="terminal__catch">Consumption pattern anomaly — <span class="hi">18%</span> above baseline</span>
-        <span class="terminal__before">Month-end surprise. No recourse.</span>
-        <span class="terminal__time">T+04:12</span>
-      </div>
-      <div class="terminal__row">
-        <span class="terminal__agent">Auditor</span>
-        <span class="terminal__catch">Cost variance <span class="hi">₹3.2L</span> across OA and grid invoices</span>
-        <span class="terminal__before">Weeks of spreadsheet archaeology.</span>
-        <span class="terminal__time">T+09:48</span>
-      </div>
-      <div class="terminal__row">
-        <span class="terminal__agent">Auditor</span>
-        <span class="terminal__catch">PF declining <span class="hi">0.4%</span> week-on-week for 6 weeks</span>
-        <span class="terminal__before">₹4.8L penalty with no audit trail.</span>
-        <span class="terminal__time">T+11:30</span>
-      </div>
-      <div class="terminal__row">
-        <span class="terminal__agent">Oracle</span>
-        <span class="terminal__catch">RE shortfall predicted — exchange window <span class="hi">open</span></span>
-        <span class="terminal__before">Missed buy at ₹2.80. Paid ₹6.40.</span>
-        <span class="terminal__time">T+18:05</span>
-      </div>
-      <div class="terminal__row">
-        <span class="terminal__agent">Oracle</span>
-        <span class="terminal__catch">Demand spike forecast — <span class="hi">3 days</span> ahead</span>
-        <span class="terminal__before">Reactive procurement at peak rates.</span>
-        <span class="terminal__time">T+21:22</span>
-      </div>
-
-      <div class="terminal__foot">Every row above is money you stop losing. Every single month.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     COST CALCULATOR
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="calculator" data-screen-label="Calculator">
-  <div class="container">
-    <div class="calc__head">
-      <span class="eyebrow">The Hidden Cost Calculator</span>
-      <h2 class="section-title">How much is your<br>energy bill <em>hiding?</em></h2>
-    </div>
-    <p class="lede" style="margin-bottom:48px;">Enter your details below. We'll estimate what you're likely losing — and what you could recover.</p>
-
-    <div class="calc__split">
-      <div class="calc__inputs">
-        <div class="calc-field">
-          <div class="calc-field__head">
-            <span class="label">01 / Monthly Electricity Spend</span>
-            <span class="value" id="spend-value">₹80L</span>
+          <div class="hero__proof-sep"></div>
+          <div class="hero__proof-item">
+            <div class="hero__proof-val">47</div>
+            <div class="hero__proof-label">Facilities Live</div>
           </div>
-          <input type="range" id="spend" min="10" max="500" step="5" value="80">
-          <div class="mono" style="display:flex; justify-content:space-between; color:var(--ink-muted); font-size:11px;">
-            <span>₹10L</span><span>₹500L</span>
-          </div>
-        </div>
-
-        <div class="calc-field">
-          <div class="calc-field__head">
-            <span class="label">02 / Number of Facilities</span>
-            <span class="value" id="facilities-value">3</span>
-          </div>
-          <input type="range" id="facilities" min="1" max="20" step="1" value="3">
-          <div class="mono" style="display:flex; justify-content:space-between; color:var(--ink-muted); font-size:11px;">
-            <span>1</span><span>20</span>
-          </div>
-        </div>
-
-        <div class="calc-field">
-          <div class="calc-field__head">
-            <span class="label">03 / Power Sources</span>
-            <span class="value mono" id="sources-count" style="font-style:normal; font-size:13px; letter-spacing:0.08em;">2 active</span>
-          </div>
-          <div class="calc-field__sources" id="sources">
-            <label class="src-chip on"><input type="checkbox" value="Grid" checked><span class="src-chip__dot"></span><span>Grid</span></label>
-            <label class="src-chip on"><input type="checkbox" value="OA Solar" checked><span class="src-chip__dot"></span><span>OA Solar</span></label>
-            <label class="src-chip"><input type="checkbox" value="OA Wind"><span class="src-chip__dot"></span><span>OA Wind</span></label>
-            <label class="src-chip"><input type="checkbox" value="DG Set"><span class="src-chip__dot"></span><span>DG Set</span></label>
+          <div class="hero__proof-sep"></div>
+          <div class="hero__proof-item">
+            <div class="hero__proof-val">14 days</div>
+            <div class="hero__proof-label">First Insight</div>
           </div>
         </div>
       </div>
 
-      <div class="calc__output">
-        <span class="calc__output-eyebrow">Live estimate · updates as you adjust</span>
-
-        <div class="calc__out-row">
-          <span class="label">Monthly hidden loss (est.)</span>
-          <span class="figure" id="out-monthly">₹12L</span>
+      <!-- RIGHT: PRODUCT WIDGET -->
+      <div class="hero__right">
+        <div class="product-widget">
+          <div class="widget__badge">
+            <div class="widget__badge-num">₹28L</div>
+            <div class="widget__badge-label">found this<br>quarter</div>
+          </div>
+          <div class="widget__chrome">
+            <div class="widget__dots">
+              <div class="widget__dot"></div>
+              <div class="widget__dot"></div>
+              <div class="widget__dot"></div>
+            </div>
+            <div class="widget__title">ONEGRID · FACILITY OVERVIEW</div>
+            <div class="widget__status">LIVE</div>
+          </div>
+          <div class="widget__body">
+            <!-- Facility tabs -->
+            <div class="widget__tabs">
+              <div class="widget__tab active">Chennai-01</div>
+              <div class="widget__tab">Pune-03</div>
+              <div class="widget__tab">Coimbatore</div>
+            </div>
+            <!-- KPIs -->
+            <div class="widget__kpis">
+              <div class="widget__kpi">
+                <div class="widget__kpi-label">Today's Cost</div>
+                <div class="widget__kpi-val amber" id="kpi-cost">₹13.40/u</div>
+                <div class="widget__kpi-delta neg">↑ 4.2% vs avg</div>
+              </div>
+              <div class="widget__kpi">
+                <div class="widget__kpi-label">Grid PF</div>
+                <div class="widget__kpi-val red" id="kpi-pf">0.87</div>
+                <div class="widget__kpi-delta neg">⚠ Below 0.90</div>
+              </div>
+              <div class="widget__kpi">
+                <div class="widget__kpi-label">Savings MTD</div>
+                <div class="widget__kpi-val green">₹3.6L</div>
+                <div class="widget__kpi-delta pos">↑ On track</div>
+              </div>
+            </div>
+            <!-- Mini chart -->
+            <div class="widget__chart-wrap">
+              <div class="widget__chart-header">
+                <span class="widget__chart-label">Demand (kW) — Last 12h</span>
+                <span class="widget__chart-val">684 kW <span>peak</span></span>
+              </div>
+              <svg class="chart-svg" viewBox="0 0 400 56" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#34B84A" stop-opacity="0.25"/>
+                    <stop offset="100%" stop-color="#34B84A" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path id="chart-area" fill="url(#chartGrad)" opacity="0.8"/>
+                <path id="chart-line" fill="none" stroke="#34B84A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <!-- Alerts -->
+            <div class="widget__alerts">
+              <div class="widget__alert crit"><span class="widget__alert-ico">⚡</span>PF penalty risk: ₹48,000 this bill cycle</div>
+              <div class="widget__alert warn"><span class="widget__alert-ico">📋</span>ToD off-peak opens 22:00 — shift load, save ₹1.20/u</div>
+              <div class="widget__alert ok"><span class="widget__alert-ico">✓</span>MD within contracted limit · no excess charges</div>
+            </div>
+          </div>
         </div>
-
-        <div class="calc__out-row primary">
-          <span class="label">Annual amount at risk</span>
-          <span class="figure" id="out-annual">₹1.44Cr</span>
-        </div>
-
-        <div class="calc__out-row savings">
-          <span class="label">Potential annual savings with OneGrid</span>
-          <span class="figure" id="out-savings">₹1.01Cr</span>
-        </div>
-
-        <p class="calc__disclaimer">Estimates based on industry benchmarks for C&amp;I facilities in India. Actual savings vary. Contact us for a precise audit.</p>
-
-        <a href="#contact" class="btn btn--primary">Get an Exact Estimate <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     TRANSFORMATION
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="transformation" data-screen-label="Transformation">
+<hr class="section-rule">
+
+<!-- ─── PLATFORM SECTION ─── -->
+<section class="platform-section" id="platform">
   <div class="container">
-    <div class="tx__head">
-      <span class="eyebrow">The Transformation</span>
-      <h2 class="section-title" style="margin-top:20px;">From reactive to<br><em>always in control.</em></h2>
-    </div>
-
-    <div class="tx__split">
-      <div class="tx__col">
-        <div class="tx__col-head">
-          <div class="tx__col-name">Without OneGrid</div>
-          <span class="tag">Bleeding</span>
-        </div>
-        <div class="tx__list">
-          <div class="tx__item before"><span class="x">✕</span><span class="name">Fragmented data — no single source of truth</span></div>
-          <div class="tx__item before"><span class="x">✕</span><span class="name">True cost per unit: unknown</span></div>
-          <div class="tx__item before"><span class="x">✕</span><span class="name">Power purchasing: reactive, expensive</span></div>
-          <div class="tx__item before"><span class="x">✕</span><span class="name">Exchange windows: consistently missed</span></div>
-          <div class="tx__item before"><span class="x">✕</span><span class="name">PF penalties arrive as surprises</span></div>
-          <div class="tx__item before"><span class="x">✕</span><span class="name">Disputes take months, settle at a loss</span></div>
-        </div>
-      </div>
-
-      <div class="tx__col">
-        <div class="tx__col-head">
-          <div class="tx__col-name">With OneGrid Agents</div>
-          <span class="tag tag--ok">In Control</span>
-        </div>
-        <div class="tx__list">
-          <div class="tx__item after"><span class="v">+</span><span class="name"><em>Explorer</em> sees everything in real time</span></div>
-          <div class="tx__item after"><span class="v">+</span><span class="name"><em>Auditor</em> unifies true landed cost daily</span></div>
-          <div class="tx__item after"><span class="v">+</span><span class="name"><em>Oracle</em> optimises your power mix proactively</span></div>
-          <div class="tx__item after"><span class="v">+</span><span class="name">Exchange fillers suggested automatically</span></div>
-          <div class="tx__item after"><span class="v">+</span><span class="name">PF alerts raised before penalties form</span></div>
-          <div class="tx__item after"><span class="v">+</span><span class="name">Every dispute backed by immutable audit logs</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tx__equation">
-      <div class="line">
-        <em>Explorer</em><span class="plus">+</span><em>Auditor</em><span class="plus">+</span><em>Oracle</em>
-      </div>
-      <div class="line" style="margin-top:16px; color: var(--ink-muted); font-style: normal;">=</div>
-      <div class="line" style="margin-top:16px;"><span class="signal">Stop Losing. Start Saving.</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     BLIND SPOT ASSESSMENT
-     ═══════════════════════════════════════════════════════ -->
-<section class="section section--dark" id="assessment" data-screen-label="Blind Spot">
-  <div class="container">
-    <div class="bs__head">
-      <span class="eyebrow">60-Second Assessment</span>
+    <div class="platform__header">
       <div>
-        <h2 class="section-title">Energy blind spot<br><em>assessment.</em></h2>
-        <p class="lede" style="margin-top:20px;">Answer 3 questions. Get an instant risk rating. No form required.</p>
+        <div class="platform__eyebrow">The Platform</div>
+        <h2 class="platform__headline">
+          Your energy data,<br><em>finally working</em><br>for you.
+        </h2>
       </div>
-    </div>
-
-    <div class="bs__card" id="bs-card">
-      <div class="bs__qmeta">
-        <div>
-          <span class="bs__counter">Question <span class="now" id="bs-num">01</span> / 03</span>
-          <h3 class="bs__q" id="bs-q">Can you see your real-time energy consumption right now — across all sources?</h3>
+      <div>
+        <p class="platform__desc">
+          Connect once. OneGrid reads your smart meters, DISCOM bills, and solar DAS. It normalises the data, finds patterns you'd never catch in a spreadsheet, and surfaces exactly what's costing you — in real time.
+        </p>
+        <div class="platform__features">
+          <div class="platform__feat">Automated bill intelligence & tariff optimisation</div>
+          <div class="platform__feat">Power factor, demand, ToD & penalty detection</div>
+          <div class="platform__feat">Multi-facility benchmarking & anomaly alerts</div>
+          <div class="platform__feat">Exchange window tracking & open-access advisory</div>
+          <div class="platform__feat">Carbon accounting & ESG reporting ready</div>
         </div>
-        <div class="quiz__qfoot">Answer honestly</div>
-      </div>
-      <div class="bs__actions">
-        <button class="bs__btn" data-ans="yes"><span class="key">[Y]</span><span>Yes — full visibility</span><span class="arr">→</span></button>
-        <button class="bs__btn" data-ans="no"><span class="key">[N]</span><span>No — or only partially</span><span class="arr">→</span></button>
       </div>
     </div>
 
-    <div class="bs__result" id="bs-result">
-      <div class="bs__tier-num"><span id="bs-tier">1</span><span class="glyph" id="bs-dot">●</span></div>
-      <div class="bs__verdict">
-        <span class="label">Tier <span id="bs-tier-num">1</span> · <span id="bs-yes-count">3</span>/3 Yes</span>
-        <h3 id="bs-title">In Control</h3>
-        <p id="bs-body">Genuinely rare. A OneGrid audit will still surface savings.</p>
-        <div class="bs__resultcta">
-          <a href="#contact" class="btn btn--primary">Get a Full Audit <span class="arrow">→</span></a>
-          <button class="btn btn--ghost" id="bs-retake">Retake</button>
+    <!-- Full-width dashboard mockup -->
+    <div class="platform__dash">
+      <div class="dash__topbar">
+        <div class="dash__topbar-left">
+          <div class="dash__wordmark">OneGrid</div>
+          <div class="dash__nav-items">
+            <div class="dash__nav-item active">Overview</div>
+            <div class="dash__nav-item">Facilities</div>
+            <div class="dash__nav-item">Bills</div>
+            <div class="dash__nav-item">Exchange</div>
+            <div class="dash__nav-item">Reports</div>
+          </div>
+        </div>
+        <div class="dash__topbar-right">
+          <div class="dash__org">Apex Industries Pvt Ltd</div>
+          <div class="dash__avatar">AK</div>
+        </div>
+      </div>
+      <div class="dash__body">
+        <!-- Sidebar -->
+        <div class="dash__sidebar">
+          <div class="dash__sidebar-section">Facilities</div>
+          <div class="dash__sidebar-item active"><span class="dash__sidebar-icon">◈</span> Chennai Plant 01</div>
+          <div class="dash__sidebar-item"><span class="dash__sidebar-icon">◈</span> Pune Factory 03</div>
+          <div class="dash__sidebar-item"><span class="dash__sidebar-icon">◈</span> Coimbatore Unit</div>
+          <div class="dash__sidebar-item"><span class="dash__sidebar-icon">◈</span> Hosur Assembly</div>
+          <div class="dash__sidebar-section">Intelligence</div>
+          <div class="dash__sidebar-item"><span class="dash__sidebar-icon">◎</span> Anomalies (3)</div>
+          <div class="dash__sidebar-item"><span class="dash__sidebar-icon">◎</span> Opportunities</div>
+          <div class="dash__sidebar-item"><span class="dash__sidebar-icon">◎</span> Exchange</div>
+          <div class="dash__sidebar-section">Reports</div>
+          <div class="dash__sidebar-item"><span class="dash__sidebar-icon">□</span> Monthly Bill</div>
+          <div class="dash__sidebar-item"><span class="dash__sidebar-icon">□</span> ESG / Carbon</div>
+        </div>
+        <!-- Main content -->
+        <div class="dash__main">
+          <div class="dash__main-header">
+            <div>
+              <div class="dash__main-title">Chennai Plant 01</div>
+              <div class="dash__main-sub">HT · TANGEDCO · Contract Demand 800 kVA</div>
+            </div>
+            <div class="dash__date-range">May 2025 ▾</div>
+          </div>
+          <div class="dash__kpi-row">
+            <div class="dash__kpi-card">
+              <div class="dash__kpi-label">Bill MTD</div>
+              <div class="dash__kpi-value amber">₹18.4L</div>
+              <div class="dash__kpi-change neg">↑ ₹2.1L vs last month</div>
+            </div>
+            <div class="dash__kpi-card">
+              <div class="dash__kpi-label">Avg Tariff</div>
+              <div class="dash__kpi-value">₹13.82</div>
+              <div class="dash__kpi-change">landed cost/unit</div>
+            </div>
+            <div class="dash__kpi-card">
+              <div class="dash__kpi-label">PF Score</div>
+              <div class="dash__kpi-value red">0.87</div>
+              <div class="dash__kpi-change neg">↓ Penalty zone</div>
+            </div>
+            <div class="dash__kpi-card">
+              <div class="dash__kpi-label">Savings Found</div>
+              <div class="dash__kpi-value green">₹3.6L</div>
+              <div class="dash__kpi-change pos">↑ Actionable now</div>
+            </div>
+          </div>
+          <div class="dash__chart-row">
+            <div class="dash__chart-card">
+              <div class="dash__chart-title">Energy Consumption — Daily (kWh)</div>
+              <div class="dash__chart-area">
+                <svg class="big-chart" viewBox="0 0 500 140" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="bigGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#34B84A" stop-opacity="0.15"/>
+                      <stop offset="100%" stop-color="#34B84A" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path id="big-area" fill="url(#bigGrad)"/>
+                  <path id="big-line" fill="none" stroke="#34B84A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <!-- X-axis labels -->
+                  <text x="0" y="135" fill="rgba(245,240,232,0.2)" font-family="JetBrains Mono, monospace" font-size="8">May 1</text>
+                  <text x="115" y="135" fill="rgba(245,240,232,0.2)" font-family="JetBrains Mono, monospace" font-size="8">May 8</text>
+                  <text x="230" y="135" fill="rgba(245,240,232,0.2)" font-family="JetBrains Mono, monospace" font-size="8">May 15</text>
+                  <text x="345" y="135" fill="rgba(245,240,232,0.2)" font-family="JetBrains Mono, monospace" font-size="8">May 22</text>
+                  <!-- Grid lines -->
+                  <line x1="0" y1="0" x2="500" y2="0" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+                  <line x1="0" y1="45" x2="500" y2="45" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+                  <line x1="0" y1="90" x2="500" y2="90" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+                </svg>
+              </div>
+            </div>
+            <div class="dash__chart-card">
+              <div class="dash__chart-title">Anomalies & Opportunities</div>
+              <div class="dash__anomaly-list">
+                <div class="dash__anomaly critical">
+                  <div class="dash__anomaly-title">PF PENALTY RISK</div>
+                  <div class="dash__anomaly-body">PF 0.87 → penalty ₹48,000 this cycle</div>
+                  <div class="dash__anomaly-meta">TANGEDCO · Surcharge clause 14(b)</div>
+                </div>
+                <div class="dash__anomaly warning">
+                  <div class="dash__anomaly-title">TOD OPPORTUNITY</div>
+                  <div class="dash__anomaly-body">Shift 40kW to off-peak → save ₹12,000</div>
+                  <div class="dash__anomaly-meta">Window: 22:00–06:00 · ₹1.20/u cheaper</div>
+                </div>
+                <div class="dash__anomaly warning">
+                  <div class="dash__anomaly-title">EXCHANGE WINDOW OPEN</div>
+                  <div class="dash__anomaly-body">IEX rate ₹3.24/u vs TANGEDCO ₹7.82/u</div>
+                  <div class="dash__anomaly-meta">Open access eligible · Est. save ₹2.1L</div>
+                </div>
+                <div class="dash__anomaly info">
+                  <div class="dash__anomaly-title">TARIFF MIGRATION</div>
+                  <div class="dash__anomaly-body">LT-4 → HT migration saves ₹0.80/unit</div>
+                  <div class="dash__anomaly-meta">At current usage: ₹8.4L/year</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     CASE STORIES
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="cases" data-screen-label="Cases">
+<!-- ─── HOW IT WORKS ─── -->
+<section class="how-section" id="how">
   <div class="container">
-    <div class="cases__head">
+    <div class="how__header">
+      <span class="eyebrow">How it works</span>
+      <h2 class="section-title">From data to decision<br><em>in under two weeks.</em></h2>
+    </div>
+    <div class="how__steps">
+      <div class="how__step">
+        <div class="how__num">01 —</div>
+        <h3 class="how__step-title">Connect your<br><em>energy data</em></h3>
+        <p class="how__step-body">Smart meters, DISCOM bills, solar DAS. OneGrid ingests all of it — automatically, every billing cycle. No manual uploads.</p>
+        <div class="how__step-detail">14-day onboarding</div>
+      </div>
+      <div class="how__step">
+        <div class="how__num">02 —</div>
+        <h3 class="how__step-title">Intelligence<br><em>surfaces issues</em></h3>
+        <p class="how__step-body">Our models flag PF penalties, missed ToD windows, open-access opportunities, and tariff mismatches before your next bill arrives.</p>
+        <div class="how__step-detail">Real-time alerts</div>
+      </div>
+      <div class="how__step">
+        <div class="how__num">03 —</div>
+        <h3 class="how__step-title">Act on specific<br><em>recommendations</em></h3>
+        <p class="how__step-body">Every alert comes with a rupee figure and an action. Your energy manager knows exactly what to do, and when. No interpretation needed.</p>
+        <div class="how__step-detail">Avg ₹28L found · Q1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CASES ─── -->
+<section class="cases-section">
+  <div class="container">
+    <div class="cases__header">
       <div>
         <span class="eyebrow">Field Evidence</span>
         <h2 class="section-title">Real facilities.<br><em>Already quantified.</em></h2>
       </div>
-      <p class="lede cases__lede">Every number below was sitting in a spreadsheet, unread. These are not projections — they are losses that had already left before anyone looked.</p>
+      <p class="cases__lede">Every number below was sitting in a spreadsheet, unread. OneGrid found it in the first audit. These are the ones that got caught — most facilities never do.</p>
     </div>
-    <div class="cases__grid" id="cases-grid"><!-- filled by JS --></div>
+    <div class="cases__grid">
+      <div class="case-card">
+        <div class="case__tag">Pharma · Pune</div>
+        <div class="case__loss">₹2.5Cr</div>
+        <div class="case__loss-label">left before anyone noticed</div>
+        <h3 class="case__hook">The Penalty They <em>Never Caught</em></h3>
+        <p class="case__body">Three years of PF penalties billed as a standard surcharge. No one questioned it. OneGrid's bill audit flagged it in the first month.</p>
+      </div>
+      <div class="case-card">
+        <div class="case__tag">Auto Components · Chennai</div>
+        <div class="case__loss">₹60L</div>
+        <div class="case__loss-label">saved by a competitor in the same zone</div>
+        <h3 class="case__hook">The Exchange Window <em>They Never Acted On</em></h3>
+        <p class="case__body">IEX rates were ₹3.10/unit cheaper for 22 consecutive nights. Competitor shifted load. This factory paid full tariff.</p>
+      </div>
+      <div class="case-card">
+        <div class="case__tag">Textiles · Coimbatore</div>
+        <div class="case__loss">₹8.4L</div>
+        <div class="case__loss-label">left every year on the wrong tariff</div>
+        <h3 class="case__hook">The Tariff Migration <em>Nobody Suggested</em></h3>
+        <p class="case__body">LT-4 to HT would have saved ₹0.80/unit at their consumption level. The DISCOM never proactively migrates customers.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     FLAGSHIP PROJECT
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="flagship" data-screen-label="Flagship">
+<!-- ─── PRICING ─── -->
+<section class="pricing-section" id="pricing">
   <div class="container">
-    <div class="flag__head">
-      <span class="eyebrow">Flagship Project</span>
-      <h2 class="section-title">100 MW <em>Renewable</em><br>Energy Park.</h2>
-    </div>
-    <p class="lede" style="margin-bottom:48px;">Tamil Nadu's next-gen clean energy hub — lock in your tariff before capacity fills.</p>
-
-    <div class="flag__visual">
-      <div class="flag__visual-grid"></div>
-      <div class="flag__visual-caption">
-        <span>Site · Tirunelveli District · Lat 8.7°N</span>
-        <span class="loc">Tamil Nadu</span>
-        <span>Status: Pre-COD · Reserving capacity</span>
-      </div>
+    <div class="pricing__header">
+      <span class="pricing__eyebrow">Pricing</span>
+      <h2 class="pricing__headline">The platform pays<br><em>for itself first.</em></h2>
+      <p class="pricing__sub">Tell us your monthly energy spend. We'll show you the payback — before you commit to anything.</p>
     </div>
 
-    <div class="flag__stats">
-      <div class="flag__stat">
-        <div class="figure">100<span class="unit">MW AC</span></div>
-        <span class="label">Installed Capacity</span>
+    <!-- PAYBACK CALCULATOR -->
+    <div class="pricing-calc">
+      <div>
+        <div class="pricing-calc__label">Your monthly energy bill</div>
+        <div class="pricing-calc__slider-row">
+          <div class="pricing-calc__val" id="pc-spend-val">₹50L</div>
+          <input class="pricing-calc__slider" type="range" id="pc-spend" min="5" max="500" step="5" value="50">
+        </div>
+        <div class="pricing-calc__hint">Drag to match your facility's monthly bill</div>
       </div>
-      <div class="flag__stat">
-        <div class="figure">210M<span class="unit">units / yr</span></div>
-        <span class="label">Annual Generation</span>
-      </div>
-      <div class="flag__stat">
-        <div class="figure">230<span class="unit">kV SS</span></div>
-        <span class="label">Injection Voltage</span>
-      </div>
-      <div class="flag__stat">
-        <div class="figure">Q4 '26<span class="unit"></span></div>
-        <span class="label">Planned COD</span>
+      <div class="pricing-calc__output">
+        <div class="pricing-calc__output-row">
+          <span class="pricing-calc__output-label">Annual energy spend</span>
+          <span class="pricing-calc__output-val" id="pc-annual">₹6Cr / year</span>
+        </div>
+        <div class="pricing-calc__output-row">
+          <span class="pricing-calc__output-label">Estimated leakage (12% of annual)</span>
+          <span class="pricing-calc__output-val signal" id="pc-leak">₹72L / year</span>
+        </div>
+        <div class="pricing-calc__output-row">
+          <span class="pricing-calc__output-label">OneGrid typically recovers</span>
+          <span class="pricing-calc__output-val" id="pc-savings">₹50L / year</span>
+        </div>
+        <div class="pricing-calc__output-row">
+          <span class="pricing-calc__output-label">Pro plan pays for itself in</span>
+          <span class="pricing-calc__output-val signal" id="pc-payback">13 days</span>
+        </div>
       </div>
     </div>
 
-    <div class="flag__feats">
-      <div class="flag__col">
-        <h4>// Technology Advantages</h4>
-        <ul>
-          <li>Cutting-edge solar modules</li>
-          <li>Peak slot optimization</li>
-          <li>AI/ML plant monitoring</li>
-          <li>Automated maintenance systems</li>
-          <li>Generation forecasting</li>
-          <li>Advanced cleaning technology</li>
+    <!-- TIER EXPLAINER -->
+    <div class="pricing__explainer">
+      <div class="pricing__explainer-text">
+        The base plan gives you <em>visibility</em> — every rupee of leakage made visible, live. Accountability and Predictability are outcome-linked engagements, priced based on what we actually find at your facility.
+      </div>
+      <div class="pricing__explainer-estimate">
+        At your spend, we'd typically find <strong id="pc-savings-card">₹50L</strong> / year. That's what the custom tiers are priced against.
+      </div>
+    </div>
+
+    <div class="pricing__grid">
+
+      <!-- VISIBILITY -->
+      <div class="pricing__card">
+        <div class="pricing__tier-badge">01</div>
+        <div class="pricing__tier">Visibility</div>
+        <div class="pricing__payback-headline">Know exactly<br>what's leaking.</div>
+        <div class="pricing__payback-sub">Base plan · Fixed monthly · Per facility</div>
+        <p class="pricing__desc">Connect your facility once. OneGrid reads every bill, flags every anomaly, and shows you the exact rupee value of what you're losing — in real time. No consultant needed to interpret it.</p>
+        <ul class="pricing__features">
+          <li class="pricing__feature">Live energy dashboard & anomaly feed</li>
+          <li class="pricing__feature">Automated bill intelligence (12 months history)</li>
+          <li class="pricing__feature">PF, ToD, MD & tariff anomaly detection</li>
+          <li class="pricing__feature">IEX exchange window tracking</li>
+          <li class="pricing__feature">Monthly savings opportunity report</li>
+          <li class="pricing__feature">Slack / email alert integration</li>
         </ul>
+        <a href="#contact" class="pricing__cta">Start free 14-day audit →</a>
+        <div class="pricing__reveal">Pays for itself in <strong id="pc-payback-card">13 days</strong> of savings found</div>
       </div>
-      <div class="flag__col">
-        <h4>// Power Purchase Options</h4>
-        <ul>
-          <li>Group Captive Model</li>
-          <li>Third Party Open Access</li>
-          <li>Captive Consumption</li>
-          <li>Flexible contract terms</li>
-          <li>Full platform integration</li>
-          <li>Transparent pricing</li>
+
+      <!-- ACCOUNTABILITY — featured -->
+      <div class="pricing__card featured">
+        <div class="pricing__tier-badge">02</div>
+        <div class="pricing__tier">Accountability</div>
+        <div class="pricing__payback-headline">We're accountable<br>for the outcome.</div>
+        <div class="pricing__payback-sub" id="pc-pro-sub">Custom · Priced on savings volume</div>
+        <p class="pricing__desc">OneGrid doesn't just flag the problem — we stay on it until it's resolved. Your energy manager gets a dedicated intelligence partner. Every recommendation tracked to closure, every rupee saved documented.</p>
+        <ul class="pricing__features">
+          <li class="pricing__feature">Everything in Visibility</li>
+          <li class="pricing__feature">Dedicated energy intelligence manager</li>
+          <li class="pricing__feature">Action tracking — open until resolved</li>
+          <li class="pricing__feature">Vendor & DISCOM coordination support</li>
+          <li class="pricing__feature">Quarterly savings audit & certification</li>
+          <li class="pricing__feature">Tariff migration & open-access advisory</li>
         </ul>
+        <a href="#contact" class="pricing__cta">Get a custom quote →</a>
+        <div class="pricing__reveal">Priced as a share of <strong id="pc-savings-card2">₹50L</strong> identified</div>
       </div>
-    </div>
 
-    <div class="flag__cta">
-      <p class="note">Capacity allocates first-come, first-served. Group Captive shares are limited.</p>
-      <a href="#contact" class="btn btn--primary">Reserve Your Capacity Before It's Gone <span class="arrow">→</span></a>
+      <!-- PREDICTABILITY -->
+      <div class="pricing__card">
+        <div class="pricing__tier-badge">03</div>
+        <div class="pricing__tier">Predictability</div>
+        <div class="pricing__payback-headline">Guaranteed costs.<br>No surprises.</div>
+        <div class="pricing__payback-sub">Custom · Multi-facility · Volume pricing</div>
+        <p class="pricing__desc">For groups running 5+ facilities who need total energy cost predictability — consolidated intelligence, proactive procurement advisory, carbon accounting, and an SLA on response time.</p>
+        <ul class="pricing__features">
+          <li class="pricing__feature">Everything in Accountability, portfolio-wide</li>
+          <li class="pricing__feature">Consolidated multi-facility dashboard</li>
+          <li class="pricing__feature">Proactive procurement & PPA advisory</li>
+          <li class="pricing__feature">ESG / carbon accounting & reporting</li>
+          <li class="pricing__feature">API access & data export</li>
+          <li class="pricing__feature">SLA-backed response & uptime guarantee</li>
+        </ul>
+        <a href="#contact" class="pricing__cta">Talk to us →</a>
+        <div class="pricing__reveal">Volume discounts · Multi-year options</div>
+      </div>
+
     </div>
+    <p class="pricing__footnote">All tiers · DISCOM-agnostic · No setup fees · Start with a free 14-day audit</p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     BENEFITS
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="benefits" data-screen-label="Benefits">
+<!-- ─── INSIGHTS ─── -->
+<section class="insights-section" id="insights">
   <div class="container">
-    <div class="benefits__head">
-      <span class="eyebrow">The ROI</span>
-      <h2 class="section-title">What you get back<br><em>from Day One.</em></h2>
+    <div class="insights__header">
+      <div>
+        <span class="eyebrow">Industry Insights</span>
+        <h2 class="section-title">What the best<br><em>energy managers know.</em></h2>
+      </div>
+      <p class="insights__lede">From tariff structures to exchange mechanics — our team writes what the DISCOM never tells you. Published on Medium.</p>
     </div>
-
-    <div class="benefits__row">
-      <div class="benefit">
-        <span class="benefit__num">01</span>
-        <div class="benefit__figure"><em>30%</em></div>
-        <span class="benefit__label">Average Savings</span>
-        <span class="benefit__heading">// Cost Reduction</span>
-        <p class="benefit__body">Landed cost visibility across grid, OA solar, OA wind — stop overpaying the moment you can see what you're paying.</p>
-      </div>
-      <div class="benefit">
-        <span class="benefit__num">02</span>
-        <div class="benefit__figure">25<span class="unit">yr</span></div>
-        <span class="benefit__label">Fixed Tariff</span>
-        <span class="benefit__heading">// Rate Certainty</span>
-        <p class="benefit__body">Lock in ex-busbar pricing. Your CFO can model 25 years of energy costs. The volatility stops here.</p>
-      </div>
-      <div class="benefit">
-        <span class="benefit__num">03</span>
-        <div class="benefit__figure">15<span class="unit">min</span></div>
-        <span class="benefit__label">Interval Data</span>
-        <span class="benefit__heading">// ToD Mastery</span>
-        <p class="benefit__body">15-minute consumption vs. generation analytics. Know exactly when and where peak costs hit — before they hit.</p>
-      </div>
-      <div class="benefit">
-        <span class="benefit__num">04</span>
-        <div class="benefit__figure">24/7</div>
-        <span class="benefit__label">Always On</span>
-        <span class="benefit__heading">// No Blind Shifts</span>
-        <p class="benefit__body">Night shifts, weekends, public holidays — the agents never clock out. Problems get caught whether you're watching or not.</p>
-      </div>
-      <div class="benefit">
-        <span class="benefit__num">05</span>
-        <div class="benefit__figure">100<span class="unit">%</span></div>
-        <span class="benefit__label">Attributed</span>
-        <span class="benefit__heading">// ESG Compliance</span>
-        <p class="benefit__body">Accurate renewable attribution and RPO reporting. Every unit traced, verified, and audit-ready for any stakeholder.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     IMPACT (dark) — animated counter
-     ═══════════════════════════════════════════════════════ -->
-<section class="section section--dark impact" id="impact" data-screen-label="Impact">
-  <div class="container">
-    <span class="eyebrow impact__eyebrow">Climate Action</span>
-
-    <div class="impact__counter-wrap">
-      <div class="impact__counter-label">CO₂ Offset · Annually</div>
-      <div class="impact__counter" id="co2-counter" data-target="120000">0</div>
-      <div class="impact__counter-unit">tonnes — from our 100 MW Renewable Energy Park.</div>
-    </div>
-
-    <div class="impact__secondary">
-      <div class="impact__stat">
-        <div class="fig">54 <span style="font-family:var(--mono); font-size:0.5em; color:var(--stone); letter-spacing:0.04em;">Lakh</span></div>
-        <span class="lab">Trees planted equivalent</span>
-      </div>
-      <div class="impact__stat">
-        <div class="fig">26,000</div>
-        <span class="lab">Cars off road</span>
-      </div>
-      <div class="impact__stat">
-        <div class="fig">18,000</div>
-        <span class="lab">Homes powered</span>
-      </div>
-      <div class="impact__stat">
-        <div class="fig">5 <span style="font-family:var(--mono); font-size:0.5em; color:var(--stone); letter-spacing:0.04em;">Cr L</span></div>
-        <span class="lab">Diesel saved</span>
-      </div>
-    </div>
-
-    <p class="impact__note">Per MW procured = 1,200 tonnes CO₂ / year offset.</p>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     INSIGHTS
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="insights" data-screen-label="Insights">
-  <div class="container">
-    <div class="insights__head">
-      <span class="eyebrow">Thought Leadership</span>
-      <h2 class="section-title">Insights &amp;<br><em>perspectives.</em></h2>
-    </div>
-
     <div class="insights__grid" id="insights-grid">
-      <article class="insight">
-        <div class="insight__cover"><span class="mono">cover · 16:10</span></div>
-        <span class="insight__tag">Energy Markets · 8 min read</span>
-        <h3 class="insight__title">Why exchange windows close while CFOs sleep — and what to do about it.</h3>
-        <p class="insight__excerpt">A six-month study of 14 C&amp;I facilities shows the average team learns about a missed buying window 4.5 hours after it opens. The math behind the loss, and how to invert it.</p>
-        <a href="#" class="insight__cta">Read</a>
-      </article>
-      <article class="insight">
-        <div class="insight__cover"><span class="mono">cover · 16:10</span></div>
-        <span class="insight__tag">Operations · 6 min read</span>
-        <h3 class="insight__title">The PF penalty is never about power factor.</h3>
-        <p class="insight__excerpt">Capacitor degradation is gradual. Penalties are sudden. The disconnect between operational drift and financial consequence — and why monthly bill reviews can't bridge it.</p>
-        <a href="#" class="insight__cta">Read</a>
-      </article>
-      <article class="insight">
-        <div class="insight__cover"><span class="mono">cover · 16:10</span></div>
-        <span class="insight__tag">Procurement · 5 min read</span>
-        <h3 class="insight__title">Open Access in 2026: a buyer's playbook for India.</h3>
-        <p class="insight__excerpt">Group Captive, Third Party, Captive — the structures CFOs need to understand before signing a 25-year PPA. With worked examples and tariff comparison.</p>
-        <a href="#" class="insight__cta">Read</a>
-      </article>
+      <!-- Skeleton cards shown while RSS loads -->
+      <div class="insight-card insight-card--skeleton">
+        <div class="insight-card__img-placeholder"><span class="insight-card__placeholder-ico">Loading…</span></div>
+        <div class="insight-card__body">
+          <div class="insight-card__tag skeleton-line" style="width:60%"></div>
+          <div class="insight-card__title skeleton-line" style="width:90%;height:48px;margin-top:8px"></div>
+          <div class="insight-card__excerpt skeleton-line" style="width:100%;height:56px;margin-top:8px"></div>
+        </div>
+      </div>
+      <div class="insight-card insight-card--skeleton">
+        <div class="insight-card__img-placeholder"><span class="insight-card__placeholder-ico"></span></div>
+        <div class="insight-card__body">
+          <div class="insight-card__tag skeleton-line" style="width:55%"></div>
+          <div class="insight-card__title skeleton-line" style="width:85%;height:48px;margin-top:8px"></div>
+          <div class="insight-card__excerpt skeleton-line" style="width:100%;height:56px;margin-top:8px"></div>
+        </div>
+      </div>
+      <div class="insight-card insight-card--skeleton">
+        <div class="insight-card__img-placeholder"><span class="insight-card__placeholder-ico"></span></div>
+        <div class="insight-card__body">
+          <div class="insight-card__tag skeleton-line" style="width:50%"></div>
+          <div class="insight-card__title skeleton-line" style="width:80%;height:48px;margin-top:8px"></div>
+          <div class="insight-card__excerpt skeleton-line" style="width:100%;height:56px;margin-top:8px"></div>
+        </div>
+      </div>
     </div>
-
-    <div style="margin-top:48px;">
-      <a href="https://medium.com/@onegrid" class="btn btn--ghost">View All on Medium <span class="arrow">→</span></a>
+    <div class="insights__all">
+      <a href="https://medium.com/@onegrid" target="_blank" class="btn-outline-dark">Read all articles on Medium →</a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     DUAL CTA
-     ═══════════════════════════════════════════════════════ -->
-<section class="section section--tight" id="dual" data-screen-label="Dual CTA">
+<!-- ─── ABOUT ─── -->
+<section class="about-section" id="about">
   <div class="container">
-    <div class="dual__split">
-      <div class="dual__panel">
-        <span class="dual__tag">// Platform</span>
-        <h3 class="dual__h">Stop the bleed.<br><em>Try the platform.</em></h3>
-        <p class="dual__sub">Full visibility from Day 1. No credit card. No commitment.</p>
-        <div class="dual__feats">
-          <div class="dual__feat"><span class="marker">+</span><span>Free account setup</span></div>
-          <div class="dual__feat"><span class="marker">+</span><span>Real-time analytics dashboard</span></div>
-          <div class="dual__feat"><span class="marker">+</span><span>All three agents active from Day 1</span></div>
-          <div class="dual__feat"><span class="marker">+</span><span>No credit card required</span></div>
-        </div>
-        <a href="#contact" class="btn btn--primary dual__cta">Sign Up Free <span class="arrow">→</span></a>
+    <div class="about__grid">
+      <div class="about__left">
+        <div class="about__eyebrow">About OneGrid</div>
+        <h2 class="about__headline">Built by engineers<br>who got tired of<br><em>unread spreadsheets.</em></h2>
+        <p class="about__body">OneGrid started when our founders — ex-grid operators and energy analysts — noticed the same pattern at every industrial facility they visited: the data to save crores was already there. Nobody was reading it.</p>
+        <p class="about__body">We built the intelligence layer that should have existed. Today we help C&I facility managers across Tamil Nadu, Maharashtra, Andhra Pradesh, Karnataka, Telangana, and Gujarat stop losing money on energy they've already bought.</p>
+        <p class="about__body">OneGrid is also a licensed Independent Power Producer. When the platform identifies that your facility would benefit from captive solar, we can provide it — directly, without a third party.</p>
       </div>
-
-      <div class="dual__panel dual__panel--ink">
-        <span class="dual__tag">// Renewable</span>
-        <h3 class="dual__h">Lock in your tariff.<br><em>Secure capacity.</em></h3>
-        <p class="dual__sub">Reserve power from our 100 MW park before it fills.</p>
-        <div class="dual__feats">
-          <div class="dual__feat"><span class="marker">+</span><span>Fixed ex-busbar pricing — no surprises</span></div>
-          <div class="dual__feat"><span class="marker">+</span><span>Q4 2026 delivery</span></div>
-          <div class="dual__feat"><span class="marker">+</span><span>Group Captive or Third Party options</span></div>
-          <div class="dual__feat"><span class="marker">+</span><span>Up to 30% cost savings vs. grid</span></div>
+      <div class="about__right">
+        <div class="about__stats">
+          <div class="about__stat">
+            <div class="about__stat-val">₹4.2Cr</div>
+            <div class="about__stat-label">Recovered · FY24</div>
+          </div>
+          <div class="about__stat">
+            <div class="about__stat-val">47</div>
+            <div class="about__stat-label">Facilities Live</div>
+          </div>
+          <div class="about__stat">
+            <div class="about__stat-val">6</div>
+            <div class="about__stat-label">States Covered</div>
+          </div>
+          <div class="about__stat">
+            <div class="about__stat-val">14d</div>
+            <div class="about__stat-label">Avg. First Insight</div>
+          </div>
         </div>
-        <a href="#contact" class="btn btn--primary dual__cta">Get PPA Quote <span class="arrow">→</span></a>
+        <div class="about__team-label">What we stand for</div>
+        <div class="about__values">
+          <div class="about__value">
+            <div class="about__value-num">01.</div>
+            <div>
+              <div class="about__value-title">Show the number first</div>
+              <div class="about__value-body">Every recommendation comes with a rupee figure. No vague "potential savings" — a specific, defensible amount.</div>
+            </div>
+          </div>
+          <div class="about__value">
+            <div class="about__value-num">02.</div>
+            <div>
+              <div class="about__value-title">No consultants in the loop</div>
+              <div class="about__value-body">Our platform tells your energy manager exactly what to do. You shouldn't need to hire someone to interpret your own data.</div>
+            </div>
+          </div>
+          <div class="about__value">
+            <div class="about__value-num">03.</div>
+            <div>
+              <div class="about__value-title">DISCOM-agnostic by design</div>
+              <div class="about__value-body">TANGEDCO, MSEDCL, APEPDCL — OneGrid connects to any DISCOM. Your intelligence doesn't stop at a state border.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     CONTACT
-     ═══════════════════════════════════════════════════════ -->
-<section class="section" id="contact" data-screen-label="Contact">
+<!-- ─── CONTACT / CTA STRIP ─── -->
+<section class="cta-strip" id="contact">
   <div class="container">
-    <div class="contact__head">
-      <span class="eyebrow">Get Started</span>
-      <h2 class="section-title" style="margin-top:20px;">Ready to stop<br><em>losing money</em><br>on energy?</h2>
-      <p class="lede contact__lede">For C&amp;I Energy Managers, CFOs, Directors and Stakeholders.</p>
-    </div>
-
-    <div class="contact__split">
-      <div class="contact__info">
-        <div class="contact__info-block">
-          <h4>// Direct</h4>
-          <p>info@onegrid.in</p>
-          <p>Tamil Nadu, India</p>
+    <div class="cta-strip__grid">
+      <div class="cta-strip__left">
+        <h2 class="cta-strip__headline">
+          Know your number<br><em>before your next bill.</em>
+        </h2>
+        <p class="cta-strip__sub">
+          Fill in the form and our team will reach out within one business day to walk you through onboarding — about 20 minutes. First insights in 14 days.
+        </p>
+        <div class="cta-strip__steps">
+          <div class="cta-strip__step">
+            <span class="cta-strip__step-num">01</span>
+            <div>
+              <div class="cta-strip__step-title">We call you within 24h</div>
+              <div class="cta-strip__step-body">A short onboarding call — we connect to your DISCOM data and meter feeds.</div>
+            </div>
+          </div>
+          <div class="cta-strip__step">
+            <span class="cta-strip__step-num">02</span>
+            <div>
+              <div class="cta-strip__step-title">First audit in 14 days</div>
+              <div class="cta-strip__step-body">We analyse 12 months of bills, flag every anomaly, and give you the exact savings number.</div>
+            </div>
+          </div>
+          <div class="cta-strip__step">
+            <span class="cta-strip__step-num">03</span>
+            <div>
+              <div class="cta-strip__step-title">You decide what's next</div>
+              <div class="cta-strip__step-body">No commitment. Upgrade to Accountability or Predictability only if the number makes sense.</div>
+            </div>
+          </div>
         </div>
-        <div class="contact__info-block">
-          <h4>// What Happens Next</h4>
-          <div class="contact__steps">
-            <div class="contact__step">We review your current energy setup and identify your biggest cost exposures.</div>
-            <div class="contact__step">You see a live demo of the platform on your own data (or sample data).</div>
-            <div class="contact__step">We build a custom savings estimate before you commit to anything.</div>
+        <div class="cta-strip__email-alt">
+          Prefer email? <a href="mailto:hello@onegrid.in" class="cta-strip__email-link">hello@onegrid.in</a>
+        </div>
+      </div>
+      <div class="cta-strip__form-wrap">
+        <form class="contact-form" id="contact-form" onsubmit="handleFormSubmit(event)">
+          <div class="contact-form__row">
+            <div class="contact-form__field">
+              <label class="contact-form__label">Your name</label>
+              <input class="contact-form__input" type="text" name="Name" placeholder="Arun Kumar" required>
+            </div>
+            <div class="contact-form__field">
+              <label class="contact-form__label">Company</label>
+              <input class="contact-form__input" type="text" name="Company" placeholder="Apex Industries Pvt Ltd" required>
+            </div>
+          </div>
+          <div class="contact-form__row">
+            <div class="contact-form__field">
+              <label class="contact-form__label">Work email</label>
+              <input class="contact-form__input" type="email" name="Email" placeholder="arun@apexindustries.com" required>
+            </div>
+            <div class="contact-form__field">
+              <label class="contact-form__label">Mobile number</label>
+              <input class="contact-form__input" type="tel" name="Mobile" placeholder="+91 98XXX XXXXX">
+            </div>
+          </div>
+          <div class="contact-form__field">
+            <label class="contact-form__label">Monthly energy bill (approx)</label>
+            <select class="contact-form__input contact-form__select" name="Monthly Bill">
+              <option value="">Select a range</option>
+              <option>Under ₹10L / month</option>
+              <option>₹10L – ₹50L / month</option>
+              <option>₹50L – ₹2Cr / month</option>
+              <option>Above ₹2Cr / month</option>
+            </select>
+          </div>
+          <button type="submit" class="contact-form__submit">Request my free audit →</button>
+          <div class="contact-form__note">We call within 24h · First audit in 14 days · No commitment</div>
+        </form>
+        <div class="contact-form__success" id="form-success" style="display:none;">
+          <div class="contact-form__success-ico">✓</div>
+          <div class="contact-form__success-title">We've got it.</div>
+          <div class="contact-form__success-body">Expect a call within 24 hours. We'll walk you through a 20-minute onboarding, connect to your DISCOM data, and deliver your first audit in 14 days. Or reach us directly at <a href="mailto:hello@onegrid.in" style="color:var(--signal);text-decoration:none;">hello@onegrid.in</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="site-footer">
+  <div class="footer__inner">
+    <div class="footer__top">
+
+      <!-- Brand + contact -->
+      <div class="footer__brand">
+        <a href="#" class="footer__logo">
+          <div class="footer__logo-mark">
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 2L14 6V10L8 14L2 10V6L8 2Z" stroke="#34B84A" stroke-width="1.5" stroke-linejoin="round"/>
+              <circle cx="8" cy="8" r="2" fill="#34B84A"/>
+            </svg>
+          </div>
+          <span class="footer__logo-name">OneGrid</span>
+        </a>
+        <p class="footer__tagline">Energy intelligence for C&I India. Know what your electricity actually costs — and stop paying what you shouldn't.</p>
+        <div class="footer__ipp-badge">
+          <span class="footer__ipp-dot"></span>
+          <span class="footer__ipp-text">Licensed Independent Power Producer · CERC Registered</span>
+        </div>
+        <div style="margin-top:24px;">
+          <div class="footer__contact-item">
+            <span class="footer__contact-label">Email</span>
+            <a href="mailto:hello@onegrid.in" class="footer__contact-val">hello@onegrid.in</a>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-label">Headquarters</span>
+            <span class="footer__contact-val">Chennai, Tamil Nadu · India</span>
           </div>
         </div>
       </div>
 
-      <form class="contact__form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="1e917a6a-d464-4c57-b358-b07a5f168f2f">
-        <input type="hidden" name="subject" value="New Enquiry — OneGrid">
-        <input type="hidden" name="from_name" value="OneGrid Website">
-        <input type="hidden" name="redirect" value="false">
-        <div class="form-row">
-          <label for="cf-name">Name *</label>
-          <input id="cf-name" name="name" type="text" required placeholder="Full name">
-        </div>
-        <div class="form-row">
-          <label for="cf-email">Email *</label>
-          <input id="cf-email" name="email" type="email" required placeholder="name@company.com">
-        </div>
-        <div class="form-row">
-          <label for="cf-company">Company</label>
-          <input id="cf-company" name="company" type="text" placeholder="Company name">
-        </div>
-        <div class="form-row">
-          <label for="cf-interest">I'm interested in *</label>
-          <select id="cf-interest" name="interest" required>
-            <option value="">Select your interest</option>
-            <option value="audit">Free Energy Cost Audit</option>
-            <option value="platform">OneGrid Platform Demo</option>
-            <option value="ppa">Power Purchase Agreement</option>
-            <option value="both">Both Platform &amp; PPA</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label for="cf-msg">Message</label>
-          <textarea id="cf-msg" name="message" placeholder="Tell us about your facility — monthly spend, sources, biggest pain point."></textarea>
-        </div>
-        <button type="submit" class="btn btn--primary contact__submit" id="contact-submit">Send Message <span class="arrow">→</span></button>
-        <p class="form-status" id="form-status" style="display:none;margin-top:16px;font-family:var(--mono);font-size:12px;letter-spacing:0.08em;"></p>
-      </form>
-    </div>
-  </div>
-</section>
+      <!-- Platform links -->
+      <div class="footer__col">
+        <div class="footer__col-title">Platform</div>
+        <ul class="footer__links">
+          <li><a href="#platform">Overview</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Request Audit</a></li>
+        </ul>
+      </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     FOOTER
-     ═══════════════════════════════════════════════════════ -->
-<footer class="footer" data-screen-label="Footer">
-  <div class="container">
-    <div class="footer__top">
-      <div class="footer__brand">
-        <a href="#top" class="brand">
-          <span class="brand__mark" aria-hidden="true">
-            <svg width="32" height="38" viewBox="0 0 142.76 170.33" xmlns="http://www.w3.org/2000/svg">
-              <path fill="currentColor" fill-rule="evenodd" d="M 142.76 170.33 L 142.46 57.37 L 66.40 57.37 L 66.40 96.26 L 99.29 96.26 L 99.29 142.31 L 95.29 142.31 L 95.29 100.26 L 62.40 100.26 L 62.40 53.37 L 142.45 53.37 L 142.31 0 L 0 0 L 0 142.31 L 95.29 142.31 L 95.29 170.33 Z M 99.29 142.31 L 138.76 142.31 L 138.76 166.33 L 99.29 166.33 Z"/>
-            </svg>
-          </span>
-          <span>ONEGRID</span>
-        </a>
-        <p class="footer__tag">India's Next-Generation Renewable Energy IPP. Intelligent energy solutions for industry.</p>
-        <div class="footer__contact">info@onegrid.in · Tamil Nadu, India</div>
-      </div>
+      <!-- Intelligence links -->
       <div class="footer__col">
-        <h4>Platform</h4>
-        <ul>
-          <li><a href="#agents">Agent Suite</a></li>
-          <li><a href="#calculator">Cost Calculator</a></li>
-          <li><a href="#quiz">Take the Quiz</a></li>
-          <li><a href="#contact">Get Started</a></li>
+        <div class="footer__col-title">Intelligence</div>
+        <ul class="footer__links">
+          <li><a href="#platform">Bill Analysis</a></li>
+          <li><a href="#platform">PF & Penalty Detection</a></li>
+          <li><a href="#platform">IEX Exchange Tracking</a></li>
+          <li><a href="#platform">ESG & Carbon Reporting</a></li>
         </ul>
       </div>
+
+      <!-- Company links -->
       <div class="footer__col">
-        <h4>Solutions</h4>
-        <ul>
-          <li><a href="#flagship">100 MW Project</a></li>
-          <li><a href="#flagship">Group Captive</a></li>
-          <li><a href="#flagship">Third Party</a></li>
-          <li><a href="#flagship">Captive</a></li>
-        </ul>
-      </div>
-      <div class="footer__col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#">About Us</a></li>
+        <div class="footer__col-title">Company</div>
+        <ul class="footer__links">
+          <li><a href="#about">About Us</a></li>
           <li><a href="#insights">Insights</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="https://medium.com/@onegrid" target="_blank" rel="noopener">Medium</a></li>
+          <li><a href="mailto:hello@onegrid.in">Contact</a></li>
         </ul>
       </div>
+
     </div>
-    <div class="footer__bigtype">ONEGRID</div>
+
     <div class="footer__bottom">
-      <span>© 2026 OneGrid Energy · Tamil Nadu</span>
-      <span>v1.0 · Edition 01 · Built for Indian C&amp;I</span>
+      <div class="footer__legal">
+        <span class="footer__copyright">© 2025 OneGrid Energy Technology Pvt Ltd. All rights reserved.</span>
+        <span class="footer__cin">CIN: U40100TN2022PTC152XXX · GSTIN: 33AADCO1234A1ZX</span>
+      </div>
+      <div class="footer__legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Data Processing Agreement</a>
+      </div>
+      <div class="footer__social">
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/company/onegrid" target="_blank" rel="noopener" class="footer__social-link" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+        </a>
+        <!-- Medium -->
+        <a href="https://medium.com/@onegrid" target="_blank" rel="noopener" class="footer__social-link" aria-label="Medium">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
 </footer>
 
-<!-- ─── Interactive JS ─── -->
-<script src="app.js"></script>
+<script>
+/* ─── TICKER DATA ─── */
+const TICKER_ITEMS = [
+  { label: 'IEX SPOT', val: '₹3.24/u', cls: '' },
+  { label: 'TANGEDCO HT', val: '₹7.82/u', cls: '' },
+  { label: 'MSEDCL HT-I', val: '₹8.14/u', cls: '' },
+  { label: 'GRID PF', val: '0.94', cls: '' },
+  { label: 'DAM VOLUME', val: '1,842 MU', cls: '' },
+  { label: 'RECs', val: '₹1,100', cls: 'up' },
+  { label: 'COAL INDEX', val: '₹5,840/MT', cls: 'down' },
+  { label: 'EXCHANGE SAVING', val: '↓ ₹9.58/u vs grid', cls: 'up' },
+  { label: 'LIVE FACILITIES', val: '47 connected', cls: '' },
+  { label: 'ALERTS TODAY', val: '3 actionable', cls: 'up' },
+];
 
+function buildTicker() {
+  const track = document.getElementById('ticker-track');
+  // Build twice for seamless loop
+  const items = [...TICKER_ITEMS, ...TICKER_ITEMS];
+  track.innerHTML = items.map(i =>
+    `<div class="ticker__item">
+      <span class="ticker__dot"></span>
+      <span class="ticker__label">${i.label}</span>
+      <span class="ticker__val ${i.cls}">${i.val}</span>
+    </div>`
+  ).join('');
+}
+buildTicker();
 
+/* ─── HERO HEADLINE ROTATION ─── */
+const HEADLINES = [
+  `You're <em>Already</em><br>Losing Money<br>on <span class="signal">Energy.</span>`,
+  `Your Energy Bill<br>Has a <em>Hidden</em><br><span class="signal">Tax.</span>`,
+  `Your Competitor<br>Just Cut Their<br><span class="signal">Energy Cost.</span>`,
+  `You Don't Know<br>What Energy<br><span class="signal">Actually Costs.</span>`,
+];
+const heroEl = document.getElementById('hero-headline');
+if (heroEl) {
+  const idx = Math.floor(Math.random() * HEADLINES.length);
+  heroEl.innerHTML = HEADLINES[idx];
+}
+
+/* ─── MINI CHART (hero widget) ─── */
+function buildMiniChart() {
+  const pts = [28, 32, 26, 35, 42, 38, 30, 45, 52, 48, 36, 40, 44, 38, 30, 28];
+  const W = 400, H = 56;
+  const max = Math.max(...pts), min = Math.min(...pts);
+  const range = max - min || 1;
+  const coords = pts.map((v, i) => [
+    (i / (pts.length - 1)) * W,
+    H - ((v - min) / range) * (H * 0.8) - H * 0.1
+  ]);
+  const lineD = coords.map((p, i) => (i === 0 ? `M${p[0]},${p[1]}` : `L${p[0]},${p[1]}`)).join(' ');
+  const areaD = `${lineD} L${W},${H} L0,${H} Z`;
+  const line = document.getElementById('chart-line');
+  const area = document.getElementById('chart-area');
+  if (line) line.setAttribute('d', lineD);
+  if (area) area.setAttribute('d', areaD);
+}
+buildMiniChart();
+
+/* ─── BIG CHART (dashboard) ─── */
+function buildBigChart() {
+  const pts = [410, 420, 395, 440, 465, 450, 380, 490, 520, 505, 460, 480, 510, 490, 430, 415, 440, 480, 510, 490, 460, 450];
+  const W = 500, H = 120;
+  const max = Math.max(...pts), min = Math.min(...pts);
+  const range = max - min || 1;
+  const coords = pts.map((v, i) => [
+    (i / (pts.length - 1)) * W,
+    H - ((v - min) / range) * (H * 0.8) - H * 0.05
+  ]);
+  const lineD = coords.map((p, i) => (i === 0 ? `M${p[0]},${p[1]}` : `L${p[0]},${p[1]}`)).join(' ');
+  const areaD = `${lineD} L${W},${H} L0,${H} Z`;
+  const line = document.getElementById('big-line');
+  const area = document.getElementById('big-area');
+  if (line) line.setAttribute('d', lineD);
+  if (area) area.setAttribute('d', areaD);
+}
+buildBigChart();
+
+/* ─── INSIGHTS RSS FETCH ─── */
+(function() {
+  const grid = document.getElementById('insights-grid');
+  if (!grid) return;
+
+  const RSS_URL = 'https://medium.com/feed/@onegrid';
+  const API_URL = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL);
+
+  function stripHtml(html) {
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    return d.textContent || d.innerText || '';
+  }
+  function truncate(str, n) {
+    // Strip "Photo by X on Unsplash" attribution sentences Medium injects
+    const s = str.trim().replace(/^Photo by[^.]+\.\s*/i, '').replace(/^Continue reading on Medium.*$/im, '').trim();
+    return s.length > n ? s.slice(0, n).replace(/\s+\S*$/, '') + '…' : s;
+  }
+  function readTime(content) {
+    return Math.max(1, Math.round(stripHtml(content).split(/\s+/).length / 200)) + ' min read';
+  }
+  function extractImage(html) {
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    const img = d.querySelector('img');
+    return img ? img.src : '';
+  }
+  function renderCard(item) {
+    const thumb   = item.thumbnail || extractImage(item.description || '') || '';
+    const tag     = (item.categories && item.categories[0]) ? item.categories[0] : 'Insights';
+    const excerpt = truncate(stripHtml(item.description), 160);
+    const rt      = readTime(item.content || item.description || '');
+    const imgHtml = thumb
+      ? `<img class="insight-card__img" src="${thumb}" alt="${item.title}" loading="lazy">`
+      : `<div class="insight-card__img-placeholder"><span class="insight-card__placeholder-ico">OneGrid · Insights</span></div>`;
+    return `<div class="insight-card">
+      ${imgHtml}
+      <div class="insight-card__body">
+        <div class="insight-card__tag">${tag} · ${rt}</div>
+        <h3 class="insight-card__title">${item.title}</h3>
+        <p class="insight-card__excerpt">${excerpt}</p>
+        <a href="${item.link}" target="_blank" rel="noopener" class="insight-card__read">Read on Medium</a>
+      </div>
+    </div>`;
+  }
+
+  fetch(API_URL)
+    .then(r => r.json())
+    .then(data => {
+      if (data.status === 'ok' && data.items && data.items.length) {
+        grid.innerHTML = data.items.slice(0, 3).map(renderCard).join('');
+      }
+    })
+    .catch(() => {
+      // Fetch failed — replace skeletons with static fallback cards
+      grid.innerHTML = [
+        { tag: 'Tariff Intelligence', rt: '8 min read', title: 'Why Your Power Factor Score Is Costing You More Than Your MD Charges', excerpt: 'Most energy managers obsess over maximum demand. The real leakage is quieter, monthly, and almost never flagged in the bill.', link: 'https://medium.com/@onegrid' },
+        { tag: 'Open Access', rt: '6 min read', title: 'The IEX Exchange Window: How C&I Buyers Are Paying ₹4/Unit Less — Legally', excerpt: 'The exchange window opens every night. Most facility managers don\'t know it exists. The ones who do have already switched.', link: 'https://medium.com/@onegrid' },
+        { tag: 'Tariff Structure', rt: '5 min read', title: 'LT vs HT: The Tariff Migration Nobody from TANGEDCO Will Suggest to You', excerpt: 'Above a certain consumption level, the HT tariff is cheaper. The DISCOM profits when you stay on LT. Nobody calls.', link: 'https://medium.com/@onegrid' },
+      ].map(i => `<div class="insight-card">
+        <div class="insight-card__img-placeholder"><span class="insight-card__placeholder-ico">OneGrid · Insights</span></div>
+        <div class="insight-card__body">
+          <div class="insight-card__tag">${i.tag} · ${i.rt}</div>
+          <h3 class="insight-card__title">${i.title}</h3>
+          <p class="insight-card__excerpt">${i.excerpt}</p>
+          <a href="${i.link}" target="_blank" rel="noopener" class="insight-card__read">Read on Medium</a>
+        </div>
+      </div>`).join('');
+    });
+})();
+
+/* ─── PRICING PAYBACK CALCULATOR ─── */
+(function() {
+  const slider    = document.getElementById('pc-spend');
+  const spendVal  = document.getElementById('pc-spend-val');
+  const annualEl  = document.getElementById('pc-annual');
+  const leakEl    = document.getElementById('pc-leak');
+  const savingsEl = document.getElementById('pc-savings');
+  const paybackEl = document.getElementById('pc-payback');
+  const paybackCard  = document.getElementById('pc-payback-card');
+  const proSub       = document.getElementById('pc-pro-sub');
+  const savingsCard  = document.getElementById('pc-savings-card');
+  const savingsCard2 = document.getElementById('pc-savings-card2');
+
+  const PRO_ANNUAL_COST_L = 1.8; // ₹1.8L/year (₹15K/month × 12)
+
+  function fmtL(lakhs) {
+    if (lakhs >= 100) return '₹' + (lakhs / 100).toFixed(1) + 'Cr';
+    if (lakhs >= 10)  return '₹' + Math.round(lakhs) + 'L';
+    return '₹' + lakhs.toFixed(1) + 'L';
+  }
+
+  function update() {
+    const monthly     = parseFloat(slider.value); // Lakhs/month
+    const annual      = monthly * 12;             // Lakhs/year
+    const leakage     = annual * 0.12;            // 12% of annual spend
+    const recoverable = leakage * 0.70;           // 70% of leakage is actionable
+    const paybackDays = Math.round((PRO_ANNUAL_COST_L / recoverable) * 365);
+    const capped      = Math.min(paybackDays, 90);
+
+    spendVal.textContent  = fmtL(monthly) + '/mo';
+    annualEl.textContent  = fmtL(annual) + ' / year';
+    leakEl.textContent    = fmtL(leakage) + ' / year';
+    savingsEl.textContent = fmtL(recoverable) + ' / year';
+    paybackEl.textContent = capped + ' days';
+
+    if (paybackCard)  paybackCard.textContent  = capped + ' days';
+    if (proSub)       proSub.textContent       = 'Custom · Priced on savings volume';
+    if (savingsCard)  savingsCard.textContent  = fmtL(recoverable);
+    if (savingsCard2) savingsCard2.textContent = fmtL(recoverable);
+  }
+
+  if (slider) {
+    slider.addEventListener('input', update);
+    update();
+  }
+})();
+
+/* ─── FORM SUBMIT ─── */
+/* ─── FORM SUBMISSION ─── */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpqnlzkp';
+
+async function handleFormSubmit(e) {
+  e.preventDefault();
+  const form    = document.getElementById('contact-form');
+  const btn     = form.querySelector('.contact-form__submit');
+  const origTxt = btn.textContent;
+  btn.textContent = 'Sending…';
+  btn.disabled    = true;
+
+  // ── Collect form fields ──
+  const fields = {};
+  form.querySelectorAll('input, select, textarea').forEach(function(el) {
+    if (el.name && el.value) fields[el.name] = el.value;
+  });
+
+  // ── Collect browser / device metadata ──
+  const tz      = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const locale  = navigator.language || 'unknown';
+  const ua      = navigator.userAgent;
+  const scr     = window.screen.width + 'x' + window.screen.height + ' @' + window.devicePixelRatio + 'x';
+  const vp      = window.innerWidth + 'x' + window.innerHeight;
+  const touch   = navigator.maxTouchPoints > 0 ? 'Yes' : 'No';
+  const conn    = (navigator.connection || {}).effectiveType || 'unknown';
+  const referrer= document.referrer || 'Direct';
+  const pageUrl = window.location.href;
+  const ts      = new Date().toLocaleString('en-IN', { timeZone: tz, hour12: false });
+
+  // ── Get public IP ──
+  let ip = 'unavailable';
+  try {
+    const r = await fetch('https://api.ipify.org?format=json', { signal: AbortSignal.timeout(4000) });
+    ip = (await r.json()).ip;
+  } catch(_) {}
+
+  // ── Build Formspree payload ──
+  // Named form fields go top-level; all metadata in a single _metadata field
+  const metadata = [
+    'Submitted at : ' + ts + ' (' + tz + ')',
+    'Public IP    : ' + ip,
+    'Referrer     : ' + referrer,
+    'Page URL     : ' + pageUrl,
+    'Screen       : ' + scr,
+    'Viewport     : ' + vp,
+    'Touch device : ' + touch,
+    'Connection   : ' + conn,
+    'Locale       : ' + locale,
+    'User Agent   : ' + ua,
+  ].join('\n');
+
+  const payload = Object.assign({}, fields, {
+    '_subject'  : 'OneGrid Lead — ' + (fields['Name'] || 'New Enquiry'),
+    '_metadata' : metadata,
+  });
+
+  try {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method : 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body   : JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      form.style.display = 'none';
+      const suc = document.getElementById('form-success');
+      if (suc) suc.style.display = 'flex';
+    } else {
+      throw new Error('Formspree returned ' + res.status);
+    }
+  } catch(err) {
+    // Fallback: open mail client with all data pre-filled
+    const bodyText = 'Name: ' + (fields['Name'] || '') + '\nCompany: ' + (fields['Company'] || '') +
+      '\nEmail: ' + (fields['Email'] || '') + '\nMonthly Bill: ' + (fields['Monthly Bill'] || '') +
+      '\n\n--- METADATA ---\n' + metadata;
+    window.location.href = 'mailto:hello@onegrid.in?subject=' + encodeURIComponent('OneGrid Lead') +
+      '&body=' + encodeURIComponent(bodyText);
+    btn.textContent = origTxt;
+    btn.disabled    = false;
+  }
+}
+
+/* ─── LIVE KPI TICK ─── */
+function tickKPIs() {
+  const costEl = document.getElementById('kpi-cost');
+  const pfEl   = document.getElementById('kpi-pf');
+  if (costEl) {
+    // HT landed cost per unit: ₹12–15/u (base tariff + fixed charges + demand + PF penalties)
+    const base  = 13.40;
+    const noise = (Math.random() - 0.5) * 0.60;
+    costEl.textContent = '₹' + (base + noise).toFixed(2) + '/u';
+  }
+  if (pfEl) {
+    const base  = 0.87;
+    const noise = (Math.random() - 0.5) * 0.01;
+    pfEl.textContent = (base + noise).toFixed(2);
+  }
+}
+setInterval(tickKPIs, 3200);
+
+// ─── MOBILE NAV ───
+(function() {
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('navMobileMenu');
+  if (!hamburger || !mobileMenu) return;
+
+  hamburger.addEventListener('click', function() {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close menu when a link is clicked
+  mobileMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Close on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 640) {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+</script>
 </body>
 </html>
