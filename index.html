@@ -2435,6 +2435,138 @@ a.footer__contact-val:hover { color: var(--signal); }
     animation: badgeBob 3s ease-in-out infinite !important;
   }
 }
+
+
+/* ─── SCROLL REVEAL ─── */
+.og-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.2,0,0,1), transform 0.65s cubic-bezier(0.2,0,0,1);
+}
+.og-reveal.og-visible {
+  opacity: 1;
+  transform: none;
+}
+.og-reveal-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.65s cubic-bezier(0.2,0,0,1), transform 0.65s cubic-bezier(0.2,0,0,1);
+}
+.og-reveal-left.og-visible { opacity: 1; transform: none; }
+
+/* ─── STICKY CTA ─── */
+.sticky-cta {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 14px 24px;
+  background: var(--forest);
+  border-top: 1px solid rgba(52,184,74,0.2);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.2,0,0,1);
+  box-shadow: 0 -8px 32px rgba(9,16,10,0.4);
+}
+.sticky-cta.og-show { transform: translateY(0); }
+.sticky-cta__text {
+  color: rgba(245,240,232,0.7);
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+.sticky-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: var(--signal);
+  color: var(--forest);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.sticky-cta__btn:hover { background: #2da840; }
+.sticky-cta__close {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  color: rgba(245,240,232,0.4);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+.sticky-cta__close:hover { color: var(--parchment); }
+@media (max-width: 600px) {
+  .sticky-cta { gap: 12px; padding: 12px 16px; }
+  .sticky-cta__text { display: none; }
+}
+
+/* ─── TICKER LIVE BADGE ─── */
+.ticker__live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px 0 14px;
+  background: var(--forest);
+  border-right: 1px solid rgba(52,184,74,0.2);
+  flex-shrink: 0;
+  z-index: 2;
+  position: relative;
+}
+.ticker__live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 0 0 rgba(52,184,74,0.6);
+  animation: livePulse 1.8s ease-out infinite;
+}
+.ticker__live-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--signal);
+  text-transform: uppercase;
+}
+@keyframes livePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(52,184,74,0.6); }
+  60%  { box-shadow: 0 0 0 6px rgba(52,184,74,0); }
+  100% { box-shadow: 0 0 0 0 rgba(52,184,74,0); }
+}
+
+/* Fade edge after LIVE badge */
+.ticker {
+  position: relative;
+}
+.ticker::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 48px;
+  background: linear-gradient(to right, transparent, var(--forest));
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .og-reveal, .og-reveal-left {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .sticky-cta { transition: none !important; }
+  .ticker__live-dot { animation: none !important; }
+}
 </style>
 </head>
 <body>
@@ -2442,6 +2574,10 @@ a.footer__contact-val:hover { color: var(--signal); }
 
 <!-- ─── TICKER STRIP ─── -->
 <div class="ticker">
+  <div class="ticker__live">
+    <span class="ticker__live-dot"></span>
+    <span class="ticker__live-label">Live</span>
+  </div>
   <div class="ticker__track" id="ticker-track">
     <!-- Filled by JS twice for infinite loop -->
   </div>
@@ -3705,6 +3841,13 @@ setInterval(tickKPIs, 3200);
 })();
 </script>
 
+<!-- ─── STICKY CTA ─── -->
+<div id="sticky-cta" class="sticky-cta" aria-hidden="true" aria-live="polite">
+  <span class="sticky-cta__text">Know your energy leak number</span>
+  <a href="#contact" class="sticky-cta__btn">Start free audit →</a>
+  <button class="sticky-cta__close" aria-label="Dismiss sticky banner">×</button>
+</div>
+
 <!-- ─── 3D HERO MOTION: mouse-tilt (Option A) ─── -->
 <script>
 (function () {
@@ -3763,6 +3906,126 @@ setInterval(tickKPIs, 3200);
     widget.removeEventListener('animationend', clearEntrance);
     tick();
   });
+})();
+</script>
+
+<script>
+/* ─── UX ENHANCEMENTS ─── */
+(function() {
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── 1. SCROLL REVEAL ── */
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    var revealTargets = [
+      { sel: '.section-title',      cls: 'og-reveal',      delay: 0   },
+      { sel: '.how__step',          cls: 'og-reveal',      delay: 80  },
+      { sel: '.pricing__card',      cls: 'og-reveal',      delay: 80  },
+      { sel: '.insight-card',       cls: 'og-reveal',      delay: 80  },
+      { sel: '.about__stat',        cls: 'og-reveal',      delay: 60  },
+      { sel: '.platform__headline', cls: 'og-reveal-left', delay: 0   },
+      { sel: '.platform__features', cls: 'og-reveal',      delay: 120 },
+    ];
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var d = el.dataset.revealDelay || 0;
+          setTimeout(function() { el.classList.add('og-visible'); }, +d);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealTargets.forEach(function(group) {
+      var els = document.querySelectorAll(group.sel);
+      els.forEach(function(el, i) {
+        el.classList.add(group.cls);
+        el.dataset.revealDelay = group.delay * i;
+        io.observe(el);
+      });
+    });
+  }
+
+  /* ── 2. COUNT-UP ANIMATION ── */
+  function parseStatVal(text) {
+    text = text.trim();
+    var m;
+    if ((m = text.match(/^₹([\d.]+)Cr/)))  return { raw: parseFloat(m[1]), prefix: '₹', suffix: 'Cr' };
+    if ((m = text.match(/^₹([\d.]+)L/)))   return { raw: parseFloat(m[1]), prefix: '₹', suffix: 'L' };
+    if ((m = text.match(/^([\d.]+)d$/)))    return { raw: parseFloat(m[1]), prefix: '', suffix: 'd' };
+    if ((m = text.match(/^([\d.]+) days$/)))return { raw: parseFloat(m[1]), prefix: '', suffix: ' days' };
+    if ((m = text.match(/^([\d.]+)$/)))     return { raw: parseFloat(m[1]), prefix: '', suffix: '' };
+    return null;
+  }
+
+  function countUp(el, parsed, duration) {
+    var start = null;
+    var decimals = parsed.raw % 1 !== 0 ? 1 : 0;
+    function step(ts) {
+      if (!start) start = ts;
+      var prog = Math.min((ts - start) / duration, 1);
+      var ease = 1 - Math.pow(1 - prog, 3);
+      var val = parsed.raw * ease;
+      el.textContent = parsed.prefix + val.toFixed(decimals) + parsed.suffix;
+      if (prog < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    var statEls = document.querySelectorAll('.hero__proof-val, .about__stat-val');
+    var statIo = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var parsed = parseStatVal(el.textContent);
+        if (parsed) countUp(el, parsed, 1200);
+        statIo.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    statEls.forEach(function(el) { statIo.observe(el); });
+  }
+
+  /* ── 3. STICKY CTA ── */
+  var stickyCta = document.getElementById('sticky-cta');
+  var contactEl = document.getElementById('contact');
+  var ctaDismissed = false;
+
+  function updateStickyCta() {
+    if (!stickyCta || ctaDismissed) return;
+    var scrollY = window.scrollY || window.pageYOffset;
+    var nearContact = contactEl
+      ? scrollY + window.innerHeight >= contactEl.getBoundingClientRect().top + scrollY - 100
+      : false;
+    if (scrollY > 700 && !nearContact) {
+      stickyCta.classList.add('og-show');
+      stickyCta.setAttribute('aria-hidden', 'false');
+    } else {
+      stickyCta.classList.remove('og-show');
+      stickyCta.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  if (stickyCta) {
+    var closeBtn = stickyCta.querySelector('.sticky-cta__close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        ctaDismissed = true;
+        stickyCta.classList.remove('og-show');
+        stickyCta.setAttribute('aria-hidden', 'true');
+      });
+    }
+    var ctaAnchor = stickyCta.querySelector('a[href="#contact"]');
+    if (ctaAnchor) {
+      ctaAnchor.addEventListener('click', function() {
+        ctaDismissed = true;
+        stickyCta.classList.remove('og-show');
+      });
+    }
+    window.addEventListener('scroll', updateStickyCta, { passive: true });
+    updateStickyCta();
+  }
 })();
 </script>
 </body>
