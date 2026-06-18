@@ -330,6 +330,8 @@ body {
 /* ─── PRODUCT WIDGET ─── */
 .hero__right {
   position: relative;
+  perspective: 1200px;
+  perspective-origin: 50% 30%;
 }
 .product-widget {
   background: var(--forest-mid);
@@ -2379,6 +2381,60 @@ a.footer__contact-val:hover { color: var(--signal); }
   .dash__kpi-row { grid-template-columns: 1fr; }
   .about__stats { grid-template-columns: 1fr; }
 }
+
+/* ─── 3D HERO MOTION ─── */
+
+/* Left column: staggered entrance */
+.hero__eyebrow  { animation: og-fade-up 0.6s cubic-bezier(0.2,0,0,1) 0.05s both; }
+.hero__headline { animation: og-fade-up 0.7s cubic-bezier(0.2,0,0,1) 0.18s both; }
+.hero__sub      { animation: og-fade-up 0.6s cubic-bezier(0.2,0,0,1) 0.30s both; }
+.hero__actions  { animation: og-fade-up 0.6s cubic-bezier(0.2,0,0,1) 0.42s both; }
+.hero__proof    { animation: og-fade-up 0.5s cubic-bezier(0.2,0,0,1) 0.55s both; }
+@keyframes og-fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Widget entrance from 3D depth (Option B) */
+.hero__right.js-3d .product-widget {
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: og-widget-enter 1s cubic-bezier(0.2,0,0,1) 0.28s both;
+}
+@keyframes og-widget-enter {
+  from {
+    transform: rotateX(20deg) translateY(36px) scale(0.95);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  to {
+    transform: rotateX(0deg) translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Badge overrides badgeBob to include Z-depth when 3D is active */
+.hero__right.js-3d .widget__badge {
+  animation: og-badge-bob 3s ease-in-out infinite;
+}
+@keyframes og-badge-bob {
+  0%, 100% { transform: translateY(0) rotate(-4deg) translateZ(24px); }
+  50%       { transform: translateY(-5px) rotate(-4deg) translateZ(24px); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero__eyebrow, .hero__headline, .hero__sub, .hero__actions, .hero__proof {
+    animation: none !important; opacity: 1 !important; transform: none !important;
+  }
+  .hero__right.js-3d .product-widget {
+    animation: none !important; opacity: 1 !important; filter: none !important;
+  }
+  .hero__right.js-3d .widget__badge {
+    animation: badgeBob 3s ease-in-out infinite !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -3646,6 +3702,67 @@ setInterval(tickKPIs, 3200);
     });
   });
 
+})();
+</script>
+
+<!-- ─── 3D HERO MOTION: mouse-tilt (Option A) ─── -->
+<script>
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var heroRight = document.querySelector('.hero__right');
+  var widget    = heroRight && heroRight.querySelector('.product-widget');
+  var hero      = document.querySelector('.hero');
+  if (!heroRight || !widget || !hero) return;
+
+  // Activate 3D CSS (enables transform-style: preserve-3d, badge Z-depth, entrance anim)
+  heroRight.classList.add('js-3d');
+
+  var MAX_TILT = 7; // degrees
+  var targetRX = 0, targetRY = 0;
+  var currentRX = 0, currentRY = 0;
+
+  hero.addEventListener('mousemove', function (e) {
+    var rect = hero.getBoundingClientRect();
+    var nx = (e.clientX - rect.left) / rect.width  * 2 - 1; // -1 → +1
+    var ny = (e.clientY - rect.top)  / rect.height * 2 - 1;
+    targetRY =  nx * MAX_TILT;
+    targetRX = -ny * MAX_TILT * 0.55;
+  });
+
+  hero.addEventListener('mouseleave', function () {
+    targetRX = 0;
+    targetRY = 0;
+  });
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function tick() {
+    currentRX = lerp(currentRX, targetRX, 0.07);
+    currentRY = lerp(currentRY, targetRY, 0.07);
+    var rx = +currentRX.toFixed(2);
+    var ry = +currentRY.toFixed(2);
+    if (Math.abs(rx) > 0.01 || Math.abs(ry) > 0.01 ||
+        Math.abs(targetRX) > 0.01 || Math.abs(targetRY) > 0.01) {
+      widget.style.transform = 'rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
+      var depth = Math.abs(rx) + Math.abs(ry);
+      widget.style.boxShadow =
+        '0 ' + (32 + depth * 2) + 'px ' + (80 + depth * 3) + 'px rgba(9,16,10,' + (0.28 + depth * 0.005) + '),' +
+        '0 0 0 1px rgba(52,184,74,0.08),' +
+        'inset 0 1px 0 rgba(255,255,255,0.06)';
+    } else {
+      widget.style.transform = '';
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Clear the entrance animation fill-mode once it ends so JS transform can take over
+  widget.addEventListener('animationend', function clearEntrance(e) {
+    if (e.animationName !== 'og-widget-enter') return;
+    widget.style.animation = 'none';
+    widget.removeEventListener('animationend', clearEntrance);
+    tick();
+  });
 })();
 </script>
 </body>
