@@ -2567,6 +2567,68 @@ a.footer__contact-val:hover { color: var(--signal); }
   .sticky-cta { transition: none !important; }
   .ticker__live-dot { animation: none !important; }
 }
+
+/* ─── ARCHETYPES SECTION ─── */
+.arch-section {
+  background: var(--forest);
+  padding: 80px 0;
+  border-top: 1px solid rgba(245,240,232,0.07);
+  border-bottom: 1px solid rgba(245,240,232,0.07);
+}
+.arch__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.arch__header .eyebrow { color: rgba(245,240,232,0.5); }
+.arch__header .section-title { color: var(--parchment); }
+.arch__header .arch__sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.5);
+  max-width: 480px;
+  margin: 10px auto 0;
+  line-height: 1.75;
+}
+.arch__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid rgba(245,240,232,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.arch__card {
+  padding: 28px 26px 32px;
+  border-right: 1px solid rgba(245,240,232,0.1);
+}
+.arch__card:last-child { border-right: none; }
+.arch__role {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-bottom: 14px;
+}
+.arch__hed {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--parchment);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.arch__hed em { font-style: italic; }
+.arch__body {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(245,240,232,0.55);
+  line-height: 1.7;
+}
+@media (max-width: 768px) {
+  .arch__grid { grid-template-columns: 1fr; }
+  .arch__card { border-right: none; border-bottom: 1px solid rgba(245,240,232,0.1); }
+  .arch__card:last-child { border-bottom: none; }
+}
 </style>
 </head>
 <body>
@@ -2629,12 +2691,12 @@ a.footer__contact-val:hover { color: var(--signal); }
     <div class="hero__grid">
       <!-- LEFT: HEADLINE + CTA -->
       <div class="hero__left">
-        <div class="hero__eyebrow">Energy Intelligence Platform</div>
+        <div class="hero__eyebrow"><span style="color:var(--signal)">Data to improve</span> · Energy Intelligence for C&amp;I India</div>
         <h1 class="hero__headline" id="hero-headline">
-          You're <em>Already</em><br>Losing Money<br>on <span class="signal">Energy.</span>
+          See what your<br>energy <em>actually</em><br><span class="signal">costs.</span>
         </h1>
         <p class="hero__sub">
-          OneGrid connects to your facility's energy data, finds what's costing you, and tells you exactly what to do. No consultants. No spreadsheets. Live intelligence.
+          OneGrid connects to your facility's energy data and makes it readable — penalties, tariff mismatches, load patterns, exchange windows — in real time. What you do with that clarity is up to you.
         </p>
         <div class="hero__actions">
           <a href="#contact" class="btn-primary btn-large">Start your free audit →</a>
@@ -2877,12 +2939,40 @@ a.footer__contact-val:hover { color: var(--signal); }
   </div>
 </section>
 
+<!-- ─── ARCHETYPES ─── -->
+<section class="arch-section">
+  <div class="container">
+    <div class="arch__header">
+      <span class="eyebrow">One platform · Three kinds of clarity</span>
+      <h2 class="section-title">Visibility means something<br><em>different</em> to every team.</h2>
+      <p class="arch__sub">OneGrid gives your facility a single data layer. What each team does with it depends on what they're optimizing for.</p>
+    </div>
+    <div class="arch__grid">
+      <div class="arch__card">
+        <div class="arch__role">Facility Manager</div>
+        <h3 class="arch__hed">Catch anomalies <em>before</em> the bill arrives.</h3>
+        <p class="arch__body">PF penalties, ToD misses, demand spikes — surfaced in real time. Your team knows where to act before the DISCOM charges you for it.</p>
+      </div>
+      <div class="arch__card">
+        <div class="arch__role">Finance / CFO</div>
+        <h3 class="arch__hed">Put a rupee figure on <em>every</em> energy decision.</h3>
+        <p class="arch__body">Track savings found vs. savings recovered. Document every rupee for your board. Know the ROI before committing to the next tier.</p>
+      </div>
+      <div class="arch__card">
+        <div class="arch__role">Sustainability / ESG</div>
+        <h3 class="arch__hed">Certified carbon numbers, <em>no consultants.</em></h3>
+        <p class="arch__body">DISCOM-agnostic Scope 2 reporting across every facility and state. Export-ready for buyer audits, ESG frameworks, or regulatory filings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── HOW IT WORKS ─── -->
 <section class="how-section" id="how">
   <div class="container">
     <div class="how__header">
       <span class="eyebrow">How it works</span>
-      <h2 class="section-title">From data to decision<br><em>in under two weeks.</em></h2>
+      <h2 class="section-title">From data to clarity<br><em>in under two weeks.</em></h2>
     </div>
     <div class="how__steps">
       <div class="how__step">
@@ -2899,8 +2989,8 @@ a.footer__contact-val:hover { color: var(--signal); }
       </div>
       <div class="how__step">
         <div class="how__num">03 —</div>
-        <h3 class="how__step-title">Act on specific<br><em>recommendations</em></h3>
-        <p class="how__step-body">Every alert comes with a rupee figure and an action. Your energy manager knows exactly what to do, and when. No interpretation needed.</p>
+        <h3 class="how__step-title">Improve<br><em>on your terms</em></h3>
+        <p class="how__step-body">Every alert comes with a rupee figure — not a script. Your team decides what to act on, and when. The intelligence follows your priorities.</p>
         <div class="how__step-detail">Avg ₹28L found · Q1</div>
       </div>
     </div>
@@ -2938,6 +3028,13 @@ a.footer__contact-val:hover { color: var(--signal); }
         <div class="case__loss-label">left every year on the wrong tariff</div>
         <h3 class="case__hook">The Tariff Migration <em>Nobody Suggested</em></h3>
         <p class="case__body">LT-4 to HT would have saved ₹0.80/unit at their consumption level. The DISCOM never proactively migrates customers.</p>
+      </div>
+      <div class="case-card">
+        <div class="case__tag">Export Textiles · Tirupur</div>
+        <div class="case__loss" style="color:#4E8EC9;">10 days</div>
+        <div class="case__loss-label">to a certified Scope 2 report</div>
+        <h3 class="case__hook">The Carbon Audit <em>Nobody Could Produce</em></h3>
+        <p class="case__body">An EU buyer required certified Scope 2 data for vendor compliance. No existing system could generate it. OneGrid ran 14 months of bills through its carbon model and delivered the report in 10 days.</p>
       </div>
     </div>
   </div>
@@ -3381,7 +3478,7 @@ buildTicker();
 
 /* ─── HERO HEADLINE ROTATION ─── */
 const HEADLINES = [
-  `You're <em>Already</em><br>Losing Money<br>on <span class="signal">Energy.</span>`,
+  `See what your<br>energy <em>actually</em><br><span class="signal">costs.</span>`,
   `Your Energy Bill<br>Has a <em>Hidden</em><br><span class="signal">Tax.</span>`,
   `Your Competitor<br>Just Cut Their<br><span class="signal">Energy Cost.</span>`,
   `You Don't Know<br>What Energy<br><span class="signal">Actually Costs.</span>`,
@@ -3924,6 +4021,8 @@ setInterval(tickKPIs, 3200);
       { sel: '.about__stat',        cls: 'og-reveal',      delay: 60  },
       { sel: '.platform__headline', cls: 'og-reveal-left', delay: 0   },
       { sel: '.platform__features', cls: 'og-reveal',      delay: 120 },
+      { sel: '.arch__header',       cls: 'og-reveal',      delay: 0   },
+      { sel: '.arch__card',         cls: 'og-reveal',      delay: 80  },
     ];
 
     var io = new IntersectionObserver(function(entries) {
