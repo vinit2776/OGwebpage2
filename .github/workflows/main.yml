@@ -1,4 +1,4 @@
-name: Deploy Static Website to VPS
+name: Deploy to Vercel
 
 on:
   push:
@@ -13,20 +13,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Deploy files to VPS
-        run: |
-          rsync -avz --delete \
-            --exclude='.git*' \
-            --exclude='.github' \
-            --exclude='.well-known' \
-            --exclude='old-website' \
-            --ignore-errors \
-            ./ \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}
+      - name: Deploy to Vercel
+        run: npx vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: team_5BkHNKAKrimkEpRj452dU5nj
+          VERCEL_PROJECT_ID: prj_mmL58LIYyVQ6n9568AyX58iQPXvD
