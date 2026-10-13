@@ -2711,6 +2711,68 @@ a.footer__contact-val:hover { color: var(--signal); }
 .og-wa-fab.og-on { display: inline-flex; }
 .og-wa-fab svg { width: 20px; height: 20px; fill: currentColor; }
 @media (max-width: 768px) { .og-wa-fab { bottom: 84px; padding: 12px; } .og-wa-fab span { display: none; } }
+
+/* ─── TRUST REWRITE: hero check, trust strip, levers, case facts, calc note ─── */
+.hero-check{background:var(--parchment-mid);border:1px solid var(--rule-strong);border-radius:8px;padding:16px;margin-bottom:28px;max-width:520px}
+.hero-check__title{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#2c7d3b;margin-bottom:12px}
+.hero-check__row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hero-check__f span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(9,16,10,.5);margin-bottom:4px}
+.hero-check__f select{width:100%;font:400 13px var(--sans);padding:8px 6px;border:1px solid var(--rule-strong);border-radius:4px;background:#fff;color:var(--forest)}
+.hero-check__result{margin-top:12px;padding:10px 12px;border-left:3px solid var(--signal);background:var(--signal-dim);font-size:13px;line-height:1.5}
+.hero-check__lead{display:block;font-weight:500;margin-bottom:4px}
+.hero-check__result ul{list-style:none;margin:6px 0;display:flex;flex-wrap:wrap;gap:6px}
+.hero-check__result li{background:#fff;border:1px solid var(--rule-strong);border-radius:3px;padding:2px 8px;font-size:12px}
+.hero-check__fine{display:block;font-size:11.5px;color:rgba(9,16,10,.6)}
+.hero-check__go{margin-top:14px}
+.hero-check__alt{margin-top:10px;font-size:13px;color:rgba(9,16,10,.6)}
+.hero-check__alt a{color:var(--forest);text-decoration:underline;text-underline-offset:3px}
+.hero__footnote{font-family:var(--mono);font-size:10px;color:rgba(9,16,10,.45);margin-top:14px}
+
+.trust-strip{background:var(--parchment-mid);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:0}
+.trust-strip__grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-cell{padding:28px 22px;border-right:1px solid var(--rule)}
+.trust-cell:last-child{border-right:0}
+.trust-cell__ico{width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--signal);display:grid;place-items:center;font:500 14px var(--mono);margin-bottom:12px}
+.trust-cell__title{font:600 15px var(--sans);margin-bottom:6px}
+.trust-cell__body{font-size:13px;line-height:1.5;color:rgba(9,16,10,.62)}
+.trust-cell__tag{margin-top:10px;font:10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#2c7d3b}
+.trust-strip__indep{background:var(--forest);color:var(--parchment);padding:16px 0;font-size:14px}
+.trust-strip__indep strong{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-right:12px}
+
+.levers-section{padding:96px 0 80px}
+.levers__header{margin-bottom:36px}
+.levers__lede{margin-top:12px;max-width:520px;font-size:16px;color:rgba(9,16,10,.62)}
+.levers__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.lever{background:var(--parchment);padding:22px}
+.lever--wide{grid-column:1/-1}
+.lever__n{font:10px var(--mono);letter-spacing:.08em;color:#2c7d3b}
+.lever__title{font:600 16px var(--sans);margin:6px 0}
+.lever__body{font-size:13.5px;color:rgba(9,16,10,.62);line-height:1.5}
+.lever__fit{margin-top:10px;font:10px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:rgba(9,16,10,.45)}
+.levers__sample{margin-top:24px;display:flex;gap:16px;align-items:center;background:var(--forest);color:var(--parchment);padding:16px 20px;border-radius:6px}
+.levers__doc{width:36px;height:46px;border:1px solid var(--signal);border-radius:2px;display:grid;place-items:center;font:9px var(--mono);color:var(--signal);flex:none}
+.levers__sample p{font-size:14px;margin:0}
+.levers__sample a{margin-left:auto;color:var(--signal);font:600 13px var(--sans);white-space:nowrap}
+
+.case__facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;padding-top:12px;border-top:1px solid var(--rule)}
+.case__facts div{font-size:11px;color:rgba(9,16,10,.5)}
+.case__facts b{display:block;font:500 12px var(--mono);color:var(--forest)}
+.pricing-calc__assume{margin:10px 0 0;font-size:12px;line-height:1.5;color:rgba(245,240,232,.6)}
+
+@media (max-width:900px){
+  .trust-strip__grid{grid-template-columns:1fr 1fr}
+  .trust-cell:nth-child(2){border-right:0}
+  .trust-cell:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+  .levers__grid{grid-template-columns:1fr 1fr}
+  .levers__sample{flex-direction:column;align-items:flex-start}
+  .levers__sample a{margin-left:0}
+}
+@media (max-width:560px){
+  .hero-check__row{grid-template-columns:1fr}
+  .hero__footnote{display:none}
+  .trust-strip__grid,.levers__grid{grid-template-columns:1fr}
+  .trust-cell{border-right:0;border-bottom:1px solid var(--rule)}
+}
 </style>
 </head>
 <body>
@@ -2774,26 +2836,46 @@ a.footer__contact-val:hover { color: var(--signal); }
     <div class="hero__grid">
       <!-- LEFT: HEADLINE + CTA -->
       <div class="hero__left">
-        <div class="hero__eyebrow"><span style="color:var(--signal)">Data to improve</span> · Energy Intelligence for C&amp;I India</div>
+        <div class="hero__eyebrow"><span style="color:var(--signal)">Electricity cost, answered</span> · For factories &amp; C&amp;I in India</div>
         <h1 class="hero__headline" id="hero-headline">
-          See what your<br>energy <em>actually</em><br><span class="signal">costs.</span>
+          Can your<br>electricity cost<br>be <span class="signal">reduced?</span>
         </h1>
         <p class="hero__sub">
-          OneGrid connects to your facility's energy data and makes it readable — penalties, tariff mismatches, load patterns, exchange windows — in real time. What you do with that clarity is up to you.
+          Email us at least six months of your DISCOM bills. We analyse them and return a written report on your plant. If there is nothing worth chasing, we will say so. <!-- CONFIRM: 'we will say so' must be true in practice -->
         </p>
-        <div class="hero__actions">
-          <a href="#contact" class="btn-primary btn-large">Start your free audit →</a>
-          <a href="#platform" class="btn-outline-dark btn-large">See the platform</a>
+        <div class="hero-check" id="hero-check">
+          <div class="hero-check__title">60-second check</div>
+          <div class="hero-check__row">
+            <label class="hero-check__f"><span>State</span>
+              <select id="hc-state">
+                <option>Tamil Nadu</option><option>Maharashtra</option><option>Andhra Pradesh</option>
+                <option>Karnataka</option><option>Telangana</option><option>Gujarat</option><option>Other state</option>
+              </select></label>
+            <label class="hero-check__f"><span>Connection</span>
+              <select id="hc-cat">
+                <option value="ht">HT industrial</option><option value="lt">LT industrial</option><option value="unsure">Not sure</option>
+              </select></label>
+            <label class="hero-check__f"><span>Monthly bill</span>
+              <select id="hc-bill">
+                <option value="s">Under ₹10L</option><option value="m" selected>₹10L – ₹50L</option>
+                <option value="l">₹50L – ₹2Cr</option><option value="xl">Above ₹2Cr</option>
+              </select></label>
+          </div>
+          <div class="hero-check__result" id="hc-result" aria-live="polite"></div>
+          <div class="hero-check__go">
+            <a href="mailto:hello@onegrid.in?subject=Bill%20analysis%20request&body=Hello%20OneGrid%20team%2C%0A%0APlease%20analyse%20the%20attached%20electricity%20bills%20and%20send%20me%20a%20written%20report.%0A%0ACompany%3A%0APlant%20location%20%28city%2C%20state%29%3A%0ADISCOM%3A%0AConnection%20%28HT%20/%20LT%29%3A%0AApprox.%20monthly%20bill%3A%0AMy%20name%3A%0AMobile%20/%20WhatsApp%3A%0A%0AI%20have%20attached%20my%20last%206%20to%2012%20months%20of%20DISCOM%20bills%20%28PDF%20or%20clear%20photos%29.%0A%0AI%20agree%20to%20OneGrid%20using%20these%20bills%20only%20to%20prepare%20my%20analysis%2C%20as%20described%20in%20the%20Privacy%20Policy%20%28https%3A//onegrid.in/privacy%29.%0A%0ARegards%2C%0A" class="btn-primary btn-large" id="hc-cta" data-cta="hero_check">Email 6 months of bills →</a>
+          </div>
+          <div class="hero-check__alt">You get a written analysis and report. Prefer to talk first? <a href="#contact" data-cta="hero_talk">Speak to an engineer</a></div>
         </div>
         <div class="hero__proof">
           <div class="hero__proof-item">
             <div class="hero__proof-val">₹4.2Cr</div>
-            <div class="hero__proof-label">Recovered · FY24</div>
+            <div class="hero__proof-label">Recovered · FY24 †</div>
           </div>
           <div class="hero__proof-sep"></div>
           <div class="hero__proof-item">
             <div class="hero__proof-val">47</div>
-            <div class="hero__proof-label">Facilities Live</div>
+            <div class="hero__proof-label">Facilities Live †</div>
           </div>
           <div class="hero__proof-sep"></div>
           <div class="hero__proof-item">
@@ -2801,6 +2883,7 @@ a.footer__contact-val:hover { color: var(--signal); }
             <div class="hero__proof-label">First Insight</div>
           </div>
         </div>
+        <p class="hero__footnote">† Basis for each figure to be shown here. <!-- CONFIRM: e.g. 4.2Cr across 47 facilities, FY24 --></p>
       </div>
 
       <!-- RIGHT: PRODUCT WIDGET -->
@@ -2869,6 +2952,113 @@ a.footer__contact-val:hover { color: var(--signal); }
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRUST STRIP ─── -->
+<section class="trust-strip" aria-label="Credentials">
+  <div class="container">
+    <div class="trust-strip__grid">
+      <div class="trust-cell">
+        <div class="trust-cell__ico">☀</div>
+        <h3 class="trust-cell__title">Renewable IPP</h3>
+        <p class="trust-cell__body">We generate renewable power ourselves, so we know when solar pays for you and when it does not.</p>
+        <div class="trust-cell__tag">Independent Power Producer</div>
+      </div>
+      <div class="trust-cell">
+        <div class="trust-cell__ico">◉</div>
+        <h3 class="trust-cell__title">Measured, not estimated</h3>
+        <p class="trust-cell__body">Readings come from CE-certified IoT data loggers on your own meters.</p>
+        <div class="trust-cell__tag">CE-certified data loggers</div>
+      </div>
+      <div class="trust-cell">
+        <div class="trust-cell__ico">⌂</div>
+        <h3 class="trust-cell__title">Your data stays yours</h3>
+        <p class="trust-cell__body">Built for India's DPDP Act. Read-only access is all we need.</p>
+        <div class="trust-cell__tag">DPDP-compliant platform</div>
+      </div>
+      <div class="trust-cell">
+        <div class="trust-cell__ico">№</div>
+        <h3 class="trust-cell__title">A company you can check</h3>
+        <p class="trust-cell__body">OneGrid Energy Technology Pvt Ltd, Chennai. <!-- CONFIRM: add real CIN and GSTIN here and in the footer --></p>
+        <div class="trust-cell__tag">Registered in India</div>
+      </div>
+    </div>
+  </div>
+  <div class="trust-strip__indep">
+    <div class="container"><strong>Independence</strong> We recommend solar only when your numbers justify it. Our advice on tariffs and penalties does not depend on whether you buy power from us.</div>
+  </div>
+</section>
+
+<!-- ─── WHAT WE CHECK ─── -->
+<section class="levers-section" id="what-we-check">
+  <div class="container">
+    <div class="levers__header">
+      <span class="eyebrow">What we check</span>
+      <h2 class="section-title">Where factory electricity<br>cost <em>actually hides.</em></h2>
+      <p class="levers__lede">Seven places we look in every bill. Most plants have two or three that matter.</p>
+    </div>
+    <div class="levers__grid">
+      <div class="lever"><div class="lever__n">01</div><h3 class="lever__title">Power factor penalties</h3><p class="lever__body">Billed as a surcharge and rarely questioned.</p><div class="lever__fit">Most HT plants</div></div>
+      <div class="lever"><div class="lever__n">02</div><h3 class="lever__title">Wrong tariff category</h3><p class="lever__body">Migration is not something the DISCOM offers on its own.</p><div class="lever__fit">LT / HT boundary</div></div>
+      <div class="lever"><div class="lever__n">03</div><h3 class="lever__title">Time-of-day windows</h3><p class="lever__body">Shiftable load running at peak rates.</p><div class="lever__fit">Multi-shift plants</div></div>
+      <div class="lever"><div class="lever__n">04</div><h3 class="lever__title">Contract demand</h3><p class="lever__body">Paying for kVA you never draw, or paying excess charges.</p><div class="lever__fit">Variable load</div></div>
+      <div class="lever"><div class="lever__n">05</div><h3 class="lever__title">Open access &amp; exchange</h3><p class="lever__body">Cheaper power, where you are eligible.</p><div class="lever__fit">Larger connections</div></div>
+      <div class="lever"><div class="lever__n">06</div><h3 class="lever__title">Billing errors</h3><p class="lever__body">Meter, multiplier and clause mistakes.</p><div class="lever__fit">Any bill</div></div>
+      <div class="lever lever--wide"><div class="lever__n">07</div><h3 class="lever__title">Captive solar</h3><p class="lever__body">Flagged only when your numbers clearly justify it. See our independence note above.</p></div>
+    </div>
+    <div class="levers__sample">
+      <div class="levers__doc">PDF</div>
+      <p><strong>See a real report first.</strong> An anonymised audit, exactly as you would receive it. <!-- CONFIRM: attach anonymised sample report, then link it here --></p>
+      <a href="#contact" data-cta="sample_report">Request a sample report →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CASES ─── -->
+<section class="cases-section">
+  <div class="container">
+    <div class="cases__header">
+      <div>
+        <span class="eyebrow">Field Evidence</span>
+        <h2 class="section-title">Real facilities.<br><em>Already quantified.</em></h2>
+      </div>
+      <p class="cases__lede">Every number below was sitting in a spreadsheet, unread. These are examples from real facilities, with names withheld. <!-- CONFIRM: all four cases real; add customer quote or named reference where permitted --></p>
+    </div>
+    <div class="cases__grid">
+      <div class="case-card">
+        <div class="case__tag">Pharma · Pune</div>
+        <div class="case__loss">₹2.5Cr</div>
+        <div class="case__loss-label">in PF penalties over three years</div>
+        <h3 class="case__hook">Billed as routine, <em>flagged in month one</em></h3>
+        <p class="case__body">PF penalties were being billed as a standard surcharge, so no one questioned them. OneGrid's bill audit flagged the pattern in the first month.</p>
+        <div class="case__facts"><div><b>PF penalty</b>lever</div><div><b>3 years of bills</b>basis</div></div>
+      </div>
+      <div class="case-card">
+        <div class="case__tag">Auto Components · Chennai</div>
+        <div class="case__loss">₹60L</div>
+        <div class="case__loss-label">saved by a plant in the same zone</div>
+        <h3 class="case__hook">Cheaper exchange power, <em>22 nights running</em></h3>
+        <p class="case__body">IEX rates ran ₹3.10/unit below tariff for 22 consecutive nights. A neighbouring plant shifted load into that window, while this factory stayed on full tariff. The DISCOM does not flag this automatically.</p>
+        <div class="case__facts"><div><b>Exchange window</b>lever</div><div><b>22 nights of IEX data</b>basis</div></div>
+      </div>
+      <div class="case-card">
+        <div class="case__tag">Textiles · Coimbatore</div>
+        <div class="case__loss">₹8.4L</div>
+        <div class="case__loss-label">a year on the wrong tariff</div>
+        <h3 class="case__hook">A tariff migration <em>the DISCOM does not offer</em></h3>
+        <p class="case__body">Moving from LT-4 to HT would have saved ₹0.80/unit at their consumption level. DISCOMs do not proactively migrate customers.</p>
+        <div class="case__facts"><div><b>Tariff category</b>lever</div><div><b>Consumption profile</b>basis</div></div>
+      </div>
+      <div class="case-card">
+        <div class="case__tag">Export Textiles · Tirupur</div>
+        <div class="case__loss" style="color:#4E8EC9;">10 days</div>
+        <div class="case__loss-label">to a certified Scope 2 report</div>
+        <h3 class="case__hook">A Scope 2 report, <em>on a buyer's deadline</em></h3>
+        <p class="case__body">An EU buyer required certified Scope 2 data for vendor compliance, and no existing system could produce it. OneGrid ran 14 months of bills through its carbon model and delivered the report in 10 days.</p>
+        <div class="case__facts"><div><b>Carbon accounting</b>lever</div><div><b>14 months of bills</b>basis</div></div>
       </div>
     </div>
   </div>
@@ -3044,7 +3234,7 @@ a.footer__contact-val:hover { color: var(--signal); }
       </div>
       <div class="arch__card">
         <div class="arch__role">Sustainability / ESG</div>
-        <h3 class="arch__hed">Certified carbon numbers, <em>no consultants.</em></h3>
+        <h3 class="arch__hed">Certified carbon numbers, <em>on demand.</em></h3>
         <p class="arch__body">DISCOM-agnostic Scope 2 reporting across every facility and state. Export-ready for buyer audits, ESG frameworks, or regulatory filings.</p>
       </div>
     </div>
@@ -3081,56 +3271,13 @@ a.footer__contact-val:hover { color: var(--signal); }
   </div>
 </section>
 
-<!-- ─── CASES ─── -->
-<section class="cases-section">
-  <div class="container">
-    <div class="cases__header">
-      <div>
-        <span class="eyebrow">Field Evidence</span>
-        <h2 class="section-title">Real facilities.<br><em>Already quantified.</em></h2>
-      </div>
-      <p class="cases__lede">Every number below was sitting in a spreadsheet, unread. OneGrid found it in the first audit. These are the ones that got caught — most facilities never do.</p>
-    </div>
-    <div class="cases__grid">
-      <div class="case-card">
-        <div class="case__tag">Pharma · Pune</div>
-        <div class="case__loss">₹2.5Cr</div>
-        <div class="case__loss-label">left before anyone noticed</div>
-        <h3 class="case__hook">The Penalty They <em>Never Caught</em></h3>
-        <p class="case__body">Three years of PF penalties billed as a standard surcharge. No one questioned it. OneGrid's bill audit flagged it in the first month.</p>
-      </div>
-      <div class="case-card">
-        <div class="case__tag">Auto Components · Chennai</div>
-        <div class="case__loss">₹60L</div>
-        <div class="case__loss-label">saved by a competitor in the same zone</div>
-        <h3 class="case__hook">The Exchange Window <em>They Never Acted On</em></h3>
-        <p class="case__body">IEX rates were ₹3.10/unit cheaper for 22 consecutive nights. Competitor shifted load. This factory paid full tariff.</p>
-      </div>
-      <div class="case-card">
-        <div class="case__tag">Textiles · Coimbatore</div>
-        <div class="case__loss">₹8.4L</div>
-        <div class="case__loss-label">left every year on the wrong tariff</div>
-        <h3 class="case__hook">The Tariff Migration <em>Nobody Suggested</em></h3>
-        <p class="case__body">LT-4 to HT would have saved ₹0.80/unit at their consumption level. The DISCOM never proactively migrates customers.</p>
-      </div>
-      <div class="case-card">
-        <div class="case__tag">Export Textiles · Tirupur</div>
-        <div class="case__loss" style="color:#4E8EC9;">10 days</div>
-        <div class="case__loss-label">to a certified Scope 2 report</div>
-        <h3 class="case__hook">The Carbon Audit <em>Nobody Could Produce</em></h3>
-        <p class="case__body">An EU buyer required certified Scope 2 data for vendor compliance. No existing system could generate it. OneGrid ran 14 months of bills through its carbon model and delivered the report in 10 days.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ─── PRICING ─── -->
 <section class="pricing-section" id="pricing">
   <div class="container">
     <div class="pricing__header">
       <span class="pricing__eyebrow">Pricing</span>
-      <h2 class="pricing__headline">The platform pays<br><em>for itself first.</em></h2>
-      <p class="pricing__sub">Tell us your monthly energy spend. We'll show you the payback — before you commit to anything.</p>
+      <h2 class="pricing__headline">Priced against<br><em>what we find.</em></h2>
+      <p class="pricing__sub">Move the slider to your monthly bill to see where plants like yours often find savings. Upload a bill and we'll give you the real number.</p>
     </div>
 
     <!-- PAYBACK CALCULATOR -->
@@ -3149,17 +3296,14 @@ a.footer__contact-val:hover { color: var(--signal); }
           <span class="pricing-calc__output-val" id="pc-annual">₹6Cr / year</span>
         </div>
         <div class="pricing-calc__output-row">
-          <span class="pricing-calc__output-label">Estimated leakage (12% of annual)</span>
-          <span class="pricing-calc__output-val signal" id="pc-leak">₹72L / year</span>
+          <span class="pricing-calc__output-label">Where plants like yours often find savings</span>
+          <span class="pricing-calc__output-val signal" id="pc-range">₹[low] – ₹[high] / year</span>
         </div>
         <div class="pricing-calc__output-row">
-          <span class="pricing-calc__output-label">OneGrid typically recovers</span>
-          <span class="pricing-calc__output-val" id="pc-savings">₹50L / year</span>
+          <span class="pricing-calc__output-label">Base plan (Visibility)</span>
+          <span class="pricing-calc__output-val" id="pc-baseprice">from ₹[X] / facility / month</span>
         </div>
-        <div class="pricing-calc__output-row">
-          <span class="pricing-calc__output-label">Pro plan pays for itself in</span>
-          <span class="pricing-calc__output-val signal" id="pc-payback">13 days</span>
-        </div>
+        <p class="pricing-calc__assume">Range based on [source and year of audits]. It depends on your tariff, power factor and load pattern. <!-- CONFIRM: replace placeholders with real audit-based range and base price --></p>
       </div>
     </div>
 
@@ -3169,7 +3313,7 @@ a.footer__contact-val:hover { color: var(--signal); }
         The base plan gives you <em>visibility</em> — every rupee of leakage made visible, live. Accountability and Predictability are outcome-linked engagements, priced based on what we actually find at your facility.
       </div>
       <div class="pricing__explainer-estimate">
-        At your spend, we'd typically find <strong id="pc-savings-card">₹50L</strong> / year. That's what the custom tiers are priced against.
+        Upload a bill and we'll put a real rupee number on this for your facility. The custom tiers are priced against what we actually find.
       </div>
     </div>
 
@@ -3181,7 +3325,7 @@ a.footer__contact-val:hover { color: var(--signal); }
         <div class="pricing__tier">Visibility</div>
         <div class="pricing__payback-headline">Know exactly<br>what's leaking.</div>
         <div class="pricing__payback-sub">Base plan · Fixed monthly · Per facility</div>
-        <p class="pricing__desc">Connect your facility once. OneGrid reads every bill, flags every anomaly, and shows you the exact rupee value of what you're losing — in real time. No consultant needed to interpret it.</p>
+        <p class="pricing__desc">Connect your facility once. OneGrid reads every bill, flags every anomaly, and shows you the exact rupee value of what you're losing — in real time. Your team and your consultants see the same numbers.</p>
         <ul class="pricing__features">
           <li class="pricing__feature">Live energy dashboard & anomaly feed</li>
           <li class="pricing__feature">Automated bill intelligence (12 months history)</li>
@@ -3191,7 +3335,7 @@ a.footer__contact-val:hover { color: var(--signal); }
           <li class="pricing__feature">Slack / email alert integration</li>
         </ul>
         <a href="#contact" class="pricing__cta">Start free 14-day audit →</a>
-        <div class="pricing__reveal">Pays for itself in <strong id="pc-payback-card">13 days</strong> of savings found</div>
+        <div class="pricing__reveal">From <strong>₹[X]</strong> / facility / month <!-- CONFIRM base price --></div>
       </div>
 
       <!-- ACCOUNTABILITY — featured -->
@@ -3210,7 +3354,7 @@ a.footer__contact-val:hover { color: var(--signal); }
           <li class="pricing__feature">Tariff migration & open-access advisory</li>
         </ul>
         <a href="#contact" class="pricing__cta">Get a custom quote →</a>
-        <div class="pricing__reveal">Priced as a share of <strong id="pc-savings-card2">₹50L</strong> identified</div>
+        <div class="pricing__reveal">Priced as a share of <strong>savings found</strong></div>
       </div>
 
       <!-- PREDICTABILITY -->
@@ -3289,7 +3433,7 @@ a.footer__contact-val:hover { color: var(--signal); }
         <h2 class="about__headline">Built by engineers<br>who got tired of<br><em>unread spreadsheets.</em></h2>
         <p class="about__body">OneGrid started when our founders — ex-grid operators and energy analysts — noticed the same pattern at every industrial facility they visited: the data to save crores was already there. Nobody was reading it.</p>
         <p class="about__body">We built the intelligence layer that should have existed. Today we help C&I facility managers across Tamil Nadu, Maharashtra, Andhra Pradesh, Karnataka, Telangana, and Gujarat stop losing money on energy they've already bought.</p>
-        <p class="about__body">OneGrid is also a licensed Independent Power Producer. When the platform identifies that your facility would benefit from captive solar, we can provide it — directly, without a third party.</p>
+        <p class="about__body">OneGrid is also an Independent Power Producer for renewable generation. We recommend captive solar only when your numbers clearly justify it, and our tariff and penalty advice does not depend on whether you buy power from us. <!-- CONFIRM: add founder names and one line of background above --></p>
       </div>
       <div class="about__right">
         <div class="about__stats">
@@ -3322,8 +3466,8 @@ a.footer__contact-val:hover { color: var(--signal); }
           <div class="about__value">
             <div class="about__value-num">02.</div>
             <div>
-              <div class="about__value-title">No consultants in the loop</div>
-              <div class="about__value-body">Our platform tells your energy manager exactly what to do. You shouldn't need to hire someone to interpret your own data.</div>
+              <div class="about__value-title">One set of numbers for everyone</div>
+              <div class="about__value-body">Our platform tells your energy manager exactly what to do, and gives any consultant you work with the same data to check it.</div>
             </div>
           </div>
           <div class="about__value">
@@ -3345,24 +3489,24 @@ a.footer__contact-val:hover { color: var(--signal); }
     <div class="cta-strip__grid">
       <div class="cta-strip__left">
         <h2 class="cta-strip__headline">
-          Know your number<br><em>before your next bill.</em>
+          Send your bills.<br><em>Get your report.</em>
         </h2>
         <p class="cta-strip__sub">
-          Fill in the form and our team will reach out within one business day to walk you through onboarding — about 20 minutes. First insights in 14 days.
+          Email at least six months of DISCOM bills and we will return an analysis and report on your plant. Prefer to talk first? Use the form for a 20-minute call. We won't push a plan.
         </p>
         <div class="cta-strip__steps">
           <div class="cta-strip__step">
             <span class="cta-strip__step-num">01</span>
             <div>
-              <div class="cta-strip__step-title">We call you within 24h</div>
-              <div class="cta-strip__step-body">A short onboarding call — we connect to your DISCOM data and meter feeds.</div>
+              <div class="cta-strip__step-title">Email at least 6 months of bills</div>
+              <div class="cta-strip__step-body">Click below to open an email to hello@onegrid.in with a template ready. Attach your last 6 to 12 months of bills and send. <a href="mailto:hello@onegrid.in?subject=Bill%20analysis%20request&body=Hello%20OneGrid%20team%2C%0A%0APlease%20analyse%20the%20attached%20electricity%20bills%20and%20send%20me%20a%20written%20report.%0A%0ACompany%3A%0APlant%20location%20%28city%2C%20state%29%3A%0ADISCOM%3A%0AConnection%20%28HT%20/%20LT%29%3A%0AApprox.%20monthly%20bill%3A%0AMy%20name%3A%0AMobile%20/%20WhatsApp%3A%0A%0AI%20have%20attached%20my%20last%206%20to%2012%20months%20of%20DISCOM%20bills%20%28PDF%20or%20clear%20photos%29.%0A%0AI%20agree%20to%20OneGrid%20using%20these%20bills%20only%20to%20prepare%20my%20analysis%2C%20as%20described%20in%20the%20Privacy%20Policy%20%28https%3A//onegrid.in/privacy%29.%0A%0ARegards%2C%0A" class="cta-strip__email-link" data-cta="contact_email_bills">Email my bills →</a></div>
             </div>
           </div>
           <div class="cta-strip__step">
             <span class="cta-strip__step-num">02</span>
             <div>
-              <div class="cta-strip__step-title">First audit in 14 days</div>
-              <div class="cta-strip__step-body">We analyse 12 months of bills, flag every anomaly, and give you the exact savings number.</div>
+              <div class="cta-strip__step-title">We analyse and report</div>
+              <div class="cta-strip__step-body">A written analysis of your bills and what stands out, delivered in [X working days]. <!-- CONFIRM turnaround --></div>
             </div>
           </div>
           <div class="cta-strip__step">
@@ -3400,6 +3544,14 @@ a.footer__contact-val:hover { color: var(--signal); }
             </div>
           </div>
           <div class="contact-form__field">
+            <label class="contact-form__label">How should we follow up?</label>
+            <select class="contact-form__input contact-form__select" name="Preferred Follow-up">
+              <option>By email</option>
+              <option>On WhatsApp</option>
+              <option>Call me for 20 minutes</option>
+            </select>
+          </div>
+          <div class="contact-form__field">
             <label class="contact-form__label">Monthly energy bill (approx)</label>
             <select class="contact-form__input contact-form__select" name="Monthly Bill">
               <option value="">Select a range</option>
@@ -3432,13 +3584,13 @@ a.footer__contact-val:hover { color: var(--signal); }
             <span>I agree to be contacted by OneGrid by phone, email or WhatsApp about this enquiry, and I have read the <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</span>
           </label>
           <div class="contact-form__error" id="form-error" role="alert" style="display:none;"></div>
-          <button type="submit" class="contact-form__submit">Request my free audit →</button>
-          <div class="contact-form__note">We call within 24h · First audit in 14 days · No commitment</div>
+          <button type="submit" class="contact-form__submit">Send my enquiry →</button>
+          <div class="contact-form__note">Read-only access · DPDP-compliant · No commitment</div>
         </form>
         <div class="contact-form__success" id="form-success" style="display:none;">
           <div class="contact-form__success-ico">✓</div>
           <div class="contact-form__success-title">We've got it.</div>
-          <div class="contact-form__success-body">Expect a call within 24 hours. We'll walk you through a 20-minute onboarding, connect to your DISCOM data, and deliver your first audit in 14 days. Or reach us directly at <a href="mailto:hello@onegrid.in" style="color:var(--signal);text-decoration:none;">hello@onegrid.in</a></div>
+          <div class="contact-form__success-body">We'll reply within one business day. To get an analysis and report, email at least 6 months of your DISCOM bills to hello@onegrid.in. Or reach us directly at <a href="mailto:hello@onegrid.in" style="color:var(--signal);text-decoration:none;">hello@onegrid.in</a></div>
         </div>
       </div>
     </div>
@@ -3463,7 +3615,7 @@ a.footer__contact-val:hover { color: var(--signal); }
         <p class="footer__tagline">Energy intelligence for C&I India. Know what your electricity actually costs — and stop paying what you shouldn't.</p>
         <div class="footer__ipp-badge">
           <span class="footer__ipp-dot"></span>
-          <span class="footer__ipp-text">Licensed Independent Power Producer · CERC Registered</span>
+          <span class="footer__ipp-text">Independent Power Producer (Renewables) · CE-certified IoT data loggers · DPDP-compliant</span>
         </div>
         <div style="margin-top:24px;">
           <div class="footer__contact-item">
@@ -3576,11 +3728,8 @@ buildTicker();
 
 /* ─── HERO HEADLINE ROTATION ─── */
 const HEADLINES = [
-  `See what your<br>energy <em>actually</em><br><span class="signal">costs.</span>`,
-  `Your Energy Bill<br>Has a <em>Hidden</em><br><span class="signal">Tax.</span>`,
-  `Your Competitor<br>Just Cut Their<br><span class="signal">Energy Cost.</span>`,
-  `You Don't Know<br>What Energy<br><span class="signal">Actually Costs.</span>`,
-];
+  `Can your<br>electricity cost<br>be <span class="signal">reduced?</span>`,
+];  // add variants here to A/B test; keep them on the question
 const heroEl = document.getElementById('hero-headline');
 if (heroEl) {
   const idx = Math.floor(Math.random() * HEADLINES.length);
@@ -3696,20 +3845,17 @@ buildBigChart();
     });
 })();
 
-/* ─── PRICING PAYBACK CALCULATOR ─── */
+/* ─── PRICING CALCULATOR ─── */
 (function() {
-  const slider    = document.getElementById('pc-spend');
-  const spendVal  = document.getElementById('pc-spend-val');
-  const annualEl  = document.getElementById('pc-annual');
-  const leakEl    = document.getElementById('pc-leak');
-  const savingsEl = document.getElementById('pc-savings');
-  const paybackEl = document.getElementById('pc-payback');
-  const paybackCard  = document.getElementById('pc-payback-card');
-  const proSub       = document.getElementById('pc-pro-sub');
-  const savingsCard  = document.getElementById('pc-savings-card');
-  const savingsCard2 = document.getElementById('pc-savings-card2');
+  const slider   = document.getElementById('pc-spend');
+  const spendVal = document.getElementById('pc-spend-val');
+  const annualEl = document.getElementById('pc-annual');
+  const rangeEl  = document.getElementById('pc-range');
 
-  const PRO_ANNUAL_COST_L = 1.8; // ₹1.8L/year (₹15K/month × 12)
+  // CONFIRM: set from real audit data, as fractions of annual spend (e.g. 0.04 and 0.09).
+  // While null, the placeholder text in the HTML is shown instead of a computed range.
+  const RANGE_LOW_PCT  = null;
+  const RANGE_HIGH_PCT = null;
 
   function fmtL(lakhs) {
     if (lakhs >= 100) return '₹' + (lakhs / 100).toFixed(1) + 'Cr';
@@ -3718,29 +3864,56 @@ buildBigChart();
   }
 
   function update() {
-    const monthly     = parseFloat(slider.value); // Lakhs/month
-    const annual      = monthly * 12;             // Lakhs/year
-    const leakage     = annual * 0.12;            // 12% of annual spend
-    const recoverable = leakage * 0.70;           // 70% of leakage is actionable
-    const paybackDays = Math.round((PRO_ANNUAL_COST_L / recoverable) * 365);
-    const capped      = Math.min(paybackDays, 90);
-
-    spendVal.textContent  = fmtL(monthly) + '/mo';
-    annualEl.textContent  = fmtL(annual) + ' / year';
-    leakEl.textContent    = fmtL(leakage) + ' / year';
-    savingsEl.textContent = fmtL(recoverable) + ' / year';
-    paybackEl.textContent = capped + ' days';
-
-    if (paybackCard)  paybackCard.textContent  = capped + ' days';
-    if (proSub)       proSub.textContent       = 'Custom · Priced on savings volume';
-    if (savingsCard)  savingsCard.textContent  = fmtL(recoverable);
-    if (savingsCard2) savingsCard2.textContent = fmtL(recoverable);
+    const monthly = parseFloat(slider.value); // Lakhs/month
+    const annual  = monthly * 12;             // Lakhs/year
+    spendVal.textContent = fmtL(monthly) + '/mo';
+    annualEl.textContent = fmtL(annual) + ' / year';
+    if (rangeEl && RANGE_LOW_PCT !== null && RANGE_HIGH_PCT !== null) {
+      rangeEl.textContent = fmtL(annual * RANGE_LOW_PCT) + ' – ' + fmtL(annual * RANGE_HIGH_PCT) + ' / year';
+    }
   }
 
   if (slider) {
     slider.addEventListener('input', update);
     update();
   }
+})();
+
+/* ─── HERO 60-SECOND CHECK ─── */
+(function() {
+  const res = document.getElementById('hc-result');
+  if (!res) return;
+  const state = document.getElementById('hc-state');
+  const cat   = document.getElementById('hc-cat');
+  const bill  = document.getElementById('hc-bill');
+  let touched = false;
+
+  function levers() {
+    const out = ['Power factor penalties', 'Billing errors'];
+    if (cat.value === 'ht')  out.push('Contract demand', 'Time-of-day windows');
+    if (cat.value === 'lt')  out.push('Tariff category (LT to HT)');
+    if (cat.value === 'unsure') out.push('Tariff category', 'Contract demand');
+    if (bill.value === 'l' || bill.value === 'xl') out.push('Open access & exchange');
+    if (bill.value !== 's') out.push('Captive solar (if it pays)');
+    return out;
+  }
+
+  function render() {
+    res.innerHTML = '<span class="hero-check__lead">Worth checking for a plant like yours in ' + state.value + ':</span>' +
+      '<ul>' + levers().map(function(l){ return '<li>' + l + '</li>'; }).join('') + '</ul>' +
+      '<span class="hero-check__fine">Places to look, not a savings figure. Six months of bills gives the real picture.</span>';
+  }
+
+  [state, cat, bill].forEach(function(el) {
+    el.addEventListener('change', function() {
+      render();
+      if (!touched) {
+        touched = true;
+        if (typeof gtag === 'function') gtag('event', 'hero_check_used', { event_category: 'engagement', event_label: 'hero_check' });
+      }
+    });
+  });
+  render();
 })();
 
 /* ─── FORM SUBMIT ─── */
@@ -4012,8 +4185,8 @@ setInterval(tickKPIs, 3200);
 
 <!-- ─── STICKY CTA ─── -->
 <div id="sticky-cta" class="sticky-cta" aria-hidden="true" aria-live="polite">
-  <span class="sticky-cta__text">Know your energy leak number</span>
-  <a href="#contact" class="sticky-cta__btn">Start free audit →</a>
+  <span class="sticky-cta__text">Email 6 months of bills, get a report</span>
+  <a href="mailto:hello@onegrid.in?subject=Bill%20analysis%20request&body=Hello%20OneGrid%20team%2C%0A%0APlease%20analyse%20the%20attached%20electricity%20bills%20and%20send%20me%20a%20written%20report.%0A%0ACompany%3A%0APlant%20location%20%28city%2C%20state%29%3A%0ADISCOM%3A%0AConnection%20%28HT%20/%20LT%29%3A%0AApprox.%20monthly%20bill%3A%0AMy%20name%3A%0AMobile%20/%20WhatsApp%3A%0A%0AI%20have%20attached%20my%20last%206%20to%2012%20months%20of%20DISCOM%20bills%20%28PDF%20or%20clear%20photos%29.%0A%0AI%20agree%20to%20OneGrid%20using%20these%20bills%20only%20to%20prepare%20my%20analysis%2C%20as%20described%20in%20the%20Privacy%20Policy%20%28https%3A//onegrid.in/privacy%29.%0A%0ARegards%2C%0A" class="sticky-cta__btn">Email your bills →</a>
   <button class="sticky-cta__close" aria-label="Dismiss sticky banner">×</button>
 </div>
 
