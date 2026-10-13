@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.onegrid.in" }], "destination": "https://onegrid.in/:path*", "permanent": true }
+  ]
+}

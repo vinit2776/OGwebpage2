@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://onegrid.in/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- TODO: add /privacy, /terms, /dpa here once finalised and the noindex tag is removed.
+       Add new pages (platform, industries, states, insights) as they are published. -->
+</urlset>

@@ -3,7 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OneGrid — Energy Intelligence Platform for C&I India</title>
+<title>OneGrid — Energy Intelligence for Factories & C&I in India</title>
+<meta name="description" content="Find hidden power factor penalties, tariff mismatches and exchange savings in your factory's electricity bills. OneGrid shows the rupee value in real time. Start a free 14-day audit.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#09100A">
+<link rel="canonical" href="https://onegrid.in/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OneGrid">
+<meta property="og:locale" content="en_IN">
+<meta property="og:url" content="https://onegrid.in/">
+<meta property="og:title" content="See what your energy actually costs | OneGrid">
+<meta property="og:description" content="Energy intelligence for C&I India: penalties, tariffs, exchange windows and carbon, shown in rupees. Free 14-day audit.">
+<meta property="og:image" content="https://onegrid.in/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OneGrid: see what your energy actually costs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="See what your energy actually costs | OneGrid">
+<meta name="twitter:description" content="Energy intelligence for C&I India. Free 14-day audit.">
+<meta name="twitter:image" content="https://onegrid.in/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://onegrid.in/#org",
+      "name": "OneGrid",
+      "legalName": "OneGrid Energy Technology Pvt Ltd",
+      "url": "https://onegrid.in/",
+      "logo": "https://onegrid.in/icon-512.png",
+      "email": "hello@onegrid.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Chennai", "addressRegion": "Tamil Nadu", "addressCountry": "IN" },
+      "areaServed": ["Tamil Nadu", "Maharashtra", "Andhra Pradesh", "Karnataka", "Telangana", "Gujarat"],
+      "sameAs": ["https://linkedin.com/company/onegrid", "https://medium.com/@onegrid"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://onegrid.in/#website",
+      "url": "https://onegrid.in/",
+      "name": "OneGrid",
+      "publisher": { "@id": "https://onegrid.in/#org" },
+      "inLanguage": "en-IN"
+    },
+    {
+      "@type": "Service",
+      "name": "Industrial energy bill intelligence and tariff optimisation",
+      "provider": { "@id": "https://onegrid.in/#org" },
+      "areaServed": { "@type": "Country", "name": "India" },
+      "audience": { "@type": "BusinessAudience", "name": "Commercial and industrial electricity consumers" },
+      "description": "Automated DISCOM bill analysis, power factor and demand penalty detection, ToD and tariff optimisation, IEX exchange window tracking and Scope 2 carbon reporting."
+    }
+  ]
+}
+</script>
 <!-- Google Analytics GA4 — G-32NS9EMXF7 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-32NS9EMXF7"></script>
 <script>
@@ -2629,6 +2685,32 @@ a.footer__contact-val:hover { color: var(--signal); }
   .arch__card { border-right: none; border-bottom: 1px solid rgba(245,240,232,0.1); }
   .arch__card:last-child { border-bottom: none; }
 }
+
+/* ─── WEEK-1 ADDITIONS ─── */
+.og-contact-hidden { display: none !important; }
+.og-sample-note {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--slate); text-align: right; margin: 0 0 8px;
+}
+.contact-form__consent {
+  display: flex; gap: 10px; align-items: flex-start; cursor: pointer;
+  font-family: var(--sans); font-size: 12px; line-height: 1.5; color: rgba(245,240,232,0.55);
+}
+.contact-form__consent input { margin-top: 3px; accent-color: var(--signal); flex-shrink: 0; }
+.contact-form__consent a { color: var(--signal); }
+.contact-form__error {
+  font-family: var(--sans); font-size: 13px; color: #ff9b86; background: rgba(200,70,46,0.12);
+  border: 1px solid rgba(200,70,46,0.4); border-radius: 4px; padding: 10px 12px;
+}
+.og-wa-fab {
+  position: fixed; right: 16px; bottom: 20px; z-index: 950;
+  display: none; align-items: center; gap: 8px; padding: 12px 16px;
+  background: #25D366; color: #06210f; font: 600 14px var(--sans);
+  border-radius: 999px; text-decoration: none; box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+}
+.og-wa-fab.og-on { display: inline-flex; }
+.og-wa-fab svg { width: 20px; height: 20px; fill: currentColor; }
+@media (max-width: 768px) { .og-wa-fab { bottom: 84px; padding: 12px; } .og-wa-fab span { display: none; } }
 </style>
 </head>
 <body>
@@ -2638,7 +2720,7 @@ a.footer__contact-val:hover { color: var(--signal); }
 <div class="ticker">
   <div class="ticker__live">
     <span class="ticker__live-dot"></span>
-    <span class="ticker__live-label">Live</span>
+    <span class="ticker__live-label">Indicative</span>
   </div>
   <div class="ticker__track" id="ticker-track">
     <!-- Filled by JS twice for infinite loop -->
@@ -2664,7 +2746,8 @@ a.footer__contact-val:hover { color: var(--signal); }
       <li><a href="#about">About</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="#" class="btn-ghost">Sign in</a>
+      <!-- TODO: restore once the customer portal URL exists: <a href="https://app.onegrid.in" class="btn-ghost">Sign in</a> -->
+      <a href="tel:" id="og-nav-phone" class="btn-ghost og-contact-hidden" data-og="phone"></a>
       <a href="#contact" class="btn-primary">Get started →</a>
     </div>
     <!-- Hamburger for mobile -->
@@ -2734,7 +2817,7 @@ a.footer__contact-val:hover { color: var(--signal); }
               <div class="widget__dot"></div>
             </div>
             <div class="widget__title">ONEGRID · FACILITY OVERVIEW</div>
-            <div class="widget__status">LIVE</div>
+            <div class="widget__status">SAMPLE DATA</div>
           </div>
           <div class="widget__body">
             <!-- Facility tabs -->
@@ -2819,6 +2902,7 @@ a.footer__contact-val:hover { color: var(--signal); }
 
     <!-- Full-width dashboard mockup -->
     <div class="platform__dash">
+      <div class="og-sample-note">Illustrative sample dashboard. Names and figures are examples.</div>
       <div class="dash__topbar">
         <div class="dash__topbar-left">
           <div class="dash__wordmark">OneGrid</div>
@@ -3298,7 +3382,7 @@ a.footer__contact-val:hover { color: var(--signal); }
           <div class="contact-form__row">
             <div class="contact-form__field">
               <label class="contact-form__label">Your name</label>
-              <input class="contact-form__input" type="text" name="Name" placeholder="Arun Kumar" required>
+              <input class="contact-form__input" type="text" name="Name" placeholder="Arun Kumar" autocomplete="name" required>
             </div>
             <div class="contact-form__field">
               <label class="contact-form__label">Company</label>
@@ -3308,11 +3392,11 @@ a.footer__contact-val:hover { color: var(--signal); }
           <div class="contact-form__row">
             <div class="contact-form__field">
               <label class="contact-form__label">Work email</label>
-              <input class="contact-form__input" type="email" name="Email" placeholder="arun@apexindustries.com" required>
+              <input class="contact-form__input" type="email" name="Email" placeholder="arun@apexindustries.com" autocomplete="email" required>
             </div>
             <div class="contact-form__field">
-              <label class="contact-form__label">Mobile number</label>
-              <input class="contact-form__input" type="tel" name="Mobile" placeholder="+91 98XXX XXXXX">
+              <label class="contact-form__label">Mobile / WhatsApp number</label>
+              <input class="contact-form__input" type="tel" name="Mobile" placeholder="+91 98XXX XXXXX" inputmode="tel" autocomplete="tel" required>
             </div>
           </div>
           <div class="contact-form__field">
@@ -3325,6 +3409,10 @@ a.footer__contact-val:hover { color: var(--signal); }
               <option>Above ₹2Cr / month</option>
             </select>
           </div>
+          <!-- Campaign attribution — filled by script from the URL (first touch) -->
+          <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign">
+          <input type="hidden" name="utm_term"><input type="hidden" name="utm_content"><input type="hidden" name="gclid">
+          <input type="hidden" name="fbclid"><input type="hidden" name="landing_page">
           <!-- Honeypot — bots fill this, humans never see it -->
           <div class="contact-form__honeypot" aria-hidden="true">
             <label>Leave this empty</label>
@@ -3339,6 +3427,11 @@ a.footer__contact-val:hover { color: var(--signal); }
               <span class="contact-form__captcha-hint" id="captcha-hint">Try again</span>
             </div>
           </div>
+          <label class="contact-form__consent">
+            <input type="checkbox" name="Consent" value="Agreed to be contacted and to the Privacy Policy" required>
+            <span>I agree to be contacted by OneGrid by phone, email or WhatsApp about this enquiry, and I have read the <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+          </label>
+          <div class="contact-form__error" id="form-error" role="alert" style="display:none;"></div>
           <button type="submit" class="contact-form__submit">Request my free audit →</button>
           <div class="contact-form__note">We call within 24h · First audit in 14 days · No commitment</div>
         </form>
@@ -3376,6 +3469,10 @@ a.footer__contact-val:hover { color: var(--signal); }
           <div class="footer__contact-item">
             <span class="footer__contact-label">Email</span>
             <a href="mailto:hello@onegrid.in" class="footer__contact-val">hello@onegrid.in</a>
+          </div>
+          <div class="footer__contact-item og-contact-hidden" data-og="phone-block">
+            <span class="footer__contact-label">Phone / WhatsApp</span>
+            <a href="tel:" class="footer__contact-val" data-og="phone-text"></a>
           </div>
           <div class="footer__contact-item">
             <span class="footer__contact-label">Headquarters</span>
@@ -3421,13 +3518,14 @@ a.footer__contact-val:hover { color: var(--signal); }
 
     <div class="footer__bottom">
       <div class="footer__legal">
-        <span class="footer__copyright">© 2025 OneGrid Energy Technology Pvt Ltd. All rights reserved.</span>
-        <span class="footer__cin">CIN: U40100TN2022PTC152XXX · GSTIN: 33AADCO1234A1ZX</span>
+        <span class="footer__copyright">© <span id="og-year">2026</span> OneGrid Energy Technology Pvt Ltd. All rights reserved.</span>
+        <!-- TODO: add real registration details, then uncomment:
+        <span class="footer__cin">CIN: [your CIN] · GSTIN: [your GSTIN]</span> -->
       </div>
       <div class="footer__legal-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-        <a href="#">Data Processing Agreement</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+        <a href="/dpa">Data Processing Agreement</a>
       </div>
       <div class="footer__social">
         <!-- LinkedIn -->
@@ -3694,38 +3792,14 @@ async function handleFormSubmit(e) {
     if (el.name && el.value) fields[el.name] = el.value;
   });
 
-  // ── Collect browser / device metadata ──
-  const tz      = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const locale  = navigator.language || 'unknown';
-  const ua      = navigator.userAgent;
-  const scr     = window.screen.width + 'x' + window.screen.height + ' @' + window.devicePixelRatio + 'x';
-  const vp      = window.innerWidth + 'x' + window.innerHeight;
-  const touch   = navigator.maxTouchPoints > 0 ? 'Yes' : 'No';
-  const conn    = (navigator.connection || {}).effectiveType || 'unknown';
-  const referrer= document.referrer || 'Direct';
-  const pageUrl = window.location.href;
-  const ts      = new Date().toLocaleString('en-IN', { timeZone: tz, hour12: false });
-
-  // ── Get public IP ──
-  let ip = 'unavailable';
-  try {
-    const r = await fetch('https://api.ipify.org?format=json', { signal: AbortSignal.timeout(4000) });
-    ip = (await r.json()).ip;
-  } catch(_) {}
-
-  // ── Build Formspree payload ──
-  // Named form fields go top-level; all metadata in a single _metadata field
+  // ── Minimal context sent with the enquiry (disclosed in the Privacy Policy) ──
+  const tz       = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const ts       = new Date().toLocaleString('en-IN', { timeZone: tz, hour12: false });
   const metadata = [
     'Submitted at : ' + ts + ' (' + tz + ')',
-    'Public IP    : ' + ip,
-    'Referrer     : ' + referrer,
-    'Page URL     : ' + pageUrl,
-    'Screen       : ' + scr,
-    'Viewport     : ' + vp,
-    'Touch device : ' + touch,
-    'Connection   : ' + conn,
-    'Locale       : ' + locale,
-    'User Agent   : ' + ua,
+    'Referrer     : ' + (document.referrer || 'Direct'),
+    'Page URL     : ' + window.location.href,
+    'User Agent   : ' + navigator.userAgent,
   ].join('\n');
 
   const payload = Object.assign({}, fields, {
@@ -3741,6 +3815,10 @@ async function handleFormSubmit(e) {
     });
 
     if (res.ok) {
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', { event_category: 'lead', event_label: 'audit_request', monthly_bill_range: fields['Monthly Bill'] || 'unknown', utm_source: fields['utm_source'] || '', utm_campaign: fields['utm_campaign'] || '' });
+        gtag('event', 'form_submit', { event_category: 'lead', event_label: 'audit_request', monthly_bill_range: fields['Monthly Bill'] || 'unknown' });
+      }
       form.style.display = 'none';
       const suc = document.getElementById('form-success');
       if (suc) suc.style.display = 'flex';
@@ -3748,7 +3826,12 @@ async function handleFormSubmit(e) {
       throw new Error('Formspree returned ' + res.status);
     }
   } catch(err) {
-    // Fallback: open mail client with all data pre-filled
+    // Show an inline message, then fall back to email with the data pre-filled
+    const errEl = document.getElementById('form-error');
+    if (errEl) {
+      errEl.innerHTML = 'We could not send this just now. Your email app will open so you can send it directly' + (window.OG_CONFIG && OG_CONFIG.whatsapp ? ', or message us on WhatsApp.' : '.');
+      errEl.style.display = 'block';
+    }
     const bodyText = 'Name: ' + (fields['Name'] || '') + '\nCompany: ' + (fields['Company'] || '') +
       '\nEmail: ' + (fields['Email'] || '') + '\nMonthly Bill: ' + (fields['Monthly Bill'] || '') +
       '\n\n--- METADATA ---\n' + metadata;
@@ -3842,18 +3925,7 @@ setInterval(tickKPIs, 3200);
     });
   }
 
-  // ── 4. Contact form submission ────────────────────────────────
-  var contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function() {
-      var bill = (contactForm.querySelector('[name="Monthly Bill"]') || {}).value || 'unknown';
-      track('form_submit', {
-        event_category: 'lead',
-        event_label: 'audit_request',
-        monthly_bill_range: bill
-      });
-    });
-  }
+  // ── 4. Contact form submission: tracked on success inside handleFormSubmit (generate_lead, form_submit) ──
 
   // ── 5. Pricing slider interaction ────────────────────────────
   var pricingSlider = document.getElementById('pc-spend');
@@ -4125,6 +4197,57 @@ setInterval(tickKPIs, 3200);
     window.addEventListener('scroll', updateStickyCta, { passive: true });
     updateStickyCta();
   }
+})();
+</script>
+
+<!-- WhatsApp quick-contact (stays hidden until OG_CONFIG.whatsapp is set below) -->
+<a href="#" id="og-wa-fab" class="og-wa-fab" target="_blank" rel="noopener" aria-label="Chat with OneGrid on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.5A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.08.9.92-3-.2-.31a8.2 8.2 0 1 1 6.86 3.74Zm4.5-6.14c-.25-.12-1.46-.72-1.69-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.96-.14.16-.28.18-.53.06a6.7 6.7 0 0 1-3.3-2.9c-.25-.43.25-.4.72-1.33.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.3-.22.25-.86.84-.86 2.05s.88 2.38 1 2.55c.12.16 1.73 2.64 4.2 3.7 1.55.67 2.15.72 2.92.6.47-.07 1.46-.6 1.66-1.17.2-.57.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg>
+  <span>Chat on WhatsApp</span>
+</a>
+
+<script>
+/* ─── CONTACT CONFIG — fill these in to switch on phone / WhatsApp everywhere ───
+   whatsapp: digits only with country code, e.g. '919876543210'
+   phone:    digits only with country code, e.g. '919876543210'
+   phoneDisplay: how the number should read, e.g. '+91 98765 43210'
+   Leave empty and the phone/WhatsApp buttons stay hidden. */
+window.OG_CONFIG = { whatsapp: '', phone: '', phoneDisplay: '' };
+
+(function () {
+  function track(n, p) { try { if (typeof gtag === 'function') gtag('event', n, p || {}); } catch (_) {} }
+
+  /* Footer year */
+  var y = document.getElementById('og-year'); if (y) y.textContent = new Date().getFullYear();
+
+  /* Phone + WhatsApp */
+  var c = window.OG_CONFIG || {};
+  if (c.phone) {
+    document.querySelectorAll('[data-og="phone"], [data-og="phone-text"]').forEach(function (el) {
+      el.href = 'tel:+' + c.phone; el.textContent = c.phoneDisplay || ('+' + c.phone);
+      el.addEventListener('click', function () { track('phone_click', { event_category: 'contact' }); });
+    });
+    document.querySelectorAll('.og-contact-hidden[data-og]').forEach(function (el) { el.classList.remove('og-contact-hidden'); });
+  }
+  if (c.whatsapp) {
+    var fab = document.getElementById('og-wa-fab');
+    fab.href = 'https://wa.me/' + c.whatsapp + '?text=' + encodeURIComponent('Hi OneGrid, I would like to know more about the free energy audit.');
+    fab.classList.add('og-on');
+    fab.addEventListener('click', function () { track('whatsapp_click', { event_category: 'contact' }); });
+  }
+
+  /* Campaign attribution: capture UTM / click ids on first visit, keep for the session */
+  var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
+  var store = {};
+  try { store = JSON.parse(sessionStorage.getItem('og_attr') || '{}'); } catch (_) {}
+  var q = new URLSearchParams(location.search), found = false;
+  keys.forEach(function (k) { if (q.get(k)) { store[k] = q.get(k); found = true; } });
+  if (!store.landing_page) { store.landing_page = location.pathname + location.search; found = true; }
+  if (found) { try { sessionStorage.setItem('og_attr', JSON.stringify(store)); } catch (_) {} }
+  var form = document.getElementById('contact-form');
+  if (form) Object.keys(store).forEach(function (k) {
+    var el = form.querySelector('[name="' + k + '"]'); if (el) el.value = store[k];
+  });
 })();
 </script>
 </body>
