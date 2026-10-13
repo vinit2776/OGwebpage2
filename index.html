@@ -3025,7 +3025,7 @@ a.footer__contact-val:hover { color: var(--signal); }
 </section>
 
 <!-- ─── CASES ─── -->
-<section class="cases-section">
+<section class="cases-section" id="field-evidence">
   <div class="container">
     <div class="cases__header">
       <div>
@@ -3938,7 +3938,7 @@ buildBigChart();
       render();
       if (!touched) {
         touched = true;
-        if (typeof gtag === 'function') gtag('event', 'hero_check_used', { event_category: 'engagement', event_label: 'hero_check' });
+        if (typeof gtag === 'function') gtag('event', 'hero_check_used', { event_category: 'engagement', event_label: 'hero_check', hero_state: state.value, hero_connection: cat.value, annual_bill_range: bill.options[bill.selectedIndex].text });
       }
     });
   });
@@ -4119,13 +4119,16 @@ setInterval(tickKPIs, 3200);
     });
   }
 
-  // ── 3. "See the platform" hero secondary CTA ─────────────────
-  var seePlatform = document.querySelector('.hero__actions .btn-outline-dark');
-  if (seePlatform) {
-    seePlatform.addEventListener('click', function() {
-      track('hero_see_platform', { event_category: 'engagement' });
-    });
-  }
+  // ── 3. Bill-by-email CTAs: the main conversion action besides the form ──
+  // Delegated so it also catches the sticky bar, which is added to the page after this script runs
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest ? e.target.closest('a[href^="mailto:hello@onegrid.in?subject=Bill"]') : null;
+    if (!el) return;
+    var where = el.closest('.hero') ? 'hero'
+              : el.closest('#sticky-cta') ? 'sticky_bar'
+              : el.closest('#contact') ? 'contact_section' : 'other';
+    track('bill_email_click', { event_category: 'conversion', cta_location: where });
+  });
 
   // ── 4. Contact form submission: tracked on success inside handleFormSubmit (generate_lead, form_submit) ──
 
@@ -4160,6 +4163,8 @@ setInterval(tickKPIs, 3200);
 
   // ── 7. Section visibility — scroll depth ──────────────────────
   var sections = [
+    { id: 'what-we-check',   name: 'what_we_check_section'   },
+    { id: 'field-evidence',  name: 'field_evidence_section'  },
     { id: 'platform',  name: 'platform_section' },
     { id: 'pricing',   name: 'pricing_section'   },
     { id: 'insights',  name: 'insights_section'  },
@@ -4202,8 +4207,15 @@ setInterval(tickKPIs, 3200);
     });
   });
 
+  document.querySelectorAll('a[href*="linkedin.com"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      track('outbound_click', { event_category: 'outbound', destination: 'linkedin' });
+    });
+  });
+
   // ── 10. Email link clicks ─────────────────────────────────────
   document.querySelectorAll('a[href^="mailto:"]').forEach(function(el) {
+    if (/subject=Bill/.test(el.getAttribute('href'))) return;
     el.addEventListener('click', function() {
       track('email_click', { event_category: 'engagement', event_label: 'hello@onegrid.in' });
     });
