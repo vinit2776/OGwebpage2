@@ -3306,8 +3306,8 @@ a.footer__contact-val:hover { color: var(--signal); }
           <span class="pricing-calc__output-val signal" id="pc-range">₹15L – ₹60L / year</span>
         </div>
         <div class="pricing-calc__output-row">
-          <span class="pricing-calc__output-label">Base plan (Visibility)</span>
-          <span class="pricing-calc__output-val" id="pc-baseprice">from ₹[X] / facility / month</span>
+          <span class="pricing-calc__output-label">Base plan (Visibility), per facility</span>
+          <span class="pricing-calc__output-val" id="pc-baseprice">from ₹24,000 / year</span>
         </div>
         <p class="pricing-calc__assume">Indicative range of 5% to 20% of your annual electricity bill. Your actual figure depends on your tariff, power factor and load pattern. Send us your bills for a real number.</p>
       </div>
@@ -3330,7 +3330,7 @@ a.footer__contact-val:hover { color: var(--signal); }
         <div class="pricing__tier-badge">01</div>
         <div class="pricing__tier">Visibility</div>
         <div class="pricing__payback-headline">Know exactly<br>what's leaking.</div>
-        <div class="pricing__payback-sub">Base plan · Fixed monthly · Per facility</div>
+        <div class="pricing__payback-sub">Base plan · Fixed annual fee · Per facility</div>
         <p class="pricing__desc">Connect your facility once. OneGrid reads every bill, flags every anomaly, and shows you the exact rupee value of what you're losing — in real time. Your team and your consultants see the same numbers.</p>
         <ul class="pricing__features">
           <li class="pricing__feature">Live energy dashboard & anomaly feed</li>
@@ -3341,7 +3341,7 @@ a.footer__contact-val:hover { color: var(--signal); }
           <li class="pricing__feature">Slack / email alert integration</li>
         </ul>
         <a href="#contact" class="pricing__cta">Start free 14-day audit →</a>
-        <div class="pricing__reveal">From <strong>₹[X]</strong> / facility / month <!-- CONFIRM base price --></div>
+        <div class="pricing__reveal">From <strong>₹24,000</strong> / facility / year</div>
       </div>
 
       <!-- ACCOUNTABILITY — featured -->
@@ -3880,7 +3880,7 @@ buildBigChart();
   function update() {
     const annual  = parseFloat(slider.value); // Lakhs/year (₹50L to ₹10Cr)
     const monthly = annual / 12;              // Lakhs/month
-    spendVal.textContent = fmtL(annual) + ' / year';
+    spendVal.textContent = fmtL(annual);
     annualEl.textContent = fmtL(monthly) + ' / month';
     if (rangeEl && RANGE_LOW_PCT !== null && RANGE_HIGH_PCT !== null) {
       rangeEl.textContent = fmtL(annual * RANGE_LOW_PCT) + ' – ' + fmtL(annual * RANGE_HIGH_PCT) + ' / year';
