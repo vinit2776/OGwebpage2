@@ -3303,13 +3303,13 @@ a.footer__contact-val:hover { color: var(--signal); }
         </div>
         <div class="pricing-calc__output-row">
           <span class="pricing-calc__output-label">Where plants like yours often find savings</span>
-          <span class="pricing-calc__output-val signal" id="pc-range">₹[low] – ₹[high] / year</span>
+          <span class="pricing-calc__output-val signal" id="pc-range">₹15L – ₹60L / year</span>
         </div>
         <div class="pricing-calc__output-row">
           <span class="pricing-calc__output-label">Base plan (Visibility)</span>
           <span class="pricing-calc__output-val" id="pc-baseprice">from ₹[X] / facility / month</span>
         </div>
-        <p class="pricing-calc__assume">Range based on [source and year of audits]. It depends on your tariff, power factor and load pattern. <!-- CONFIRM: replace placeholders with real audit-based range and base price --></p>
+        <p class="pricing-calc__assume">Indicative range of 5% to 20% of your annual electricity bill. Your actual figure depends on your tariff, power factor and load pattern. Send us your bills for a real number.</p>
       </div>
     </div>
 
@@ -3867,10 +3867,9 @@ buildBigChart();
   const annualEl = document.getElementById('pc-annual');
   const rangeEl  = document.getElementById('pc-range');
 
-  // CONFIRM: set from real audit data, as fractions of annual spend (e.g. 0.04 and 0.09).
-  // While null, the placeholder text in the HTML is shown instead of a computed range.
-  const RANGE_LOW_PCT  = null;
-  const RANGE_HIGH_PCT = null;
+  // Indicative savings range as a fraction of annual spend (5% to 20%), per the founders.
+  const RANGE_LOW_PCT  = 0.05;
+  const RANGE_HIGH_PCT = 0.20;
 
   function fmtL(lakhs) {
     if (lakhs >= 100) return '₹' + (lakhs / 100).toFixed(1).replace(/\.0$/, '') + 'Cr';
