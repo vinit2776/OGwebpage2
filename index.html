@@ -2847,7 +2847,7 @@ a.footer__contact-val:hover { color: var(--signal); }
           Can your<br>electricity cost<br>be <span class="signal">reduced?</span>
         </h1>
         <p class="hero__sub">
-          Email us at least six months of your DISCOM bills. We analyse them and return a written report on your plant. If there is nothing worth chasing, we will say so. <!-- CONFIRM: 'we will say so' must be true in practice -->
+          Email us at least six months of your DISCOM bills. We analyse them and return a written report on your plant within 2 working days. If there is nothing worth chasing, we will say so. <!-- CONFIRM: 'we will say so' must be true in practice -->
         </p>
         <div class="hero-check" id="hero-check">
           <div class="hero-check__title">60-second check</div>
@@ -3289,17 +3289,17 @@ a.footer__contact-val:hover { color: var(--signal); }
     <!-- PAYBACK CALCULATOR -->
     <div class="pricing-calc">
       <div>
-        <div class="pricing-calc__label">Your monthly energy bill</div>
+        <div class="pricing-calc__label">Your annual electricity bill</div>
         <div class="pricing-calc__slider-row">
-          <div class="pricing-calc__val" id="pc-spend-val">₹50L</div>
-          <input class="pricing-calc__slider" type="range" id="pc-spend" min="5" max="500" step="5" value="50">
+          <div class="pricing-calc__val" id="pc-spend-val">₹3Cr</div>
+          <input class="pricing-calc__slider" type="range" id="pc-spend" min="50" max="1000" step="10" value="300">
         </div>
-        <div class="pricing-calc__hint">Drag to match your facility's monthly bill</div>
+        <div class="pricing-calc__hint">Drag to match your facility's annual bill (₹50L to ₹10Cr)</div>
       </div>
       <div class="pricing-calc__output">
         <div class="pricing-calc__output-row">
-          <span class="pricing-calc__output-label">Annual energy spend</span>
-          <span class="pricing-calc__output-val" id="pc-annual">₹6Cr / year</span>
+          <span class="pricing-calc__output-label">Monthly average</span>
+          <span class="pricing-calc__output-val" id="pc-annual">₹25L / month</span>
         </div>
         <div class="pricing-calc__output-row">
           <span class="pricing-calc__output-label">Where plants like yours often find savings</span>
@@ -3521,7 +3521,7 @@ a.footer__contact-val:hover { color: var(--signal); }
             <span class="cta-strip__step-num">02</span>
             <div>
               <div class="cta-strip__step-title">We analyse and report</div>
-              <div class="cta-strip__step-body">A written analysis of your bills and what stands out, delivered in [X working days]. <!-- CONFIRM turnaround --></div>
+              <div class="cta-strip__step-body">A written analysis of your bills and what stands out, delivered in 2 working days.</div>
             </div>
           </div>
           <div class="cta-strip__step">
@@ -3605,7 +3605,7 @@ a.footer__contact-val:hover { color: var(--signal); }
         <div class="contact-form__success" id="form-success" style="display:none;">
           <div class="contact-form__success-ico">✓</div>
           <div class="contact-form__success-title">We've got it.</div>
-          <div class="contact-form__success-body">We'll reply within one business day. To get an analysis and report, email at least 6 months of your DISCOM bills to hello@onegrid.in. Or reach us directly at <a href="mailto:hello@onegrid.in" style="color:var(--signal);text-decoration:none;">hello@onegrid.in</a></div>
+          <div class="contact-form__success-body">We'll reply within one business day. To get an analysis and report, email at least 6 months of your DISCOM bills to hello@onegrid.in and we will return your report within 2 working days. Or reach us directly at <a href="mailto:hello@onegrid.in" style="color:var(--signal);text-decoration:none;">hello@onegrid.in</a></div>
         </div>
       </div>
     </div>
@@ -3873,16 +3873,16 @@ buildBigChart();
   const RANGE_HIGH_PCT = null;
 
   function fmtL(lakhs) {
-    if (lakhs >= 100) return '₹' + (lakhs / 100).toFixed(1) + 'Cr';
+    if (lakhs >= 100) return '₹' + (lakhs / 100).toFixed(1).replace(/\.0$/, '') + 'Cr';
     if (lakhs >= 10)  return '₹' + Math.round(lakhs) + 'L';
     return '₹' + lakhs.toFixed(1) + 'L';
   }
 
   function update() {
-    const monthly = parseFloat(slider.value); // Lakhs/month
-    const annual  = monthly * 12;             // Lakhs/year
-    spendVal.textContent = fmtL(monthly) + '/mo';
-    annualEl.textContent = fmtL(annual) + ' / year';
+    const annual  = parseFloat(slider.value); // Lakhs/year (₹50L to ₹10Cr)
+    const monthly = annual / 12;              // Lakhs/month
+    spendVal.textContent = fmtL(annual) + ' / year';
+    annualEl.textContent = fmtL(monthly) + ' / month';
     if (rangeEl && RANGE_LOW_PCT !== null && RANGE_HIGH_PCT !== null) {
       rangeEl.textContent = fmtL(annual * RANGE_LOW_PCT) + ' – ' + fmtL(annual * RANGE_HIGH_PCT) + ' / year';
     }
@@ -4123,7 +4123,7 @@ setInterval(tickKPIs, 3200);
       if (!sliderMoved) {
         track('pricing_calculator_used', {
           event_category: 'engagement',
-          spend_lakhs: pricingSlider.value
+          annual_spend_lakhs: pricingSlider.value
         });
         sliderMoved = true;
       }
