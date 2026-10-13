@@ -3799,10 +3799,12 @@ buildBigChart();
   const RSS_URL = 'https://medium.com/feed/@onegrid';
   const API_URL = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL);
 
+  // DOMParser builds an inert document: unlike innerHTML it never fetches images or runs scripts
+  function parseHtml(html) {
+    return new DOMParser().parseFromString(html || '', 'text/html');
+  }
   function stripHtml(html) {
-    const d = document.createElement('div');
-    d.innerHTML = html;
-    return d.textContent || d.innerText || '';
+    return parseHtml(html).body.textContent || '';
   }
   function truncate(str, n) {
     // Strip "Photo by X on Unsplash" attribution sentences Medium injects
@@ -3812,27 +3814,38 @@ buildBigChart();
   function readTime(content) {
     return Math.max(1, Math.round(stripHtml(content).split(/\s+/).length / 200)) + ' min read';
   }
+  function esc(str) {
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  // Only accept real https images; skip Medium's tracking pixel (/_/stat) and 1x1 beacons
+  function goodImage(url) {
+    return /^https:\/\//i.test(url || '') && !/\/_\/stat|clientViewed/i.test(url);
+  }
   function extractImage(html) {
-    const d = document.createElement('div');
-    d.innerHTML = html;
-    const img = d.querySelector('img');
-    return img ? img.src : '';
+    const imgs = parseHtml(html).querySelectorAll('img');
+    for (let i = 0; i < imgs.length; i++) {
+      const w = parseInt(imgs[i].getAttribute('width') || '0', 10);
+      if (goodImage(imgs[i].src) && w !== 1) return imgs[i].src;
+    }
+    return '';
   }
   function renderCard(item) {
-    const thumb   = item.thumbnail || extractImage(item.description || '') || '';
+    const thumb   = [item.thumbnail, extractImage(item.description || '')].filter(goodImage)[0] || '';
     const tag     = (item.categories && item.categories[0]) ? item.categories[0] : 'Insights';
     const excerpt = truncate(stripHtml(item.description), 160);
     const rt      = readTime(item.content || item.description || '');
     const imgHtml = thumb
-      ? `<img class="insight-card__img" src="${thumb}" alt="${item.title}" loading="lazy">`
+      ? `<img class="insight-card__img" src="${esc(thumb)}" alt="${esc(item.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<div class=&quot;insight-card__img-placeholder&quot;><span class=&quot;insight-card__placeholder-ico&quot;>OneGrid · Insights</span></div>'">`
       : `<div class="insight-card__img-placeholder"><span class="insight-card__placeholder-ico">OneGrid · Insights</span></div>`;
     return `<div class="insight-card">
       ${imgHtml}
       <div class="insight-card__body">
-        <div class="insight-card__tag">${tag} · ${rt}</div>
-        <h3 class="insight-card__title">${item.title}</h3>
-        <p class="insight-card__excerpt">${excerpt}</p>
-        <a href="${item.link}" target="_blank" rel="noopener" class="insight-card__read">Read on Medium</a>
+        <div class="insight-card__tag">${esc(tag)} · ${esc(rt)}</div>
+        <h3 class="insight-card__title">${esc(item.title)}</h3>
+        <p class="insight-card__excerpt">${esc(excerpt)}</p>
+        <a href="${/^https:\/\//i.test(item.link || '') ? esc(item.link) : 'https://medium.com/@onegrid'}" target="_blank" rel="noopener" class="insight-card__read">Read on Medium</a>
       </div>
     </div>`;
   }
@@ -4022,7 +4035,7 @@ async function handleFormSubmit(e) {
       errEl.style.display = 'block';
     }
     const bodyText = 'Name: ' + (fields['Name'] || '') + '\nCompany: ' + (fields['Company'] || '') +
-      '\nEmail: ' + (fields['Email'] || '') + '\nAnnual Bill: ' + (fields['Annual Bill'] || '') +
+      '\nEmail: ' + (fields['Email'] || '') + '\nMobile: ' + (fields['Mobile'] || '') + '\nAnnual Bill: ' + (fields['Annual Bill'] || '') +
       '\n\n--- METADATA ---\n' + metadata;
     window.location.href = 'mailto:hello@onegrid.in?subject=' + encodeURIComponent('OneGrid Lead') +
       '&body=' + encodeURIComponent(bodyText);
