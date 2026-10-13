@@ -4,7 +4,7 @@
 
 - **GA4 account "OneGrid"** (own account under vinitchordia@gmail.com), property **onegrid.in**, web stream **OneGrid website** (`https://onegrid.in`), Measurement ID **G-LXSVQDG751**. Time zone India, currency INR. Data-sharing options with Google are all off.
 - The site tag in `index.html` uses this ID and **only runs on onegrid.in / www.onegrid.in**, so local testing and preview deployments never reach the reports.
-- **History:** until 13 Oct 2026 the site used an older, unrelated property named "heyguru" / "Hey Guru" (`G-32NS9EMXF7`). Its handful of early visits stay there. It no longer receives OneGrid data once this change is live, and it can be ignored or deleted.
+- **History:** until 13 Oct 2026 the site used an older, unrelated property named "heyguru" / "Hey Guru" (`G-32NS9EMXF7`). That account was moved to the Analytics recycle bin on 13 Oct 2026 (restorable for about 35 days) and the tag was removed from the site.
 - **Event data retention: 14 months** and **custom dimensions** `cta_location`, `annual_bill_range`, `tier` are configured on the new property.
 - Enhanced measurement is on, with Form interactions off so the site's own `generate_lead` / `form_submit` are not double-counted.
 
