@@ -61,17 +61,26 @@
   ]
 }
 </script>
-<!-- Google Analytics GA4 — G-32NS9EMXF7 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-32NS9EMXF7"></script>
+<!-- Google Analytics GA4: account "OneGrid", property onegrid.in, stream "OneGrid website" -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-32NS9EMXF7', {
-    page_title: document.title,
-    page_location: window.location.href,
-    send_page_view: true
-  });
+  (function () {
+    var GA_ID = 'G-LXSVQDG751';
+    var host = location.hostname;
+    // Only measure the real site: no data from localhost, previews or other hosts
+    if (host !== 'onegrid.in' && host !== 'www.onegrid.in') return;
+    var tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(tag);
+    gtag('js', new Date());
+    gtag('config', GA_ID, {
+      page_title: document.title,
+      page_location: window.location.href,
+      send_page_view: true
+    });
+  })();
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

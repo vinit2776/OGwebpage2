@@ -2,10 +2,11 @@
 
 ## What is set up (13 Oct 2026)
 
-- **GA4 property** (account "heyguru", property id 296128894), web stream **OneGrid**, `https://onegrid.in`, Measurement ID **G-32NS9EMXF7**, matching the tag in `index.html`. Receiving traffic.
-- **Event data retention: 14 months** (was the 2-month default).
-- **Custom dimensions (event scope):** `cta_location`, `annual_bill_range`, `tier`.
-- **Enhanced measurement** on (page views, scrolls, outbound clicks, site search, video, file downloads). Form interactions is off, so the site's own `generate_lead` / `form_submit` are not double-counted.
+- **GA4 account "OneGrid"** (own account under vinitchordia@gmail.com), property **onegrid.in**, web stream **OneGrid website** (`https://onegrid.in`), Measurement ID **G-LXSVQDG751**. Time zone India, currency INR. Data-sharing options with Google are all off.
+- The site tag in `index.html` uses this ID and **only runs on onegrid.in / www.onegrid.in**, so local testing and preview deployments never reach the reports.
+- **History:** until 13 Oct 2026 the site used an older, unrelated property named "heyguru" / "Hey Guru" (`G-32NS9EMXF7`). Its handful of early visits stay there. It no longer receives OneGrid data once this change is live, and it can be ignored or deleted.
+- **Event data retention: 14 months** and **custom dimensions** `cta_location`, `annual_bill_range`, `tier` are configured on the new property.
+- Enhanced measurement is on, with Form interactions off so the site's own `generate_lead` / `form_submit` are not double-counted.
 
 ## Events the site sends
 
@@ -65,4 +66,3 @@ Rules: lowercase only, hyphens not spaces, one naming style per campaign, never 
 2. **Internal traffic filter.** Admin, Data collection and modification, Data streams, Configure tag settings, Define internal traffic: add your office and home IPs, then activate the filter under Data filters. Otherwise your own testing counts as visitors.
 3. **Link Search Console** (Admin, Product links) for organic search queries, and **link Google Ads** when ads start.
 4. **Cookie consent.** The site loads GA with no consent banner while the privacy policy says one is still to be described, and the site describes itself as DPDP-compliant. Decide on a banner before large-scale promotion.
-5. Account name is "heyguru". Rename it or move the property if you want OneGrid kept separate.
