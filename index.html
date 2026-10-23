@@ -222,6 +222,9 @@ body {
   text-decoration: none;
   letter-spacing: 0.01em;
   transition: color 0.18s;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 .nav__links a:hover { color: var(--forest); }
 .nav__links a.active { color: var(--forest); }
@@ -238,7 +241,11 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 12px 16px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 4px;
   transition: background 0.15s, color 0.15s;
   text-decoration: none;
@@ -252,7 +259,11 @@ body {
   background: var(--signal);
   border: none;
   cursor: pointer;
-  padding: 9px 20px;
+  padding: 12px 20px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 4px;
   letter-spacing: 0.01em;
   transition: background 0.15s, box-shadow 0.15s;
@@ -2973,25 +2984,25 @@ a.footer__contact-val:hover { color: var(--signal); }
     <div class="trust-strip__grid">
       <div class="trust-cell">
         <div class="trust-cell__ico">☀</div>
-        <h3 class="trust-cell__title">Renewable IPP</h3>
+        <p class="trust-cell__title">Renewable IPP</p>
         <p class="trust-cell__body">We generate renewable power ourselves, so we know when solar pays for you and when it does not.</p>
         <div class="trust-cell__tag">Independent Power Producer</div>
       </div>
       <div class="trust-cell">
         <div class="trust-cell__ico">◉</div>
-        <h3 class="trust-cell__title">Measured, not estimated</h3>
+        <p class="trust-cell__title">Measured, not estimated</p>
         <p class="trust-cell__body">Readings come from CE-certified IoT data loggers on your own meters.</p>
         <div class="trust-cell__tag">CE-certified data loggers</div>
       </div>
       <div class="trust-cell">
         <div class="trust-cell__ico">⌂</div>
-        <h3 class="trust-cell__title">Your data stays yours</h3>
+        <p class="trust-cell__title">Your data stays yours</p>
         <p class="trust-cell__body">Built for India's DPDP Act. Read-only access is all we need.</p>
         <div class="trust-cell__tag">DPDP-compliant platform</div>
       </div>
       <div class="trust-cell">
         <div class="trust-cell__ico">№</div>
-        <h3 class="trust-cell__title">A company you can check</h3>
+        <p class="trust-cell__title">A company you can check</p>
         <p class="trust-cell__body">OneGrid is run by Proweroptics Technologies Private Limited, Chennai. CIN U62090TN2026PTC198146. <!-- GSTIN deliberately omitted: registration in process --></p>
         <div class="trust-cell__tag">Registered in India</div>
       </div>
